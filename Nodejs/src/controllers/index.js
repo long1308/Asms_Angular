@@ -1,5 +1,5 @@
 import Joi from "joi";
-import Product from "../models/index";
+import Product from "../models/product";
 
 const productSchema = Joi.object({
    name : Joi.string().required().min(3),
