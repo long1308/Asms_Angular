@@ -8,7 +8,7 @@
 * style: những thay đổi không làm thay đổi ý nghĩa của code như thay đổi css/ui chẳng hạn.
 * perf: code cải tiến về mặt hiệu năng xử lý
 * vendor: cập nhật version cho các dependencies, packages.
-
+* build : những thay đổi ảnh hưởng đến hệ thống bản dựng hoặc bên ngoài
 # VD 
 Code thêm sản phẩm thì : feat:add new product
 
