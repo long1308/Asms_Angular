@@ -5,20 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/Client/header/header.component';
 import { FooterComponent } from './shared/Client/footer/footer.component';
-import { ListProductComponent } from './components/list-product/list-product.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
-import { ProductDeailComponent } from './components/product-deail/product-deail.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ContainerComponent } from './pages/Client/container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ListProductComponent,
     ListProductsComponent,
-    ProductDeailComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
