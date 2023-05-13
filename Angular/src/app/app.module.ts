@@ -10,6 +10,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ContainerComponent } from './pages/Client/container/container.component';
 import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
+import { NotfoundComponent } from './components/not-found/notfound.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,11 @@ import { SigninComponent } from './pages/Client/signin/signin.component';
     ProductDetailComponent,
     ContainerComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    NotfoundComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
