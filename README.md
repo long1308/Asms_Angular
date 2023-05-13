@@ -13,3 +13,12 @@
 Code thêm sản phẩm thì : feat:add new product
 
 Cẩn thận khi commit không thì sẽ conflict die :))
+# VD Branch
+* git checkout : Kiểm tra xem có cao nhiêu nhánh
+* git checkout 'branch' : chuyển qua nhánh cần sử dụng
+* git checkout -b 'new branch' : tạo mới 1 nhánh
+* git push origin 'branch' : đẩy code về nhánh
+* Các bước Xóa nhánh :
+    - git checkout master
+    - git branch -d 'branch'
+    - git push origin -d 'branch'    
