@@ -26,4 +26,14 @@ export const productSchema = Joi.object({
     "any.required": "Trường image này là bắt buộc ",
     "string.base": "image phải là 1 string",
   }),
+  size: Joi.array().required().messages({
+    "string.empty": "size không được để trống",
+    "any.required": "Trường size này là bắt buộc ",
+    "array.base": "size phải là 1 array",
+  }),
+  color: Joi.array().required().messages({
+    "string.empty": "color không được để trống",
+    "any.required": "Trường color này là bắt buộc ",
+    "array.base": "color phải là 1 array",
+  }),
 });
