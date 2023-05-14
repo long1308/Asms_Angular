@@ -37,3 +37,10 @@ export const productSchema = Joi.object({
     "array.base": "color phải là 1 array",
   }),
 });
+export const sizeSchema = Joi.object({
+  name: Joi.string().required().messages({
+    "string.empty": "Name không được để trống",
+    "any.required": "Trường Name này là bắt buộc",
+    "string.base": "Name phải là 1 string",
+  }),
+});
