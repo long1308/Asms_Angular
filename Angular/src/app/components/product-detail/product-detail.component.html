@@ -40,18 +40,12 @@
     </div>
   </div>
   <!-- ./ Breadcrumbs -->
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-    <div class="flex flex-col  md:flex-row  -mx-4">
-      <div class="md:flex-1 p-4 ">
-      
-        
-          <app-carousel></app-carousel>
-    
-       
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6  ">
+    <div class="flex flex-col md:flex-row ">
+      <div class="md:flex-1 p-2 shadow-md bg-slate-100 ">
+        <app-carousel></app-carousel>
       </div>
-
-      <div class=" md:flex-1  px-4">
+      <div class="md:flex-1 px-4">
         <h2
           class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"
         >
@@ -227,9 +221,10 @@
             <div
               class="items-center border border-gray-200 rounded inline-block"
             >
-              <button (click)="updateQuantity('decrease')"
+              <button
+                (click)="updateQuantity('decrease')"
                 type="button"
-                class="w-10 h-10 leading-10 text-gray-600 transition  hover:bg-slate-300"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
               >
                 &minus;
               </button>
@@ -238,46 +233,42 @@
                 type="number"
                 id="Quantity"
                 [(ngModel)]="valueQuantity"
-              
                 (input)="updateQuantity('input')"
                 (keydown)="handleInput($event)"
                 class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-              /> 
+              />
 
-              <button (click)="updateQuantity('increase')"
+              <button
+                (click)="updateQuantity('increase')"
                 type="button"
-                class="w-10 h-10 leading-10 text-gray-600 transition  hover:bg-slate-300"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
               >
                 &plus;
               </button>
-              
             </div>
             <!-- Sản phảm còn lại -->
-            <span class="ml-3">{{quantity}} products available</span>
+            <span class="ml-3">{{ quantity }} products available</span>
           </div>
-         <div class="flex">
           <div class="flex">
-            <span>
-              <i class="fa-light fa-cart-plus"></i>
-            </span>
-           
-       
+            <div class="flex">
+              <span>
+                <i class="fa-light fa-cart-plus"></i>
+              </span>
+
+              <button
+                type="button"
+                class="h-14 px-9 py-2 font-semibold  bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg"
+              >
+                Add to cart
+              </button>
+            </div>
             <button
-            type="button"
-            class="h-14 px-9 py-2 font-semibold rounded-sm bg-teal-50 border border-teal-500   hover:bg-transparent text-teal-500 mt-6"
-          >
-          Add to cart
-          </button>
-     
+              type="button"
+              class="mx-5 h-14 px-9 py-2 font-semibold  bg-teal-600 hover:bg-teal-500 text-white mt-6 rounded-lg" 
+            >
+              Buy now
+            </button>
           </div>
-            
-            <button
-            type="button"
-            class="mx-5 h-14 px-9 py-2 font-semibold rounded-sm bg-teal-600  hover:bg-teal-500  text-white mt-6"
-          >
-            Buy now
-          </button>
-         </div>
         </div>
       </div>
     </div>

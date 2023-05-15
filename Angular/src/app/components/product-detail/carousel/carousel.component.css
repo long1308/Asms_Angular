@@ -2,15 +2,11 @@
   cursor: pointer;
   height: 400px;
 }
-
 .slide1 > img {
   display: none;
   border-radius: 15px;
-
-
 }
 .slide1 .image_active {
-  /* border: 2px solid #f0ad4e; */
 
   border-radius: 5px;
   display: block;
@@ -20,17 +16,17 @@ img {
   height: 100%;
   object-fit: cover;
 }
-
 .small-image {
   width: 100px;
   height: 100px;
   cursor: pointer;
-
 }
-
 .active {
-
   border: 2px solid #ee4d2d;
-
-
+}
+/* transition */
+.slide-image {
+  transition-property: transform;
+  transition-duration: 1100ms;
+  transition-timing-function: ease-in-out;
 }
