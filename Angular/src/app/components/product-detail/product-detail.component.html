@@ -42,61 +42,16 @@
   <!-- ./ Breadcrumbs -->
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-    <div class="flex flex-col md:flex-row -mx-4">
-      <div class="md:flex-1 p-4 shadow-md bg-slate-100">
-        <div class="rounded-lg bg-gray-100 mb-4">
-          <div
-            class="rounded-lg bg-gray-100 mb-4 flex items-center justify-center "
-          >
-            <img
-              class="w-full"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="grid grid-cols-4 gap-2">
-          <div
-            width="100%"
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            width="100%"
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </div>
+    <div class="flex flex-col  md:flex-row  -mx-4">
+      <div class="md:flex-1 p-4 ">
+      
+        
+          <app-carousel></app-carousel>
+    
+       
       </div>
 
-      <div class="md:flex-1 px-4">
+      <div class=" md:flex-1  px-4">
         <h2
           class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"
         >
@@ -287,7 +242,7 @@
                 (input)="updateQuantity('input')"
                 (keydown)="handleInput($event)"
                 class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-              />
+              /> 
 
               <button (click)="updateQuantity('increase')"
                 type="button"
@@ -295,14 +250,34 @@
               >
                 &plus;
               </button>
+              
             </div>
+            <!-- Sản phảm còn lại -->
+            <span class="ml-3">{{quantity}} sản phẩm có sẵn</span>
           </div>
-          <button
+         <div class="flex">
+          <div class="flex">
+            <span>
+              <i class="fa-light fa-cart-plus"></i>
+            </span>
+           
+       
+            <button
             type="button"
-            class="h-14 px-9 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white mt-6"
+            class="h-14 px-9 py-2 font-semibold rounded-sm bg-red-50 border border-red-500 hover:bg-transparent text-red-500 mt-6"
           >
-            Add to Cart
+            Thêm vào giỏ hàng
           </button>
+     
+          </div>
+            
+            <button
+            type="button"
+            class="mx-5 h-14 px-9 py-2 font-semibold rounded-sm bg-[#ee4d2d] hover:bg-[#f05d40] text-white mt-6"
+          >
+            Mua ngay
+          </button>
+         </div>
         </div>
       </div>
     </div>

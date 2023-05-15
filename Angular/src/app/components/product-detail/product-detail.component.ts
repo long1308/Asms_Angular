@@ -1,5 +1,4 @@
-import { Component, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail',
