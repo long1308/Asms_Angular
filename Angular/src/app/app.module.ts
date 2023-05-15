@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/Client/header/header.component';
@@ -12,6 +12,7 @@ import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
+import { CarouselComponent } from './components/product-detail/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { TestimonialsComponent } from './components/testimonials/testimonials.co
     SigninComponent,
     NotfoundComponent,
     TestimonialsComponent,
+    CarouselComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

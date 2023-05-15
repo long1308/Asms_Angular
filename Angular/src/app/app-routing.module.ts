@@ -20,7 +20,7 @@ const routes: Routes = [
     component: SigninComponent,
   },
   {
-    path: 'detail_products',
+    path: 'detail_products/:id',
     component: ProductDetailComponent,
   },
   {
