@@ -11,7 +11,7 @@ import { ContainerComponent } from './pages/Client/container/container.component
 import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
-import { AboutComponent } from './components/about/about.component';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { AboutComponent } from './components/about/about.component';
     SignupComponent,
     SigninComponent,
     NotfoundComponent,
-    AboutComponent,
+    TestimonialsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
