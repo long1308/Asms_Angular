@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <div class="flex-1 md:flex md:items-center md:gap-12">
-        <a class="block text-teal-600" href="/">
+        <a routerLink = "/"  class="block text-teal-600" >
           <span class="sr-only">Home</span>
           <img src="/assets/logo.png" class="w-16" alt="" />
         </a>
@@ -11,9 +11,9 @@
         <nav aria-label="Site Nav" class="hidden md:block">
           <ul class="flex items-center gap-6 text-sm">
             <li class=" ">
-              <a
+              <a routerLink = "/about"
                 class="text-gray-500 transition hover:text-gray-500/75 before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-red-500 hover:before:w-full before:transition-all"
-                href="/"
+              
               >
                 About
               </a>
@@ -116,7 +116,7 @@
           <div class="sm:flex sm:gap-4">
             <a
               class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-              href="/"
+              routerLink = "/signin"
             >
               Login
             </a>
@@ -124,7 +124,7 @@
             <div class="hidden sm:flex">
               <a
                 class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                href="/"
+                routerLink = "/signup"
               >
                 Register
               </a>

@@ -1,14 +1,14 @@
 <div class="relative">
   <div class="slide1 relative flex justify-center absolute h-80 w-full pb-3" >
     <img *ngFor="let image of productImages; let i = index" class="" [src]="image" alt="" [ngClass]="{'image_active': selectedIndex===i}">
-    <div class=" ">
+    <div class="click">
       <button class="absolute top-1/2 translate-y-[-50%] hover:bg-black px-4 py-4 rounded-md text-white text-xl font-bold left-0 " (click)="previousImage()"> ❮</button>
       <button class="absolute top-1/2 translate-y-[-50%] hover:bg-black px-4 py-4 rounded-md text-white text-xl font-bold right-0" (click)="nextImage()">❯</button>
     </div>
   </div>
   
   <div class="flex w-full justify-center absolute top-[415px]">
-    <div *ngFor="let image of productImages.slice(0,6); let i2 = index" class="small-image mx-1">
+    <div *ngFor="let image of productImages.slice(0,5); let i2 = index" class="small-image mx-1">
       <img class="w-full m-auto" [src]="image" alt="" [ngClass]="{'active': i2 === selectedIndex}" (click)="onchange(i2)">
     </div>
   </div>
