@@ -11,7 +11,7 @@ import { ContainerComponent } from './pages/Client/container/container.component
 import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
-import { TestimonialsComponent } from './pages/Client/testimonials/testimonials.component';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 
 @NgModule({
   declarations: [
