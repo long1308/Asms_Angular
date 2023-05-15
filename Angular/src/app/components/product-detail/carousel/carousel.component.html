@@ -1,0 +1,39 @@
+<div class="relative h-full">
+  <div class="slide1 flex justify-center absolute h-80 w-full pb-3">
+    <img
+      *ngFor="let image of productImages; let i = index"
+      class="slide-image transition-transform duration-300 ease-in-out"
+      [src]="image"
+      alt=""
+      [ngClass]="{ image_active: selectedIndex === i }"
+    />
+    <div class="click">
+      <button
+        class="duration-300 ease-in-out absolute top-1/2 translate-y-[-50%] hover:bg-gray-300 px-4 py-4 rounded-r-lg text-white text-xl font-bold left-0 hover:text-black"
+        (click)="previousImage()"
+      >
+        ❮
+      </button>
+      <button
+        class="duration-300 ease-in-out absolute top-1/2 translate-y-[-50%] hover:bg-gray-300 px-4 py-4 rounded-l-lg text-white text-xl font-bold right-0 hover:text-black"
+        (click)="nextImage()"
+      >
+        ❯
+      </button>
+    </div>
+  </div>
+  <div class="flex w-full justify-center absolute -bottom-2 p-2">
+    <div
+      *ngFor="let image of productImages.slice(0, 5); let i2 = index"
+      class="small-image mx-1"
+    >
+      <img
+        class="w-full m-auto"
+        [src]="image"
+        alt=""
+        [ngClass]="{ active: i2 === selectedIndex }"
+        (click)="onchange(i2)"
+      />
+    </div>
+  </div>
+</div>
