@@ -11,6 +11,7 @@ import { ContainerComponent } from './pages/Client/container/container.component
 import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { CarouselComponent } from './components/product-detail/carousel/carousel.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
@@ -25,8 +26,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     SignupComponent,
     SigninComponent,
     NotfoundComponent,
+    TestimonialsComponent,
     CarouselComponent,
- 
+    ProductDetail
   ],
   imports: [BrowserModule, AppRoutingModule,FormsModule,SlickCarouselModule],
   providers: [],

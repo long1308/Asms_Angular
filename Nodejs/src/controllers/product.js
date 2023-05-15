@@ -63,7 +63,6 @@ export const create = async (req, res) => {
     });
   }
 };
-
 export const update = async (req, res) => {
   try {
     // validate
@@ -73,7 +72,9 @@ export const update = async (req, res) => {
         message: error.details.map((error) => error.message),
       });
     }
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!product) {
       return res.json({
         message: "Cập nhật sản phẩm không thành công !",
