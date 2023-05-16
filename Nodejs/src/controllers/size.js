@@ -78,7 +78,7 @@ export const updateSize = async (req, res) => {
         message: error.details.map((error) => error.message),
       });
     }
-    const size = await Size.findByIdAndUpdate({ id: req.params.id }, req.body, {
+    const size = await Size.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     if (!size) {

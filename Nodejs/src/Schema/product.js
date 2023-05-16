@@ -44,3 +44,10 @@ export const sizeSchema = Joi.object({
     "string.base": "Name phải là 1 string",
   }),
 });
+export const colorSchema = Joi.object({
+  name: Joi.string().required().messages({
+    "string.empty": "Name không được để trống",
+    "any.required": "Trường Name này là bắt buộc",
+    "string.base": "Name phải là 1 string",
+  }),
+});

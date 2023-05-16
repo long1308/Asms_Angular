@@ -2,7 +2,7 @@
   <!-- Breadcrumbs -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center space-x-2 text-gray-400 text-sm">
-      <a class="hover:underline hover:text-gray-600">Home</a>
+      <a routerLink="/" class="hover:underline hover:text-gray-600">Home</a>
       <span>
         <svg
           class="h-5 w-5 leading-none text-gray-300"
@@ -40,62 +40,11 @@
     </div>
   </div>
   <!-- ./ Breadcrumbs -->
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-    <div class="flex flex-col md:flex-row -mx-4">
-      <div class="md:flex-1 p-4 shadow-md bg-slate-100">
-        <div class="rounded-lg bg-gray-100 mb-4">
-          <div
-            class="rounded-lg bg-gray-100 mb-4 flex items-center justify-center "
-          >
-            <img
-              class="w-full"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="grid grid-cols-4 gap-2">
-          <div
-            width="100%"
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            width="100%"
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-          <div
-            class="h-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-          >
-            <img
-              width="100%"
-              src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-            />
-          </div>
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6  ">
+    <div class="flex flex-col md:flex-row ">
+      <div class="md:flex-1 p-2 shadow-md bg-slate-100 ">
+        <app-carousel></app-carousel>
       </div>
-
       <div class="md:flex-1 px-4">
         <h2
           class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"
@@ -273,8 +222,9 @@
               class="items-center border border-gray-200 rounded inline-block"
             >
               <button
+                (click)="updateQuantity('decrease')"
                 type="button"
-                class="w-10 h-10 leading-10 text-gray-600 transition  hover:bg-slate-300"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
               >
                 &minus;
               </button>
@@ -282,24 +232,43 @@
               <input
                 type="number"
                 id="Quantity"
-                value="1"
+                [(ngModel)]="valueQuantity"
+                (input)="updateQuantity('input')"
+                (keydown)="handleInput($event)"
                 class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
               />
 
               <button
+                (click)="updateQuantity('increase')"
                 type="button"
-                class="w-10 h-10 leading-10 text-gray-600 transition  hover:bg-slate-300"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
               >
                 &plus;
               </button>
             </div>
+            <!-- Sản phảm còn lại -->
+            <span class="ml-3">{{ quantity }} products available</span>
           </div>
-          <button
-            type="button"
-            class="h-14 px-9 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white mt-6"
-          >
-            Add to Cart
-          </button>
+          <div class="flex">
+            <div class="flex">
+              <span>
+                <i class="fa-light fa-cart-plus"></i>
+              </span>
+
+              <button
+                type="button"
+                class="h-14 px-9 py-2 font-semibold  bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg"
+              >
+                Add to cart
+              </button>
+            </div>
+            <button
+              type="button"
+              class="mx-5 h-14 px-9 py-2 font-semibold  bg-teal-600 hover:bg-teal-500 text-white mt-6 rounded-lg" 
+            >
+              Buy now
+            </button>
+          </div>
         </div>
       </div>
     </div>

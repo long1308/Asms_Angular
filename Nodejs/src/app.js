@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import routerProduct from "./routes/product.js";
 import routerSize from "./routes/size.js";
+import routerColor from "./routes/color.js";
 
 //config
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 // router
 app.use("/api", routerProduct);
 app.use("/api", routerSize);
+app.use("/api", routerColor);
 
 // database config
 mongoose.connect(API_DB);

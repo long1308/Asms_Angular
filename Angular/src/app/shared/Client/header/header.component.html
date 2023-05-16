@@ -1,8 +1,11 @@
-<header aria-label="Site Header" class="bg-slate-200 fixed top-0 w-screen mb-16 z-50">
+<header
+  aria-label="Site Header"
+  class="bg-slate-200 fixed top-0 w-screen mb-16 z-50"
+>
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <div class="flex-1 md:flex md:items-center md:gap-12">
-        <a class="block text-teal-600" href="/">
+        <a routerLink="/" class="block text-teal-600">
           <span class="sr-only">Home</span>
           <img src="/assets/logo.png" class="w-16" alt="" />
         </a>
@@ -12,8 +15,41 @@
           <ul class="flex items-center gap-6 text-sm">
             <li class=" ">
               <a
-                class="text-gray-500 transition hover:text-gray-500/75 before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-red-500 hover:before:w-full before:transition-all"
-                href="/"
+                routerLink="/home"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+                routerLink="/shop"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+                routerLink="/blog"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Blog
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+                routerLink="/about"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
               >
                 About
               </a>
@@ -21,51 +57,17 @@
 
             <li>
               <a
-                class="text-gray-500 transition hover:text-gray-500/75"
-                href="/"
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+                routerLink="/contact"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
               >
-                Careers
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="text-gray-500 transition hover:text-gray-500/75"
-                href="/"
-              >
-                History
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="text-gray-500 transition hover:text-gray-500/75"
-                href="/"
-              >
-                Services
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="text-gray-500 transition hover:text-gray-500/75"
-                href="/"
-              >
-                Projects
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="text-gray-500 transition hover:text-gray-500/75"
-                href="/"
-              >
-                Blog
+                Contact
               </a>
             </li>
             <li>
               <a
-                href="/cart"
+                routerLink="/cart"
                 class="grid h-10 w-10 place-content-center border-b-4 border-transparent"
               >
                 <svg
@@ -88,7 +90,7 @@
             </li>
             <li>
               <a
-                href="/account"
+                routerLink="/account"
                 class="grid h-10 w-10 place-content-center border-b-4 border-transparent"
               >
                 <svg
@@ -116,7 +118,7 @@
           <div class="sm:flex sm:gap-4">
             <a
               class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-              href="/"
+              routerLink="/signin"
             >
               Login
             </a>
@@ -124,7 +126,7 @@
             <div class="hidden sm:flex">
               <a
                 class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                href="/"
+                routerLink="/signup"
               >
                 Register
               </a>
