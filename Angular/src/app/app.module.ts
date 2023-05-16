@@ -13,6 +13,7 @@ import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { CarouselComponent } from './components/product-detail/carousel/carousel.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CarouselComponent } from './components/product-detail/carousel/carousel
     NotfoundComponent,
     TestimonialsComponent,
     CarouselComponent,
+    BannerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
