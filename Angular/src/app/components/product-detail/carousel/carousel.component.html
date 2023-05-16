@@ -1,5 +1,5 @@
-<div class="relative h-full">
-  <div class="slide1 flex justify-center   w-full pb-3">
+<div class=" h-full">
+  <div class="slide1 flex justify-center w-2/3 items-center pb-3 relative mx-auto">
     <img
       *ngFor="let image of productImages; let i = index"
       class=""
@@ -22,7 +22,7 @@
       </button>
     </div>
   </div>
-  <div class="flex w-full justify-center absolute -bottom-2 p-2">
+  <div class="flex w-full justify-center  -bottom-2 p-2">
     <div
       *ngFor="let image of productImages.slice(0, 5); let i2 = index"
       class="small-image mx-1"
