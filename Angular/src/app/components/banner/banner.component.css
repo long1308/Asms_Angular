@@ -25,7 +25,6 @@
   left: 0;
 }
 
-
 .sm\:bg-transparent {
   background-color: transparent !important;
 }
@@ -33,20 +32,25 @@
 .sm\:from-white\/95 {
   --tw-gradient-from: #ffffff;
   --tw-gradient-to: rgba(255, 255, 255, 0.95);
-  background-image: linear-gradient(var(--tw-gradient-from), var(--tw-gradient-to));
+  background-image: linear-gradient(var(--tw-gradient-to));
 }
 
 .sm\:to-white\/25 {
   --tw-gradient-to: rgba(255, 255, 255, 0.25);
-  background-image: linear-gradient(var(--tw-gradient-from, rgba(255, 255, 255, 0)), var(--tw-gradient-to));
+  background-image: linear-gradient(
+    var(--tw-gradient-from, rgba(255, 255, 255, 0))
+  );
 }
 
 .ltr\:sm\:bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to, rgba(255, 255, 255, 0))) !important;
+  background-image: linear-gradient(
+    to right,
+    var(--tw-gradient-from)
+  ) !important;
 }
 
 .rtl\:sm\:bg-gradient-to-l {
-  background-image: linear-gradient(to)
+  background-image: linear-gradient(to);
 }
 section.relative:after {
   content: "";
@@ -59,4 +63,3 @@ section.relative:after {
   box-shadow: inset 0px 30px 20px -20px rgba(0, 0, 0, 0.3);
   z-index: -1;
 }
-
