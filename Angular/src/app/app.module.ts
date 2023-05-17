@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +22,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
-
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,14 @@ import { AccountComponent } from './components/account/account.component';
     CartComponent,
     AccountComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
