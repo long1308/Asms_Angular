@@ -25,7 +25,8 @@ import { AccountComponent } from './components/account/account.component';
 import { ButtonModule } from 'primeng/button';
 import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hidden.component';
 import { SearchComponent } from './shared/Client/header/search/search.component';
-
+import { CarouselModule } from 'primeng/carousel';
+import { TagModule } from 'primeng/tag';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { SearchComponent } from './shared/Client/header/search/search.component'
     AccountComponent,
     MenuHiddenComponent,
     SearchComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -56,8 +58,14 @@ import { SearchComponent } from './shared/Client/header/search/search.component'
     HttpClientModule,
     BrowserAnimationsModule,
     ButtonModule,
+    CarouselModule,
+    TagModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+
+
+
