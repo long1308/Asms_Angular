@@ -9,6 +9,10 @@ const productSchema = new Schema(
     image: String,
     description: String,
     description_short: String,
+    featured: {
+      type: Boolean,
+      default: false,
+    },
     hot_sale: {
       type: Number,
       default: 2,

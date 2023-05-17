@@ -36,6 +36,7 @@ export const productSchema = Joi.object({
   }),
   hot_sale: Joi.number(),
   description_short: Joi.string(),
+  featured: Joi.boolean(),
 });
 export const sizeSchema = Joi.object({
   name: Joi.string().required().messages({
