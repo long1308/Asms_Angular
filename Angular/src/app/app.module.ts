@@ -20,6 +20,8 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
+import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hidden.component';
+import { SearchComponent } from './shared/Client/header/search/search.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { AccountComponent } from './components/account/account.component';
     ContactComponent,
     CartComponent,
     AccountComponent,
+    MenuHiddenComponent,
+    SearchComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

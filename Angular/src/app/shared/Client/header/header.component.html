@@ -1,14 +1,17 @@
-<header
+<header [ngClass]="{'menu-visible': isMenuVisible}"
   aria-label="Site Header"
   class="bg-slate-200 fixed top-0 w-screen mb-16 z-50"
 >
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
-      <div class="flex-1 md:flex md:items-center md:gap-12">
+      <div class=" md:flex md:items-center md:gap-12">
         <a routerLink="/" class="block text-teal-600">
           <span class="sr-only">Home</span>
           <img src="/assets/logo.png" class="w-16" alt="" />
         </a>
+      </div>
+      <div id="search">
+        <app-search></app-search>
       </div>
       <div class="md:flex md:items-center md:gap-12">
         <nav aria-label="Site Nav" class="hidden md:block">
@@ -137,9 +140,10 @@
             </div>
           </div>
 
-          <div class="block md:hidden">
-            <button
-              class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+          <div class="block md:hidden ">
+            <button (click)="toggleMenu() "
+              class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 w-9 h-9"
+              [ngClass]="{'hidden': isMenuVisible, 'block': isMenuVisible}"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -156,9 +160,37 @@
                 />
               </svg>
             </button>
+            <button (click)="toggleMenu()"
+              class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 w-9 h-9"
+              [ngClass]="{'hidden': !isMenuVisible, 'block': isMenuVisible}"
+            >
+            <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+            </button>
+          
+          <div class=" absolute w-full right-4 mt-[13px]">
+              <!-- Nội dung của menu -->
+              <app-menu-hidden *ngIf="isMenuVisible">
+                
+              </app-menu-hidden>
+            </div>
+            <div class="backdrop" [ngClass]="{'hidden': !isMenuVisible, 'block': isMenuVisible}" (click)="toggleMenu()"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </header>
+
