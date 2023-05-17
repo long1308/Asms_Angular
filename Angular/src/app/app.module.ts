@@ -14,6 +14,13 @@ import { NotfoundComponent } from './components/not-found/notfound.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { CarouselComponent } from './components/product-detail/carousel/carousel.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AccountComponent } from './components/account/account.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +36,12 @@ import { BannerComponent } from './components/banner/banner.component';
     TestimonialsComponent,
     CarouselComponent,
     BannerComponent,
+    ShopComponent,
+    BlogComponent,
+    AboutComponent,
+    ContactComponent,
+    CartComponent,
+    AccountComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
