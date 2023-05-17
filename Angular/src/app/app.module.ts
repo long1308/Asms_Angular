@@ -23,6 +23,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
 import { ButtonModule } from 'primeng/button';
+import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hidden.component';
+import { SearchComponent } from './shared/Client/header/search/search.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,8 @@ import { ButtonModule } from 'primeng/button';
     ContactComponent,
     CartComponent,
     AccountComponent,
+    MenuHiddenComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
