@@ -11,6 +11,9 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
+import { LayoutAdminComponent } from './layouts/layout-admin/layout-admin.component';
+import { DashboardComponent } from './components/Admin/dashboard/dashboard.component';
+import { ListProductComponent } from './components/Admin/list-product/list-product.component';
 
 const routes: Routes = [
   {
@@ -26,7 +29,7 @@ const routes: Routes = [
     component: SigninComponent,
   },
   {
-    path: 'detail_products/:id',
+    path: 'products/:id',
     component: ProductDetailComponent,
   },
   {
@@ -52,6 +55,16 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent,
+  },
+  //admin
+  {
+    path: 'admin',
+    component: LayoutAdminComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'products', component: ListProductComponent },
+    ],
   },
   {
     path: '',
