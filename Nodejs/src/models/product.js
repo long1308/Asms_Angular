@@ -15,7 +15,7 @@ const productSchema = new Schema(
     },
     hot_sale: {
       type: Number,
-      default: 2,
+      default: 0,
     },
     size: {
       type: [String],
