@@ -180,13 +180,13 @@
     </svg>
             </button>
           
-          <div class=" absolute w-full right-4 mt-[13px]">
+          <div class=" absolute w-full right-4 mt-[13px] menu-container"  [ngClass]="{'slide-in': isMenuVisible, 'slide-out': !isMenuVisible}" >
               <!-- Nội dung của menu -->
               <app-menu-hidden *ngIf="isMenuVisible">
                 
               </app-menu-hidden>
             </div>
-            <div class="backdrop" [ngClass]="{'hidden': !isMenuVisible, 'block': isMenuVisible}" (click)="toggleMenu()"></div>
+           
           </div>
         </div>
       </div>
