@@ -47,7 +47,9 @@ export const createSize = async (req, res) => {
     }
     //check name
     const sizeAll = await Size.find();
-    const sizeName = sizeAll.find((size) => size.name === req.body.name);
+    const sizeName = sizeAll.find(
+      (size) => size.name.toLowerCase() === req.body.name.toLowerCase()
+    );
     if (sizeName) {
       return res.status(400).json({
         message: "Tên size đã tồn tại !",
@@ -78,7 +80,17 @@ export const updateSize = async (req, res) => {
         message: error.details.map((error) => error.message),
       });
     }
-    const size = await Size.findByIdAndUpdate(req.params.id, req.body, {
+    //check name
+    const sizeAll = await Size.find();
+    const sizeName = sizeAll.find(
+      (size) => size.name.toLowerCase() === req.body.name.toLowerCase()
+    );
+    if (sizeName) {
+      return res.status(400).json({
+        message: "Tên size đã có trong danh sách hoặc đã tồn tại !!",
+      });
+    }
+    const size = await Size.findByIdAndUpdate({ id: req.params.id }, req.body, {
       new: true,
     });
     if (!size) {
