@@ -13,4 +13,5 @@ export interface Iproduct {
   quantity: number;
   category: string;
   inventoryStatus: string;
+  rating: number;
 }
