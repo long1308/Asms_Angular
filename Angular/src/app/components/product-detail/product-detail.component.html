@@ -36,104 +36,60 @@
           />
         </svg>
       </span>
-      <span>Headphones</span>
+      <span>{{ product.name }}</span>
     </div>
   </div>
   <!-- ./ Breadcrumbs -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6  ">
-    <div class="flex flex-col md:flex-row ">
-      <div class="md:flex-1 p-2 shadow-md bg-slate-100 ">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+    <div class="flex flex-col md:flex-row">
+      <div class="md:flex-1 p-2 shadow-md bg-slate-100">
         <app-carousel></app-carousel>
       </div>
       <div class="md:flex-1 px-4">
         <h2
           class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"
         >
-          Nike Air MX Super 2500 - Red
+          {{ product.name }}
         </h2>
         <div class="flex items-center space-x-4 my-4">
           <div>
             <div class="rounded-lg bg-gray-100 flex py-2 px-3">
               <span class="text-indigo-400 mr-1 mt-1">$</span>
-              <span class="font-bold text-indigo-600 text-3xl">25</span>
+              <span class="font-bold text-indigo-600 text-3xl">{{
+                product.priceSale | number : "1.2-2"
+              }}</span>
             </div>
           </div>
-          <div class="flex-1">
-            <p class="text-green-500 text-xl font-semibold">Save 12%</p>
+          <div *ngIf="product.hot_sale && product.hot_sale > 0" class="flex-1">
+            <p class="text-green-500 text-xl font-semibold">
+              Save {{ product.hot_sale }}%
+            </p>
             <p class="text-gray-400 text-sm">Inclusive of all Taxes.</p>
           </div>
         </div>
         <p class="text-gray-500">
-          Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Vitae
-          exercitationem porro saepe ea harum corrupti vero id laudantium enim,
-          libero blanditiis expedita cupiditate a est.
+          {{ product.description }}
         </p>
         <div class="pt-4">
           <legend class="text-lg font-bold">Color:</legend>
           <div class="mt-2 flex flex-wrap gap-1">
-            <label for="color_green" class="cursor-pointer">
+            <label
+              *ngFor="let color of product.color"
+              [for]="'color_' + color"
+              class="cursor-pointer"
+            >
               <input
                 type="radio"
-                id="color_green"
+                [id]="'color_' + color"
                 name="color"
                 class="peer sr-only"
                 checked
               />
 
               <span
-                class="block h-6 w-6 rounded-full border border-gray-200 bg-green-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-              ></span>
-            </label>
-
-            <label for="color_blue" class="cursor-pointer">
-              <input
-                type="radio"
-                id="color_blue"
-                name="color"
-                class="peer sr-only"
-              />
-
-              <span
-                class="block h-6 w-6 rounded-full border border-gray-200 bg-blue-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-              ></span>
-            </label>
-
-            <label for="color_pink" class="cursor-pointer">
-              <input
-                type="radio"
-                id="color_pink"
-                name="color"
-                class="peer sr-only"
-              />
-
-              <span
-                class="block h-6 w-6 rounded-full border border-gray-200 bg-pink-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-              ></span>
-            </label>
-
-            <label for="color_red" class="cursor-pointer">
-              <input
-                type="radio"
-                id="color_red"
-                name="color"
-                class="peer sr-only"
-              />
-
-              <span
-                class="block h-6 w-6 rounded-full border border-gray-200 bg-red-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-              ></span>
-            </label>
-
-            <label for="color_indigo" class="cursor-pointer">
-              <input
-                type="radio"
-                id="color_indigo"
-                name="color"
-                class="peer sr-only"
-              />
-
-              <span
-                class="block h-6 w-6 rounded-full border border-gray-200 bg-indigo-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
+                class="block h-6 w-6 rounded-full border border-gray-200 bg-{{
+                  color
+                }}-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
               ></span>
             </label>
           </div>
@@ -257,14 +213,14 @@
 
               <button
                 type="button"
-                class="h-14 px-9 py-2 font-semibold  bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg"
+                class="h-14 px-9 py-2 font-semibold bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg"
               >
                 Add to cart
               </button>
             </div>
             <button
               type="button"
-              class="mx-5 h-14 px-9 py-2 font-semibold  bg-teal-600 hover:bg-teal-500 text-white mt-6 rounded-lg" 
+              class="mx-5 h-14 px-9 py-2 font-semibold bg-teal-600 hover:bg-teal-500 text-white mt-6 rounded-lg"
             >
               Buy now
             </button>
