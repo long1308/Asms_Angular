@@ -27,6 +27,7 @@ import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hid
 import { SearchComponent } from './shared/Client/header/search/search.component';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { TagModule } from 'primeng/tag';
     BrowserAnimationsModule,
     ButtonModule,
     CarouselModule,
-    TagModule
+    TagModule,
+    AutoCompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],
