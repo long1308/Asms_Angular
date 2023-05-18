@@ -8,6 +8,15 @@ const productSchema = new Schema(
     priceSale: Number,
     image: String,
     description: String,
+    description_short: String,
+    featured: {
+      type: Boolean,
+      default: false,
+    },
+    hot_sale: {
+      type: Number,
+      default: 0,
+    },
     size: {
       type: [String],
       enum: ["XS", "S", "M", "L", "XL"],
@@ -19,4 +28,10 @@ const productSchema = new Schema(
   },
   { timestamps: true, versionKey: false }
 );
+productSchema.pre("save", function (next) {
+  if (this.isModified("hot_sale") || this.isModified("price")) {
+    this.priceSale = this.price * (1 - this.hot_sale / 100);
+  }
+  next();
+});
 export default mongoose.model("Product", productSchema);

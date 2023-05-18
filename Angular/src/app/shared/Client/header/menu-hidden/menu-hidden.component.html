@@ -1,0 +1,82 @@
+<div id="mega-menu-full-cta-dropdown" class=" bg-white border-gray-200 shadow-sm border-y dark:bg-gray-800 dark:border-gray-600 ">
+  
+    <div class=" top-0  bg-white max-w-screen-xl w-full py-5 mx-auto text-sm text-gray-500 dark:text-gray-400 md:grid-cols-3 md:px-4">
+    
+      <div class="" *ngIf="isMenuVisible" >
+        <ul class="pr-24 pl-10 space-y-4 sm:mb-4 md:mb-0" aria-labelledby="mega-menu-full-cta-button">
+            <li>
+                <a
+                routerLink="/home"  
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+                <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                routerLink="/shop"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+                <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                routerLink="/blog"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Blog
+              </a>
+            </li>
+            <li>
+                <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                routerLink="/about"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                About
+              </a>
+            </li>
+            <li>
+                <a
+                class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                routerLink="/contact"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Contact
+              </a>
+            </li>
+            <li>
+                <a
+                  routerLink="/cart"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                >
+                 
+             Cart
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="/cart"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="text-base font-semibold text-[#1a1a1a] transition before:content-[''] before:absolute relative before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-slate-600 hover:before:w-full before:transition-all hover:text-[#088178]"
+                >
+                 
+        Account 
+                </a>
+              </li>
+        </ul>
+    </div>
+    </div>
+</div>
