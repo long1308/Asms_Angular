@@ -20,7 +20,7 @@
           class="relative mx-3 mt-3 flex justify-center h-60 overflow-hidden rounded-xl"
         >
           <img
-            routerLink="/detail_products/1"
+            [routerLink]="'/products/' + product._id"
             class="w-full object-cover cursor-pointer"
             src="{{ product.image }}"
             alt="product image"
