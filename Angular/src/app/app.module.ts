@@ -27,6 +27,10 @@ import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hid
 import { SearchComponent } from './shared/Client/header/search/search.component';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
+import { LayoutAdminComponent } from './layouts/layout-admin/layout-admin.component';
+import { LayoutClientComponent } from './layouts/layout-client/layout-client.component';
+import { DashboardComponent } from './components/Admin/dashboard/dashboard.component';
+import { ListProductComponent } from './components/Admin/list-product/list-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +53,11 @@ import { TagModule } from 'primeng/tag';
     AccountComponent,
     MenuHiddenComponent,
     SearchComponent,
- 
+    LayoutAdminComponent,
+    LayoutClientComponent,
+    DashboardComponent,
+    ListProductComponent,
+
   ],
   imports: [
     BrowserModule,

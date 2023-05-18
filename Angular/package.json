@@ -20,6 +20,7 @@
     "@angular/router": "^16.0.0",
     "@tippyjs/react": "^4.2.6",
     "autoprefixer": "^10.4.14",
+    "flowbite": "^1.6.5",
     "ngx-slick-carousel": "^15.0.0",
     "postcss-scss": "^4.0.6",
     "primeng": "^16.0.0-rc.1",
