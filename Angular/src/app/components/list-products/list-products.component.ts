@@ -9,50 +9,32 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ListProductsComponent implements OnInit {
   products: Iproduct[] = [];
-  
+
   responsiveOptions!: any[];
   constructor(private productService: ProductService) {}
-
-  // ngOnInit() {
-  //   this.loadProducts();
-  // }
-
-  // loadProducts() {
-  //   this.productService.getProducts().subscribe(( data:any) => {
-  //     this.products = data.product;
-  //      console.log(this.products);
-  //      this.products.forEach((product) => {
-   
-    
-  //      })
-  //      }
-  // )}
-  
   ngOnInit() {
-    this.productService.getProducts().subscribe((products:any) => {
-        this.products = products.product;
-        console.log(this.products);
-        
+    this.productService.getProducts().subscribe((products: any) => {
+      this.products = products.product;
+      console.log(this.products);
     });
-
-   this.responsiveOptions = [
-        {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
-            numVisible: 2,
-            numScroll: 1
-        },
-        {
-            breakpoint: '767px',
-            numVisible: 1,
-            numScroll: 1
-        }
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1,
+      },
     ];
-}
+  }
   // getSeverity(status: string | undefined): string {
   //   if (status === undefined) {
   //     // Xử lý khi inventoryStatus là undefined, ví dụ:
@@ -70,8 +52,4 @@ export class ListProductsComponent implements OnInit {
   //     // return '...'; (trả về giá trị tương ứng với inventoryStatus)
   //   }
   // }
-
 }
-
-
-
