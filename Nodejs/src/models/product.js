@@ -15,7 +15,7 @@ const productSchema = new Schema(
     },
     hot_sale: {
       type: Number,
-      default: 2,
+      default: 0,
     },
     size: {
       type: [String],
@@ -29,7 +29,7 @@ const productSchema = new Schema(
   { timestamps: true, versionKey: false }
 );
 productSchema.pre("save", function (next) {
-  if (this.hot_sale >= 0 && this.price) {
+  if (this.isModified("hot_sale") || this.isModified("price")) {
     this.priceSale = this.price * (1 - this.hot_sale / 100);
   }
   next();

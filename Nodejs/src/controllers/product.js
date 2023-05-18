@@ -72,9 +72,19 @@ export const update = async (req, res) => {
         message: error.details.map((error) => error.message),
       });
     }
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    // Update product
+    const updatedProduct = req.body;
+    if (updatedProduct.hot_sale >= 0 && updatedProduct.price) {
+      updatedProduct.priceSale =
+        updatedProduct.price * (1 - updatedProduct.hot_sale / 100);
+    }
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      updatedProduct,
+      {
+        new: true,
+      }
+    );
     if (!product) {
       return res.json({
         message: "Cập nhật sản phẩm không thành công !",
