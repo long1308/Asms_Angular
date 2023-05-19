@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { Iproduct } from 'src/app/interface/product';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit{
   handleInput(event: KeyboardEvent) {
     this.updateQuantity('input');
     this.handleInputChange(event);
@@ -41,12 +41,49 @@ export class ProductDetailComponent {
     private productService: ProductService
   ) {}
   ngOnInit() {
+  this.ngOnInit1()
+  this.ngOnInit2()
+  }
+  ngOnInit1() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
         console.log(this.product);
+ 
+        
       });
     });
+  }
+
+
+/// getall
+
+  productsAll: Iproduct[] = [];
+
+  responsiveOptions!: any[];
+ 
+  ngOnInit2() {
+    this.productService.getProducts().subscribe((products: any) => {
+      this.productsAll = products.product;
+      console.log(this.productsAll);
+    });
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
   }
 }

@@ -78,6 +78,16 @@ export const update = async (req, res) => {
       updatedProduct.priceSale =
         updatedProduct.price * (1 - updatedProduct.hot_sale / 100);
     }
+    switch (true) {
+      case updatedProduct.quantity <= 0:
+        updatedProduct.inventoryStatus = "OUTOFSTOCK";
+        break;
+      case updatedProduct.quantity <= 10:
+        updatedProduct.inventoryStatus = "LOWSTOCK";
+        break;
+      default:
+        updatedProduct.inventoryStatus = "INSTOCK";
+    }
     const product = await Product.findByIdAndUpdate(
       req.params.id,
       updatedProduct,

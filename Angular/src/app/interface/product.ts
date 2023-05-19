@@ -10,4 +10,8 @@ export interface Iproduct {
   hot_sale?: number;
   size: Array<string>;
   color: Array<string>;
+  quantity: number;
+  category: string;
+  inventoryStatus: string;
+  rating: number;
 }
