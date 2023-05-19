@@ -33,8 +33,6 @@ export const signup = async (req, res) => {
       ...req.body,
       password: hashedPassword,
     });
-
-    const token = jwt.sign({ id: user._id }, SECRET_CODE, { expiresIn: "1d" });
     user.password = undefined;
     return res.status(201).json({
       message: "Tạo tài khoản thành công",
@@ -43,13 +41,6 @@ export const signup = async (req, res) => {
     });
   } catch (error) {}
 };
-// B1: Kiểm tra thông tin req.body có hợp lệ hay không
-// B2: Kiểm tra email đã tồn tại hay chưa?
-// B2.1: Mã hóa mật khẩu trước khi tạo user mới
-// B3: Tạo user mới
-// B4: Tạo token mới chứa id của user
-// B5: Trả về client
-
 export const signin = async (req, res) => {
   try {
     const { error } = signinSchema.validate(req.body, { abortEarly: false });
@@ -93,11 +84,11 @@ export const getAll = async (req, res) => {
     const user = await User.find();
     if (user.length === 0) {
       return res.json({
-        message: "Không có sản phẩm nào !",
+        message: "Không có user nào !",
       });
     }
     return res.json({
-      message: "Lấy danh sách sản phẩm thành công !",
+      message: "Lấy danh sách user thành công !",
       user,
     });
   } catch (error) {
@@ -116,7 +107,7 @@ export const remove = async (req, res) => {
       });
     }
     return res.json({
-      message: "Xóa sản phẩm thành công",
+      message: "Xóa user thành công",
       user,
     });
   } catch (error) {
@@ -160,11 +151,11 @@ export const get = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
       return res.json({
-        message: "Lấy sản phẩm không thành công !",
+        message: "Lấy user không thành công !",
       });
     }
     return res.json({
-      message: "Lấy 1 sản phẩm thành công !",
+      message: "Lấy 1 user thành công !",
       user,
     });
   } catch (error) {
