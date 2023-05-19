@@ -18,4 +18,5 @@ export class HeaderComponent {
   toggleMenu() {
     this.isMenuVisible = !this.isMenuVisible;
   }
+
 }
