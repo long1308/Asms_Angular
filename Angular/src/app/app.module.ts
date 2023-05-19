@@ -27,7 +27,6 @@ import { MenuHiddenComponent } from './shared/Client/header/menu-hidden/menu-hid
 import { SearchComponent } from './shared/Client/header/search/search.component';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { LayoutAdminComponent } from './layouts/layout-admin/layout-admin.component';
 import { LayoutClientComponent } from './layouts/layout-client/layout-client.component';
 import { DashboardComponent } from './components/Admin/dashboard/dashboard.component';
@@ -151,8 +150,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ButtonModule,
     CarouselModule,
     TagModule,
-    AutoCompleteModule
-    ToastModule,
+    AutoCompleteModule,
     AvatarModule,
     BrowserModule,
     FormsModule,

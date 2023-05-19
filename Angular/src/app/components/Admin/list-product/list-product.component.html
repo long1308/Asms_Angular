@@ -105,6 +105,7 @@
             [ngModel]="product.rating"
             [readonly]="true"
             [cancel]="false"
+            [ngStyle]="{ color: 'yellow' }"
           ></p-rating>
         </td>
         <td>
@@ -117,16 +118,20 @@
           <button
             pButton
             pRipple
-            class="p-button-rounded p-button-success "
+            class="p-button-rounded p-button-success"
             style="margin-right: 0.5rem"
             (click)="editProduct(product)"
-          >Edit</button>
+          >
+            Edit
+          </button>
           <button
             pButton
             pRipple
             class="p-button-rounded p-button-warning"
             (click)="deleteProduct(product)"
-          >Remove</button>
+          >
+            Remove
+          </button>
         </td>
       </tr>
     </ng-template>
