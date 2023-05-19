@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-
+import paginate from "mongoose-paginate-v2";
 const productSchema = new Schema(
   {
     name: String,
@@ -31,6 +31,11 @@ const productSchema = new Schema(
       type: String,
       enum: ["INSTOCK", "LOWSTOCK", "OUTOFSTOCK"],
     },
+    //tạo 1 tr category
+    categoryId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Category", // liên kết bảng categorry
+    },
   },
   { timestamps: true, versionKey: false }
 );
@@ -50,4 +55,5 @@ productSchema.pre("save", function (next) {
   }
   next();
 });
+productSchema.plugin(paginate);
 export default mongoose.model("Product", productSchema);
