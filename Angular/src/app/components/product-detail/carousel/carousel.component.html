@@ -1,28 +1,28 @@
-<div class=" h-full">
+<div class="h-full">
   <div class="slide1 flex justify-center w-2/3 items-center pb-3 relative mx-auto">
     <img
       *ngFor="let image of productImages; let i = index"
-      class=""
+      class="side"
       [src]="image"
       alt=""
       [ngClass]="{ image_active: selectedIndex === i }"
     />
     <div class="click">
       <button
-        class="duration-300 ease-in-out absolute top-1/2 translate-y-[-50%] hover:bg-gray-300 px-4 py-4 rounded-r-lg text-white text-xl font-bold left-0 hover:text-black"
+        class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2  px-4 py-4 rounded-r-lg text-white text-xl font-bold left-0 hover:text-black"
         (click)="previousImage()"
       >
         ❮
       </button>
       <button
-        class="duration-300 ease-in-out absolute top-1/2 translate-y-[-50%] hover:bg-gray-300 px-4 py-4 rounded-l-lg text-white text-xl font-bold right-0 hover:text-black"
+        class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2  px-4 py-4 rounded-l-lg text-white text-xl font-bold right-0 hover:text-black"
         (click)="nextImage()"
       >
         ❯
       </button>
     </div>
   </div>
-  <div class="flex w-full justify-center  -bottom-2 p-2">
+  <div class="flex w-full justify-center -bottom-2 p-2">
     <div
       *ngFor="let image of productImages.slice(0, 5); let i2 = index"
       class="small-image mx-1"

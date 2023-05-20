@@ -1,12 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
-import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { Component, OnInit} from '@angular/core';
 
+import { ProductService } from 'src/app/service/product.service';
+import { Iproduct } from 'src/app/interface/product';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit {
+
+  product: Iproduct = {} as Iproduct;
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService
+  ) {}
+
   onchange(index: number) {
     this.selectedIndex = index;
   }
@@ -26,4 +35,21 @@ export class CarouselComponent {
     'https://templateprj.vercel.app/img/products/f4.jpg',
     'https://templateprj.vercel.app/img/products/f5.jpg', 
   ];
+
+
+  ngOnInit() {
+    this.ngOnInit1()
+  
+    }
+    ngOnInit1() {
+      this.route.paramMap.subscribe((params) => {
+        const id = params.get('id');
+        this.productService.getProduct(id!).subscribe((item: any) => {
+          this.product = item.product;
+          console.log(this.product);
+          
+        });
+      });
+    }
+
 }
