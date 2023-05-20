@@ -20,6 +20,9 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
+import { Banner2Component } from './components/banner2/banner2.component';
+import { Banner3Component } from './components/banner3/banner3.component';
+import { Banner4Component } from './components/banner4/banner4.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { AccountComponent } from './components/account/account.component';
     ContactComponent,
     CartComponent,
     AccountComponent,
+    Banner2Component,
+    Banner3Component,
+    Banner4Component,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
