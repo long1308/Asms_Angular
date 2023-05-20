@@ -44,7 +44,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
     <div class="flex flex-col md:flex-row">
       <div class="md:flex-1 p-2 shadow-md bg-slate-100">
-        <app-carousel></app-carousel>
+        <app-carousel [value] = "product" [selectedIndex] = "selectedIndex" ></app-carousel>
       </div>
       <div class="md:flex-1 px-4">
         <h2
@@ -75,7 +75,7 @@
           <legend class="text-lg font-bold">Color:</legend>
           <div class="mt-2 flex flex-wrap gap-1">
             <label
-              *ngFor="let color of product.color"
+              *ngFor="let color of product.color, let i = index"
               [for]="'color_' + color"
               class="cursor-pointer"
             >
@@ -84,7 +84,10 @@
                 [id]="'color_' + color"
                 name="color"
                 class="peer sr-only"
-                checked
+                [checked]="i == selectedIndex"
+                (click)= "clickColor(i)"
+                
+            
               />
               <span               
                 class="block h-6 w-6 rounded-full border border-gray-200 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-700"
@@ -134,6 +137,9 @@
                 [(ngModel)]="valueQuantity"
                 (input)="updateQuantity('input')"
                 (keydown)="handleInput($event)"
+                (paste)="handlePaste($event)"
+                (focus)="checkInputEmpty()"
+                (blur)="isInputEmpty && valueQuantity !== 1 ? valueQuantity = 1 : null"
                 class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
               />
 
@@ -146,7 +152,7 @@
               </button>
             </div>
             <!-- Sản phảm còn lại -->
-            <span class="ml-3">{{ quantity }} products available</span>
+            <span class="ml-3">{{ product.quantity || "1" }} products available</span>
           </div>
           <div class="flex">
             <div class="flex">
@@ -192,7 +198,7 @@
           <img
           [routerLink]  ="'/products/' + productss._id"
             class="w-full object-cover cursor-pointer"
-            src="{{ productss.image }}"
+            src="{{ productss.image[0] }}"
             alt="product image"
           />
           <span

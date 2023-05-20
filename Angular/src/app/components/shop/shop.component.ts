@@ -14,12 +14,20 @@ export class ShopComponent implements OnInit{
   countries: Iproduct[] = [];
   filteredCountries : Iproduct[] = [];
   isAscending: boolean = true;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 0;
+  
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
       this.searchValue = params.search;
 
       this.countryService.getProducts().subscribe((countries: any) => {
-        this.countries = countries.product;
+        console.log(countries.product);
+        this.countries = countries.product.docs;
+        // Calculate the total number of pages
+        this.totalPages = Math.ceil(this.countries.length / this.itemsPerPage);
+        
 
         if (this.searchValue) {
           this.filteredCountries = this.countries.filter((country: Iproduct) =>
@@ -27,16 +35,29 @@ export class ShopComponent implements OnInit{
           );
         } else {
           this.filteredCountries = this.countries;
+          console.log(this.filteredCountries.length);
+   
+          
         }
         this.sortProducts();
       });
     });
   }
+  onPageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
+  }
+
+  getPaginatedProducts(): Iproduct[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return this.countries.slice(startIndex, endIndex);
+  }
   sortProducts() {
     if (this.isAscending) {
-      this.filteredCountries.sort((a, b) => a.price - b.price);
+      this.filteredCountries.sort((a, b) => a.priceSale - b.priceSale);
     } else {
-      this.filteredCountries.sort((a, b) => b.price - a.price);
+      this.filteredCountries.sort((a, b) => b.priceSale - a.priceSale);
     }
   }
 

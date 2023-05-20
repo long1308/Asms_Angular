@@ -2,7 +2,7 @@ export interface Iproduct {
   _id?: number | string;
   name: string;
   price: number;
-  priceSale?: number;
+  priceSale: number;
   featured: boolean;
   image: string;
   description: string;
