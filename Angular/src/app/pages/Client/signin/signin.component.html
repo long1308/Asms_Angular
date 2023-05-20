@@ -1,4 +1,3 @@
-<!-- component -->
 <!-- Container -->
 <div
   class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10"
@@ -15,21 +14,25 @@
         <img src="./assets/logo.png" alt="" class="mx-auto w-1/4" />
 
         <!-- Form -->
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="form" (ngSubmit)="submitForm()">
           <div class="mb-3">
             <label class="mb-2 block text-xs font-semibold">Email</label>
             <input
               type="email"
+              formControlName="email"
               placeholder="Email"
               class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
+
+
 
           <div class="mb-3">
             <label class="mb-2 block text-xs font-semibold">Password</label>
             <input
               type="password"
               placeholder="*****"
+              formControlName="password"
               class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
@@ -54,6 +57,7 @@
             >
               Sign in
             </button>
+            <div *ngIf="successMessage" class="text-green-500 text-sm mt-2">{{ successMessage }}</div>
             <div
               class="btn-wrapper text-center flex items-center justify-center space-x-4 mt-3"
             >
