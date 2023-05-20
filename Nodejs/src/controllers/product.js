@@ -1,9 +1,15 @@
 import Product from "../models/product";
 import { productSchema } from "../Schema/product";
-
 export const getAll = async (req, res) => {
+  const { _sort = "createdAt", _limit = 10, _order = "asc" } = req.query;
+  const option = {
+    limit: _limit,
+    sort: {
+      [_sort]: _order === "asc" ? 1 : -1,
+    },
+  };
   try {
-    const product = await Product.find();
+    const product = await Product.paginate({}, option);
     if (product.length === 0) {
       return res.json({
         message: "Không có sản phẩm nào !",
