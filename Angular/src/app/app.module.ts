@@ -117,7 +117,6 @@ import { AnimateModule } from 'primeng/animate';
 import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,6 +146,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     LayoutClientComponent,
     DashboardComponent,
     ListProductComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,
@@ -247,8 +247,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TreeTableModule,
     AnimateModule,
     CardModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [SignupComponent]
 })
 export class AppModule {}
