@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
 
  ngOnInit() {// Lấy dữ liệu
    this.countryService.getProducts().subscribe((countries: any) => {
-     this.countries = countries.product;
+     this.countries = countries.product.docs;
    });
  }
  onSearch() { // Submit khi tìm kiếm và chuyển đến trang Shop
