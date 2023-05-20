@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormControl } from '@angular/forms';
-
+import {FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
-  successMessage: string = '';
-
+  submitted = false;
   form!: FormGroup;
-constructor (private ProductService : ProductService) {
+constructor (private ProductService : ProductService, private router: Router) {
   this.form = new FormGroup ({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -26,9 +24,8 @@ constructor (private ProductService : ProductService) {
       this.ProductService.login(formData).subscribe(
         response => {
           // Xử lý phản hồi từ API khi đăng nhập thành công
+          this.router.navigate(['/']);
           console.log('Đăng nhập thành công', response);
-          this.successMessage = 'Đăng nhập thành công';
-
         },
         error => {
           // Xử lý lỗi từ API khi đăng nhập thất bại
