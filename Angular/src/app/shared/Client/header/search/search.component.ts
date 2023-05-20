@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Router } from '@angular/router';
 import { Iproduct } from 'src/app/interface/product';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -16,67 +17,56 @@ export class SearchComponent implements OnInit {
  showResults: boolean = false;
  clear: boolean = false;
  loading: boolean = false;
+ timeoutId: any;
  @ViewChild('searchInput') searchInput!: ElementRef;
- constructor(private countryService: ProductService) {}
- 
- ngOnInit() {
+ constructor(private countryService: ProductService , private router: Router) {}
+
+ ngOnInit() {// Lấy dữ liệu
    this.countryService.getProducts().subscribe((countries: any) => {
      this.countries = countries.product;
    });
  }
+ onSearch() { // Submit khi tìm kiếm và chuyển đến trang Shop
+  this.filteredCountries = this.countries.filter((country: Iproduct) => {
+    return country.name.toLowerCase().includes(this.searchValue.toLowerCase());
+  });
 
- filterCountry() {
+  this.showResults = false;
+  this.router.navigate(['/shop'], {
+    queryParams: { search: this.searchValue },
+    queryParamsHandling: 'merge'
+  });
+}
+
+ filterCountry() {// Lấy dữ liệu theo từ khóa 
   this.loading = true; // Hiển thị biểu tượng tải
  // Hiển thị kết quả tìm kiếm
-  setTimeout(() => {
+ clearTimeout(this.timeoutId); // Hủy timeout trước nếu có
+
+ this.timeoutId = setTimeout(() => {
     this.filteredCountries = this.countries.filter((country: Iproduct) =>
       country.name.toLowerCase().includes(this.searchValue.toLowerCase())
-     
-    );
-    
- this.showResults = true; 
-    
+    )
+ this.showResults = true; // show dữ liệu sau khi tìm
     this.loading = false; // Ẩn biểu tượng tải
   }, 300); // Đợi 0.3s trước khi lọc và hiển thị kết quả
-
 }
-// show list dữ liệu search và 
-showList(){
+
+showList(){ // show list dữ liệu search 
 this.showResults = true;
 
 }
- hideResults() {
-this.showResults = false;
-}
- clearSearch() {
+
+hidenList(){ // ẩn list dữ liệu search
+
+  this.showResults = false;}
+
+ clearSearch() {  // Xóa value và focus vào input
   this.searchValue=""
   this.searchInput.nativeElement.focus(); // Focus vào input sau khi xóa nội dung
 }
 
-hidenList(){
 
-this.showResults = false;}
  
- 
- 
- 
- 
-
-//  filterCountry(event: any) {
-//      let filtered: any[] = [];
-//      let query = event.query;
-
-//      for (let i = 0; i < this.countries.length; i++) {
-//          let country = this.countries[i];
-//          if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-//              filtered.push(country);
-//          }
-//      }
-//      console.log(this.filteredCountries);
-     
-
-//      this.filteredCountries = filtered;
-//  }
-//}
 
 }
