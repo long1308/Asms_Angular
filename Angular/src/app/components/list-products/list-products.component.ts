@@ -35,21 +35,5 @@ export class ListProductsComponent implements OnInit {
       },
     ];
   }
-  // getSeverity(status: string | undefined): string {
-  //   if (status === undefined) {
-  //     // Xử lý khi inventoryStatus là undefined, ví dụ:
-  //     return 'default';
-  //   } else {
-  //     switch (status) {
-  //       case 'INSTOCK':
-  //           return 'success';
-  //       case 'LOWSTOCK':
-  //           return 'warning';
-  //       case 'OUTOFSTOCK':
-  //           return 'danger';
-  //   }
-  //     // Xử lý khi inventoryStatus có giá trị, ví dụ:
-  //     // return '...'; (trả về giá trị tương ứng với inventoryStatus)
-  //   }
-  // }
+
 }
