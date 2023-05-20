@@ -11,9 +11,7 @@ export const productSchema = Joi.object({
     "any.required": "Trường Price này là bắt buộc",
     "number.base": "Price phải là 1 số",
   }),
-  priceSale: Joi.number().required().messages({
-    "string.empty": "priceSale không được để trống",
-    "any.required": "Trường priceSale này là bắt buộc",
+  priceSale: Joi.number().messages({
     "number.base": "priceSale phải là 1 số",
   }),
   description: Joi.string().required().messages({
@@ -36,6 +34,25 @@ export const productSchema = Joi.object({
     "any.required": "Trường color này là bắt buộc ",
     "array.base": "color phải là 1 array",
   }),
+  hot_sale: Joi.number(),
+  description_short: Joi.string(),
+  featured: Joi.boolean(),
+  rating: Joi.number().required().messages({
+    "string.empty": "rating không được để trống",
+    "any.required": "Trường Price này là bắt buộc",
+    "number.base": "Price phải là 1 số",
+  }),
+  quantity: Joi.number().required().messages({
+    "string.empty": "rating không được để trống",
+    "any.required": "Trường Price này là bắt buộc",
+    "number.base": "Price phải là 1 số",
+  }),
+  inventoryStatus: Joi.string(),
+  categoryId: Joi.string().required().messages({
+    "string.empty": "categoryId không được để trống",
+    "any.required": "Trường categoryId này là bắt buộc",
+    "string.base": "categoryId phải là 1 string",
+  }),
 });
 export const sizeSchema = Joi.object({
   name: Joi.string().required().messages({
@@ -49,5 +66,12 @@ export const colorSchema = Joi.object({
     "string.empty": "Name không được để trống",
     "any.required": "Trường Name này là bắt buộc",
     "string.base": "Name phải là 1 string",
+  }),
+});
+export const categorySchema = Joi.object({
+  name: Joi.string().required().messages({
+    "string.empty": "Category không được để trống",
+    "any.required": "Trường Category này là bắt buộc",
+    "string.base": "Name phải là 1 String",
   }),
 });

@@ -1,9 +1,15 @@
 import Product from "../models/product";
 import { productSchema } from "../Schema/product";
-
 export const getAll = async (req, res) => {
+  const { _sort = "createdAt", _limit = 10, _order = "asc" } = req.query;
+  const option = {
+    limit: _limit,
+    sort: {
+      [_sort]: _order === "asc" ? 1 : -1,
+    },
+  };
   try {
-    const product = await Product.find();
+    const product = await Product.paginate({}, option);
     if (product.length === 0) {
       return res.json({
         message: "Không có sản phẩm nào !",
@@ -72,9 +78,29 @@ export const update = async (req, res) => {
         message: error.details.map((error) => error.message),
       });
     }
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    // Update product
+    const updatedProduct = req.body;
+    if (updatedProduct.hot_sale >= 0 && updatedProduct.price) {
+      updatedProduct.priceSale =
+        updatedProduct.price * (1 - updatedProduct.hot_sale / 100);
+    }
+    switch (true) {
+      case updatedProduct.quantity <= 0:
+        updatedProduct.inventoryStatus = "OUTOFSTOCK";
+        break;
+      case updatedProduct.quantity <= 10:
+        updatedProduct.inventoryStatus = "LOWSTOCK";
+        break;
+      default:
+        updatedProduct.inventoryStatus = "INSTOCK";
+    }
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      updatedProduct,
+      {
+        new: true,
+      }
+    );
     if (!product) {
       return res.json({
         message: "Cập nhật sản phẩm không thành công !",
