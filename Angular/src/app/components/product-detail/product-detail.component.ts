@@ -65,7 +65,7 @@ export class ProductDetailComponent implements OnInit{
  
   ngOnInit2() {
     this.productService.getProducts().subscribe((products: any) => {
-      this.productsAll = products.product;
+      this.productsAll = products.product.docs;
       console.log(this.productsAll);
     });
     this.responsiveOptions = [
