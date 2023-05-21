@@ -1,8 +1,7 @@
-<div class="h-full">
-  <div class="slide1 flex justify-center w-2/3 items-center pb-3 relative mx-auto">
+ <div class="slide1 flex justify-center  items-center pb-3 relative  w-full " style="height: auto;">
     <img
       *ngFor="let image of value.image; let i = index"
-      class="side"
+      class="side "
       [src]="image"
       alt=""
       [ngClass]="{ image_active: selectedIndex === i }"
@@ -36,4 +35,3 @@
       />
     </div>
   </div>
-</div>
