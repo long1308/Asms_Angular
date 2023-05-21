@@ -63,6 +63,7 @@ export class ProductDetailComponent implements OnInit {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
+        this.valueQuantity= 1
       });
     });
   }
@@ -108,7 +109,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
   // get rating array
-getRatingArray(rating: number, maxRating: number): number[] {
-  return Array.from({ length: maxRating }, (_, index) => index + 1);
-}
+  getRatingArray(rating: number, maxRating: number): number[] {
+    return Array.from({ length: maxRating }, (_, index) => index + 1);
+  }
 }
