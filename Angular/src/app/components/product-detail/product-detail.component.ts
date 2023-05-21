@@ -1,4 +1,4 @@
-import { Component ,OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { Iproduct } from 'src/app/interface/product';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -19,10 +19,10 @@ export class ProductDetailComponent implements OnInit{
     this.handleInputChange(event);
   }
   valueQuantity: number = 1;
-  isInputEmpty: boolean = true
+  isInputEmpty: boolean = true;
 
-   //số lượng sản phẩm còn lại
-  
+  //số lượng sản phẩm còn lại
+
   handleInputChange(event: KeyboardEvent) {
     if (
       event.key === 'e' ||
@@ -39,53 +39,38 @@ export class ProductDetailComponent implements OnInit{
     event.preventDefault();
   }
   checkInputEmpty() {
-    this.isInputEmpty = isNaN(this.valueQuantity) || this.valueQuantity === null || this.valueQuantity === undefined;
-  
+    this.isInputEmpty =
+      isNaN(this.valueQuantity) ||
+      this.valueQuantity === null ||
+      this.valueQuantity === undefined;
   }
   updateQuantity(action: string) {
-  
-    
-      if (action === 'increase' && this.valueQuantity < this.product.quantity) {
-        this.valueQuantity++;
-      } else if (action === 'decrease' && this.valueQuantity > 1) {
-        this.valueQuantity--;
-      }
-  
-   
-    
+    if (action === 'increase' && this.valueQuantity < this.product.quantity) {
+      this.valueQuantity++;
+    } else if (action === 'decrease' && this.valueQuantity > 1) {
+      this.valueQuantity--;
+    }
   }
   //grt product
   product: Iproduct = {} as Iproduct;
 
   ngOnInit() {
-  this.ngOnInit1()
-  this.ngOnInit2()
-
-  
+    this.ngOnInit1();
+    this.ngOnInit2();
   }
   ngOnInit1() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
-        this.valueQuantity= 1
-        console.log(this.product);
-        
       });
     });
   }
-  
-/// getall
-
   productsAll: Iproduct[] = [];
-
   responsiveOptions!: any[];
- 
   ngOnInit2() {
     this.productService.getProducts().subscribe((products: any) => {
       this.productsAll = products.product.docs;
-
-   
     });
     this.responsiveOptions = [
       {
@@ -105,11 +90,25 @@ export class ProductDetailComponent implements OnInit{
       },
     ];
   }
-
   selectedIndex: number = 0;
-  clickColor(index: number){
-  this.selectedIndex = index
-  console.log(this.selectedIndex);
-  
+  clickColor(index: number) {
+    this.selectedIndex = index;
   }
+  //status
+  getSeverity(status: string): string {
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+      default:
+        return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
+    }
+  }
+  // get rating array
+getRatingArray(rating: number, maxRating: number): number[] {
+  return Array.from({ length: maxRating }, (_, index) => index + 1);
+}
 }
