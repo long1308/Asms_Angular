@@ -15,6 +15,9 @@
         <!-- Form -->
         <form class="mt-4" [formGroup]="form" (ngSubmit)="submitForm()">
           <div class="mb-3">
+            <div *ngIf="loginError" class="text-red-500 text-xs mt-1">
+              Invalid email or password.
+            </div>
             <label class="mb-2 block text-xs font-semibold">Email</label>
             <input
               type="email"

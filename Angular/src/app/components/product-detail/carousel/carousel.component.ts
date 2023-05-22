@@ -47,7 +47,6 @@ export class CarouselComponent implements OnInit {
         const id = params.get('id');
         this.productService.getProduct(id!).subscribe((item: any) => {
           this.product = item.product;
-          console.log(this.value);
           this.selectedIndex = 0;
         });
       });

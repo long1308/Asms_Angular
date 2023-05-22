@@ -63,7 +63,7 @@ export class ProductDetailComponent implements OnInit {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
-        this.valueQuantity= 1
+        this.valueQuantity = 1;
       });
     });
   }
@@ -111,5 +111,14 @@ export class ProductDetailComponent implements OnInit {
   // get rating array
   getRatingArray(rating: number, maxRating: number): number[] {
     return Array.from({ length: maxRating }, (_, index) => index + 1);
+  }
+  cartItems: any[] = [];
+  addToCart(product: Iproduct) {
+     existingItem = this.cartItems.find(item => item._id === product._id);
+    console.log(product);
+    
+    // const existingItem = this.cartItems.find((item) => item.id === product.id);
+    // this.productService.addToCart(product);
+    // this.router.navigate(['/cart']);
   }
 }
