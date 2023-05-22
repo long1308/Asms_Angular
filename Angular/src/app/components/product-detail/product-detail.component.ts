@@ -114,7 +114,6 @@ export class ProductDetailComponent implements OnInit {
   }
   cartItems: any[] = [];
   addToCart(product: Iproduct) {
-     existingItem = this.cartItems.find(item => item._id === product._id);
     console.log(product);
     
     // const existingItem = this.cartItems.find((item) => item.id === product.id);
