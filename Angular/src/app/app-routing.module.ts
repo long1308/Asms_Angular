@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContainerComponent } from './pages/Client/container/container.component';
 import { SignupComponent } from './pages/Client/signup/signup.component';
 import { SigninComponent } from './pages/Client/signin/signin.component';
 import { NotfoundComponent } from './components/not-found/notfound.component';
@@ -14,48 +13,28 @@ import { AccountComponent } from './components/account/account.component';
 import { LayoutAdminComponent } from './layouts/layout-admin/layout-admin.component';
 import { DashboardComponent } from './components/Admin/dashboard/dashboard.component';
 import { ListProductComponent } from './components/Admin/list-product/list-product.component';
+import { LayoutClientComponent } from './layouts/layout-client/layout-client.component';
+import { ContainerComponent } from './pages/Client/container/container.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: ContainerComponent,
+    path: '',
+    component: LayoutClientComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: ContainerComponent },
+      { path: 'products/:id', component: ProductDetailComponent },
+      { path: 'shop', component: ShopComponent },
+      { path: 'blog', component: BlogComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'account', component: AccountComponent },
+    ],
   },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  },
-  {
-    path: 'signin',
-    component: SigninComponent,
-  },
-  {
-    path: 'products/:id',
-    component: ProductDetailComponent,
-  },
-  {
-    path: 'shop',
-    component: ShopComponent,
-  },
-  {
-    path: 'blog',
-    component: BlogComponent,
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-  },
-  {
-    path: 'cart',
-    component: CartComponent,
-  },
-  {
-    path: 'account',
-    component: AccountComponent,
-  },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
+
   //admin
   {
     path: 'admin',

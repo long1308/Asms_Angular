@@ -119,6 +119,8 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './shared/Admin/sidebar/sidebar.component';
+import { ContainerAdimComponent } from './pages/Admin/container-adim/container-adim.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -149,6 +151,8 @@ import { CommonModule } from '@angular/common';
     DashboardComponent,
     ListProductComponent,
     SigninComponent,
+    SidebarComponent,
+    ContainerAdimComponent,
   ],
   imports: [
     BrowserModule,
