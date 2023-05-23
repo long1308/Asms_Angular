@@ -1,13 +1,14 @@
 import User from "../models/user";
 import { signinSchema, signupSchema } from "../Schema/user.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
 const { SECRET_CODE } = process.env;
 
 export const signup = async (req, res) => {
+  const { name, email, password, image_url } = req.body;
   try {
     // validate đầu vào
     const { error } = signupSchema.validate(req.body, { abortEarly: false });
@@ -28,18 +29,23 @@ export const signup = async (req, res) => {
     // Mã hóa mật khẩu
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
     const user = await User.create({
-      ...req.body,
+      // ...req.body,
+      name,
+      email,
+      image_url,
       password: hashedPassword,
     });
     user.password = undefined;
     return res.status(201).json({
       message: "Tạo tài khoản thành công",
-      accessToken: token,
       user,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 export const signin = async (req, res) => {
   try {
@@ -116,7 +122,6 @@ export const remove = async (req, res) => {
     }
   }
 };
-
 
 export const update = async (req, res) => {
   try {
