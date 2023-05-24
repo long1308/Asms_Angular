@@ -72,7 +72,7 @@ export class ProductDetailComponent implements OnInit {
       this.productsAll = products.product.docs;
       this.nonFeaturedProducts = this.productsAll.filter(
         (product) => !product.featured
-      );   
+      );
     });
     this.responsiveOptions = [
       {
@@ -119,9 +119,16 @@ export class ProductDetailComponent implements OnInit {
     this.selectedColor = this.product.color[index];
     console.log(this.selectedColor);
   }
+  srcFromChild!: string;
+  updateSrc(src: any) {
+    this.srcFromChild = src;
+    
+    
+  }
   cartItems: any[] = [];
   addToCart(product: Iproduct) {
     console.log(product);
+    console.log(this.srcFromChild);
 
     // const existingItem = this.cartItems.find((item) => item.id === product.id);
     // this.productService.addToCart(product);

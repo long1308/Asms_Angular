@@ -1,37 +1,41 @@
- <div class="slide1 flex justify-center  items-center pb-3 relative  w-full " style="height: auto;">
+<div
+  class="slide1 flex justify-center items-center pb-3 relative w-full"
+  style="height: auto"
+>
+  <img
+    *ngFor="let image of value.image; let i = index"
+    class="side"
+    [src]="image"
+    alt=""  
+    [ngClass]="{ image_active: selectedIndex === i }"
+    (click)="sendSrc(image)"
+  />
+  <div class="click">
+    <button
+      class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2 px-4 py-4 rounded-r-lg text-white text-xl font-bold left-0 hover:text-black"
+      (click)="previousImage()"
+    >
+      ❮
+    </button>
+    <button
+      class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2 px-4 py-4 rounded-l-lg text-white text-xl font-bold right-0 hover:text-black"
+      (click)="nextImage()"
+    >
+      ❯
+    </button>
+  </div>
+</div>
+<div class="flex w-full justify-center -bottom-2 p-2">
+  <div
+    *ngFor="let image of value.image; let i2 = index"
+    class="small-image mx-1"
+  >
     <img
-      *ngFor="let image of value.image; let i = index"
-      class="side "
+      class="w-full m-auto"
       [src]="image"
       alt=""
-      [ngClass]="{ image_active: selectedIndex === i }"
+      [ngClass]="{ active: i2 === selectedIndex }"
+      (click)="onchange(i2)"
     />
-    <div class="click">
-      <button
-        class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2  px-4 py-4 rounded-r-lg text-white text-xl font-bold left-0 hover:text-black"
-        (click)="previousImage()"
-      >
-        ❮
-      </button>
-      <button
-        class="duration-300 ease-in-out absolute top-1/2 transform -translate-y-1/2  px-4 py-4 rounded-l-lg text-white text-xl font-bold right-0 hover:text-black"
-        (click)="nextImage()"
-      >
-        ❯
-      </button>
-    </div>
   </div>
-  <div class="flex w-full justify-center -bottom-2 p-2">
-    <div
-      *ngFor="let image of value.image; let i2 = index"
-      class="small-image mx-1"
-    >
-      <img
-        class="w-full m-auto"
-        [src]="image"
-        alt=""
-        [ngClass]="{ active: i2 === selectedIndex }"
-        (click)="onchange(i2)"
-      />
-    </div>
-  </div>
+</div>

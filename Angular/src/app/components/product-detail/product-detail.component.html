@@ -45,6 +45,7 @@
     <div class="flex flex-col md:flex-row">
       <div class="w-2/5 p-3 shadow-md bg-slate-100">
         <app-carousel
+          (srcChange)="updateSrc($event)"
           [value]="product"
           [selectedIndex]="selectedIndex"
         ></app-carousel>
@@ -100,7 +101,7 @@
             <legend class="text-lg font-bold">Size:</legend>
             <div class="mt-2 flex flex-wrap gap-1">
               <label
-                *ngFor="let size of product.size;let i = index"
+                *ngFor="let size of product.size; let i = index"
                 [for]="'size_' + size"
                 class="cursor-pointer"
               >
@@ -198,7 +199,7 @@
     Summer Collection New Morden Design
   </p>
   <p-carousel
-    [value]="nonFeaturedProducts  "
+    [value]="nonFeaturedProducts"
     [numVisible]="5"
     [numScroll]="3"
     [circular]="true"
