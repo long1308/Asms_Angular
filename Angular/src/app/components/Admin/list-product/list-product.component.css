@@ -1,0 +1,15 @@
+.btn-left{
+margin-right: 10px;
+}
+.title-inp{
+   
+    line-height: 40px;
+    text-align: left;
+    
+}
+
+.checkbox-cate{
+display: flex;
+align-items: center;
+
+}

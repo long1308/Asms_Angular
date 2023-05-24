@@ -24,6 +24,7 @@ export class ProductService {
   login(user: signin) :Observable<signin> {
     return this.http.post<signin>('http://localhost:8080/api/signin',user);
   }
-
-
+  editProduct(product: Iproduct): Observable<Iproduct> {
+    return this.http.put<Iproduct>('http://localhost:8080/api/products/' + product._id, product);
+  }
 }
