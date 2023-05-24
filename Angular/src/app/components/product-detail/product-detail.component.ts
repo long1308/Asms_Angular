@@ -9,6 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
+  productsAll!: Iproduct[];
+  responsiveOptions!: any[];
+  valueQuantity: number = 1;
+  isInputEmpty: boolean = true;
+  product!: Iproduct;
+  selectedSize!: string;
+  selectedColor!: string;
+  nonFeaturedProducts!: Iproduct[];
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -18,11 +26,6 @@ export class ProductDetailComponent implements OnInit {
     this.updateQuantity('input');
     this.handleInputChange(event);
   }
-  valueQuantity: number = 1;
-  isInputEmpty: boolean = true;
-
-  //số lượng sản phẩm còn lại
-
   handleInputChange(event: KeyboardEvent) {
     if (
       event.key === 'e' ||
@@ -51,9 +54,6 @@ export class ProductDetailComponent implements OnInit {
       this.valueQuantity--;
     }
   }
-  //grt product
-  product: Iproduct = {} as Iproduct;
-
   ngOnInit() {
     this.ngOnInit1();
     this.ngOnInit2();
@@ -67,11 +67,12 @@ export class ProductDetailComponent implements OnInit {
       });
     });
   }
-  productsAll: Iproduct[] = [];
-  responsiveOptions!: any[];
   ngOnInit2() {
     this.productService.getProducts().subscribe((products: any) => {
       this.productsAll = products.product.docs;
+      this.nonFeaturedProducts = this.productsAll.filter(
+        (product) => !product.featured
+      );   
     });
     this.responsiveOptions = [
       {
@@ -92,9 +93,6 @@ export class ProductDetailComponent implements OnInit {
     ];
   }
   selectedIndex: number = 0;
-  clickColor(index: number) {
-    this.selectedIndex = index;
-  }
   //status
   getSeverity(status: string): string {
     switch (status) {
@@ -112,10 +110,19 @@ export class ProductDetailComponent implements OnInit {
   getRatingArray(rating: number, maxRating: number): number[] {
     return Array.from({ length: maxRating }, (_, index) => index + 1);
   }
+  clickSize(index: number) {
+    this.selectedSize = this.product.size[index];
+    console.log(this.selectedSize);
+  }
+  clickColor(index: number) {
+    this.selectedIndex = index;
+    this.selectedColor = this.product.color[index];
+    console.log(this.selectedColor);
+  }
   cartItems: any[] = [];
   addToCart(product: Iproduct) {
     console.log(product);
-    
+
     // const existingItem = this.cartItems.find((item) => item.id === product.id);
     // this.productService.addToCart(product);
     // this.router.navigate(['/cart']);
