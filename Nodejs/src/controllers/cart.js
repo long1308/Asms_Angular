@@ -45,42 +45,27 @@ const getCartById = async (req, res) => {
 const createCart = async (req, res) => {
   const { items, userId } = req.body;
   const { size, color } = items[0];
-  const productId = items[0].productId;
   try {
     //lấy product
-    const product = await Product.findById(productId);
     //lấy user
     const cart = await Cart.findOne({ userId });
     if (cart) {
       // kiểm tra sản phẩm đó đã có trong giỏ hàng chưa
-      if (cart) {
-        const existingItem = cart.items.find(
-          (item) => item.productId.toString() === items[0].productId.toString()
-        );
-        if (existingItem) {
-          existingItem.size.push(...size);
-          existingItem.color.push(...color);
-        } else {
-          // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
-          cart.items.push({
-            productId: items[0].productId,
-            size: [...size],
-            color: [...color],
-            // price: product.priceSale.quantity * quantity,
-          });
-        }
-
-        await cart.save();
-
-        res.status(200).json({
-          message: "Cập nhật giỏ hàng thành công",
-          cart: cart,
-        });
-      }
+      // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+      cart.items.push({
+        productId: items[0].productId,
+        size: [...size],
+        color: [...color],
+        // price: product.priceSale.quantity * quantity,
+      });
+      await cart.save();
+      res.status(200).json({
+        message: "Cập nhật giỏ hàng thành công",
+        cart: cart,
+      });
     } else {
       // Nếu chưa có giỏ hàng, tạo giỏ hàng mới và thêm sản phẩm vào
       const newCart = await Cart.create(req.body);
-
       res.status(201).json({
         message: "Thêm Cart thành công",
         cart: newCart,
