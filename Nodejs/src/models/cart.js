@@ -8,6 +8,7 @@ const cartItemSchema = new mongoose.Schema({
   },
   size: { type: Array, required: true, default: [] },
   color: { type: Array, required: true, default: [] },
+  image: { type: Array, required: true, default: [] },
 }); 
 
 const cartSchema = new mongoose.Schema({

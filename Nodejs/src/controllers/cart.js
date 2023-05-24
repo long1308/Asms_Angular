@@ -44,7 +44,7 @@ const getCartById = async (req, res) => {
 // Create a new cart
 const createCart = async (req, res) => {
   const { items, userId } = req.body;
-  const { size, color } = items[0];
+  const { size, color, image } = items[0];
   try {
     //lấy product
     //lấy user
@@ -56,6 +56,7 @@ const createCart = async (req, res) => {
         productId: items[0].productId,
         size: [...size],
         color: [...color],
+        image: [...image],
         // price: product.priceSale.quantity * quantity,
       });
       await cart.save();
