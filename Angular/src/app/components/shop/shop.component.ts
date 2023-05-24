@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Iproduct } from 'src/app/interface/product';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -8,22 +9,37 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private route: ActivatedRoute) {}
   products: Iproduct[] = [];
-
+  filteredCountries: Iproduct[] = [];
   itemsPerPage!: number;
   currentPage: number = 1;
   totalRecords: number = 0;
   rowsPerPageOptions: number[] = [5, 10, 20];
-
+  searchValue: string = '';
   ngOnInit() {
+    this.route.queryParams.subscribe((params: any) => {
+    
+      this.searchValue = params.search;
     this.productService.getProducts().subscribe((data: any) => {
-      console.log(data.product);
+   
       this.products = data.product.docs;
       this.totalRecords = data.product.totalDocs;
       this.itemsPerPage = data.product.limit;
+      console.log(data.product);
       console.log(this.totalRecords);
-    });
+      console.log(this.itemsPerPage);
+      
+
+    if(this.searchValue){
+      this.filteredCountries = this.products.filter((country: Iproduct) =>
+      country.name.toLowerCase().includes(this.searchValue.toLowerCase())
+    )
+      }else{
+    this.filteredCountries = this.products;
+     }
+  })
+});
   }
   onPageChange(event: any) {
     this.currentPage = event.page + 1;

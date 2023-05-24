@@ -1,12 +1,21 @@
 <app-header></app-header>
 <app-banner2></app-banner2>
 <section class="mt-10 py-10 bg-gray-100">
+  <div class="flex justify-center">
+    <!-- Hiển thị số kết quả -->
+<div *ngIf="filteredCountries.length === 0">
+  <h2>Không tìm thấy kết quả</h2>
+</div>
+<div *ngIf="filteredCountries.length > 0">
+  <h2>Tìm thấy tổng {{ filteredCountries.length }} kết quả <strong *ngIf="searchValue">"{{searchValue}}"</strong> </h2>
+</div>
+</div>
   <div
     class="mx-auto grid max-w-full grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     <article
       *ngFor="
-        let product of products.slice(
+        let product of filteredCountries.slice(
           (currentPage - 1) * itemsPerPage,
           currentPage * itemsPerPage
         )
