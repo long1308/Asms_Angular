@@ -2,30 +2,46 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { Iproduct } from 'src/app/interface/product';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
+  providers: [MessageService],
 })
 export class ProductDetailComponent implements OnInit {
   productsAll!: Iproduct[];
   responsiveOptions!: any[];
   valueQuantity: number = 1;
   isInputEmpty: boolean = true;
+  // call api lấy product
   product!: Iproduct;
+  //lấu màu và size
   selectedSize!: string;
   selectedColor!: string;
+  //sản phẩm mới
   nonFeaturedProducts!: Iproduct[];
+  selectedIndex: number = 0;
+  //lấy user localStorage
+  user: any;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+    });
+  }
   handleInput(event: KeyboardEvent) {
     this.updateQuantity('input');
     this.handleInputChange(event);
   }
+  //validate input
   handleInputChange(event: KeyboardEvent) {
     if (
       event.key === 'e' ||
@@ -38,15 +54,18 @@ export class ProductDetailComponent implements OnInit {
       event.preventDefault();
     }
   }
+  //validate k past
   handlePaste(event: ClipboardEvent) {
     event.preventDefault();
   }
+  // k rỗng
   checkInputEmpty() {
     this.isInputEmpty =
       isNaN(this.valueQuantity) ||
       this.valueQuantity === null ||
       this.valueQuantity === undefined;
   }
+  //tăng giả quantity
   updateQuantity(action: string) {
     if (action === 'increase' && this.valueQuantity < this.product.quantity) {
       this.valueQuantity++;
@@ -67,6 +86,7 @@ export class ProductDetailComponent implements OnInit {
       });
     });
   }
+
   ngOnInit2() {
     this.productService.getProducts().subscribe((products: any) => {
       this.productsAll = products.product.docs;
@@ -92,7 +112,6 @@ export class ProductDetailComponent implements OnInit {
       },
     ];
   }
-  selectedIndex: number = 0;
   //status
   getSeverity(status: string): string {
     switch (status) {
@@ -112,26 +131,34 @@ export class ProductDetailComponent implements OnInit {
   }
   clickSize(index: number) {
     this.selectedSize = this.product.size[index];
-    console.log(this.selectedSize);
   }
   clickColor(index: number) {
     this.selectedIndex = index;
     this.selectedColor = this.product.color[index];
-    console.log(this.selectedColor);
   }
   srcFromChild!: string;
   updateSrc(src: any) {
     this.srcFromChild = src;
-    
-    
   }
-  cartItems: any[] = [];
-  addToCart(product: Iproduct) {
-    console.log(product);
-    console.log(this.srcFromChild);
 
-    // const existingItem = this.cartItems.find((item) => item.id === product.id);
-    // this.productService.addToCart(product);
+  addToCart(product: Iproduct) {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    const newItem = {
+      userId: this.user._id,
+      items: [
+        {
+          productId: product._id,
+          size: [this.selectedSize ? this.selectedSize : product.size[0]],
+          color: [this.selectedColor ? this.selectedColor : product.color[0]],
+          image: [this.srcFromChild ? this.srcFromChild : product.image[0]],
+        },
+      ],
+    };
+    console.log('Cart:', newItem);
+    console.log('valueQuantity:', this.valueQuantity);
+    this.productService.addCart(newItem).subscribe((data) => {
+      console.log(data);
+    });
     // this.router.navigate(['/cart']);
   }
 }

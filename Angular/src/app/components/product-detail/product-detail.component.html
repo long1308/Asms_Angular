@@ -111,6 +111,7 @@
                   [id]="'size_' + size"
                   class="peer sr-only"
                   (click)="clickSize(i)"
+                  
                 />
 
                 <span
@@ -164,18 +165,17 @@
             >
           </div>
           <div class="flex">
-            <div class="flex">
-              <span>
-                <i class="fa-light fa-cart-plus"></i>
-              </span>
-
+            <div class="flex items-end">
+              <p-toast></p-toast>
               <button
-                type="button"
                 (click)="addToCart(product)"
-                class="h-14 px-9 py-2 font-semibold bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg"
-              >
-                Add to cart
-              </button>
+                ngClass="h-14 px-9 py-2 font-semibold bg-teal-50 border border-teal-500 hover:bg-transparent text-teal-500 mt-6 rounded-lg p-button-success"
+                type="button"
+                pButton
+                pRipple
+                (click)="showSuccess()"
+                label="Add to cart"
+              ></button>
             </div>
             <button
               type="button"
