@@ -22,7 +22,6 @@ export class ShopComponent implements OnInit {
     
       this.searchValue = params.search;
     this.productService.getProducts().subscribe((data: any) => {
-   
       this.products = data.product.docs;
       this.totalRecords = data.product.totalDocs;
       this.itemsPerPage = data.product.limit;
@@ -45,9 +44,21 @@ export class ShopComponent implements OnInit {
     this.currentPage = event.page + 1;
     this.itemsPerPage = event.rows;
   }
+  //status
+  getSeverity(status: string): string {
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+      default:
+        return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
+    }
+  }
   // get rating array
-getRatingArray(rating: number, maxRating: number): number[] {
-  return Array.from({ length: maxRating }, (_, index) => index + 1);
-}
-
+  getRatingArray(rating: number, maxRating: number): number[] {
+    return Array.from({ length: maxRating }, (_, index) => index + 1);
+  }
 }

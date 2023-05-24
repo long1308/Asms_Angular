@@ -8,14 +8,21 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./list-products.component.css'],
 })
 export class ListProductsComponent implements OnInit {
-  products: Iproduct[] = [];
+  products!: Iproduct[];
+  nonFeaturedProducts!: Iproduct[];
+  featuredProducts!: Iproduct[];
 
   responsiveOptions!: any[];
   constructor(private productService: ProductService) {}
   ngOnInit() {
     this.productService.getProducts().subscribe((products: any) => {
       this.products = products.product.docs;
-      console.log(this.products);
+      this.featuredProducts = this.products.filter(
+        (product) => product.featured
+      );
+      this.nonFeaturedProducts = this.products.filter(
+        (product) => !product.featured
+      );
     });
     this.responsiveOptions = [
       {

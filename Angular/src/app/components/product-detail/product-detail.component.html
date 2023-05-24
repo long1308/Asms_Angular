@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="py-6bg-slate-100 mt-16 mb-10">
+<div class="py-6bg-slate-100 mt-16 mb-10" *ngIf="product">
   <!-- Breadcrumbs -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center space-x-2 text-gray-400 text-sm pt-5">
@@ -45,6 +45,7 @@
     <div class="flex flex-col md:flex-row">
       <div class="w-2/5 p-3 shadow-md bg-slate-100">
         <app-carousel
+          (srcChange)="updateSrc($event)"
           [value]="product"
           [selectedIndex]="selectedIndex"
         ></app-carousel>
@@ -100,7 +101,7 @@
             <legend class="text-lg font-bold">Size:</legend>
             <div class="mt-2 flex flex-wrap gap-1">
               <label
-                *ngFor="let size of product.size"
+                *ngFor="let size of product.size; let i = index"
                 [for]="'size_' + size"
                 class="cursor-pointer"
               >
@@ -109,6 +110,7 @@
                   name="size"
                   [id]="'size_' + size"
                   class="peer sr-only"
+                  (click)="clickSize(i)"
                 />
 
                 <span
@@ -197,7 +199,7 @@
     Summer Collection New Morden Design
   </p>
   <p-carousel
-    [value]="productsAll"
+    [value]="nonFeaturedProducts"
     [numVisible]="5"
     [numScroll]="3"
     [circular]="true"
@@ -239,16 +241,16 @@
             >
           </p>
 
-          <div class="flex items-center">
+          <div class="flex items-center" *ngIf="productss.rating">
             <ng-container
-              *ngFor="let rating of getRatingArray(product.rating, 5)"
+              *ngFor="let rating of getRatingArray(productss.rating, 5)"
             >
               <svg
                 aria-hidden="true"
                 class="h-5 w-5"
                 [ngClass]="{
-                  'text-yellow-300': rating <= product.rating,
-                  'text-gray-300': rating > product.rating
+                  'text-yellow-300': rating <= productss.rating,
+                  'text-gray-300': rating > productss.rating
                 }"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -262,11 +264,11 @@
             <span
               class="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold"
             >
-              {{ product.rating | number : "1.1-1" }}
+              {{ productss.rating | number : "1.1-1" }}
             </span>
             <p-tag
-              [value]="product.inventoryStatus"
-              [severity]="getSeverity(product.inventoryStatus)"
+              [value]="productss.inventoryStatus"
+              [severity]="getSeverity(productss.inventoryStatus)"
             ></p-tag>
           </div>
         </div>
@@ -294,4 +296,3 @@
     </ng-template>
   </p-carousel>
 </div>
-<app-footer></app-footer>

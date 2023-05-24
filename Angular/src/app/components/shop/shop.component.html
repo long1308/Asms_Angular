@@ -28,7 +28,7 @@
         <img
           [routerLink]="'/products/' + product._id"
           class="w-full object-cover cursor-pointer"
-          src="{{ product.image }} "
+          [src]="product.image[0]  "
           alt="product image"
         />
         <span
@@ -78,6 +78,10 @@
             >
               {{ product.rating | number : '1.1-1' }}
             </span>
+            <p-tag
+            [value]="product.inventoryStatus"
+            [severity]="getSeverity(product.inventoryStatus)"
+          ></p-tag>
           </div>
           
         </div>
