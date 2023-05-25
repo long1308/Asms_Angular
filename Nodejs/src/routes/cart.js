@@ -11,6 +11,6 @@ router.get("/cart", getAllCarts);
 router.get("/cart/:id", getCartById);
 router.post("/cart", createCart);
 router.put("/cart/:id", updateCart);
-router.delete("/cart/:id", deleteCart);
+router.delete("/cart/:userId/products/:productId", deleteCart);
 
 export default router;

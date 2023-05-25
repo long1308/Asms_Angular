@@ -23,9 +23,9 @@ const getAllCarts = async (req, res) => {
 
 // Get a single cart by ID
 const getCartById = async (req, res) => {
-  const { id } = req.params;
+  const { idUser } = req.params;
   try {
-    const cart = await Cart.findById(id).populate({
+    const cart = await Cart.findOne({ "items.userId": idUser }).populate({
       path: "items.productId",
       model: "Product",
     });
@@ -53,14 +53,14 @@ const createCart = async (req, res) => {
       // kiểm tra sản phẩm đó đã có trong giỏ hàng chưa
       // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
       const product = await Product.findById(items[0].productId);
-      const price = product.priceSale * quantity;
       cart.items.push({
         productId: items[0].productId,
         size: [...size],
         color: [...color],
         image: [...image],
         quantity: quantity,
-        price: price,
+        price: product.price * quantity,
+        priceSale: product.priceSale * quantity,
         // price: product.priceSale.quantity * quantity,
       });
       await cart.save();
@@ -75,8 +75,8 @@ const createCart = async (req, res) => {
       if (!product) {
         return res.status(404).json({ error: "Sản phẩm không tồn tại" });
       }
-      const price = product.priceSale * quantity;
-      newCart.items[0].price = price;
+      newCart.items[0].price = product.price * quantity;
+      newCart.items[0].priceSale = product.priceSale * quantity;
       await newCart.save();
       res.status(201).json({
         message: "Thêm Cart thành công",
@@ -90,34 +90,80 @@ const createCart = async (req, res) => {
 
 // Update a cart by ID
 const updateCart = async (req, res) => {
-  const { id } = req.params;
-  const { items, totalQuantity, totalPrice } = req.body;
+  const { idUser } = req.params;
+  const { items } = req.body;
+  const { quantity } = items[0];
+
   try {
-    const updatedCart = await Cart.findByIdAndUpdate(
-      id,
-      { items, totalQuantity, totalPrice },
-      { new: true }
-    );
-    if (!updatedCart) {
+    const cart = await Cart.findOne({ "items.userId": idUser });
+    // nếu cart không tồn tại
+    if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
-    res.status(200).json(updatedCart);
+    // lấy product
+    const product = await Product.findById(items[0].productId);
+    // nếu product không tồn tại
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
+    const existingItem = cart.items.find(
+      (item) => item.productId.toString() === items[0].productId
+    );
+    if (existingItem) {
+      existingItem.quantity = quantity;
+      existingItem.price = product.price * quantity;
+      existingItem.priceSale = product.priceSale * quantity;
+    } else {
+      return res.status(200).json({
+        message: "Cập nhật giỏ hàng không thành công",
+      });
+    }
+    await cart.save();
+
+    res.status(200).json({
+      message: "Cập nhật giỏ hàng thành công",
+      cart: cart,
+    });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+// Delete a product from cart by userId and productId
+const deleteProductFromCart = async (userId, productId) => {
+  try {
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      throw new Error("Cart not found");
+    }
+
+    // Kiểm tra và xóa sản phẩm từ mảng items
+    const itemIndex = cart.items.findIndex(
+      (item) => item.productId.toString() === productId
+    );
+    if (itemIndex === -1) {
+      throw new Error("Product not found in cart");
+    }
+
+    cart.items.splice(itemIndex, 1); // Xóa sản phẩm khỏi mảng items
+    await cart.save();
+
+    return cart;
+  } catch (error) {
+    throw error;
   }
 };
 
 // Delete a cart by ID
 const deleteCart = async (req, res) => {
-  const { id } = req.params;
+  const { userId, productId } = req.params;
   try {
-    const deletedCart = await Cart.findByIdAndDelete(id);
-    if (!deletedCart) {
-      return res.status(404).json({ error: "Cart not found" });
-    }
-    res.status(200).json({ message: "Cart deleted successfully" });
+    const cart = await deleteProductFromCart(userId, productId);
+    res.status(200).json({ message: "Product deleted from cart", cart });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: error.message });
   }
 };
 
