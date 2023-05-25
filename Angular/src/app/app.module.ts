@@ -121,6 +121,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './shared/Admin/sidebar/sidebar.component';
 import { ContainerAdimComponent } from './pages/Admin/container-adim/container-adim.component';
+import { SizeComponent } from './components/Admin/size/size.component';
+import { ColorComponent } from './components/Admin/color/color.component';
+import { CategoyComponent } from './components/Admin/categoy/categoy.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -153,6 +156,9 @@ import { ContainerAdimComponent } from './pages/Admin/container-adim/container-a
     SigninComponent,
     SidebarComponent,
     ContainerAdimComponent,
+    SizeComponent,
+    ColorComponent,
+    CategoyComponent,
   ],
   imports: [
     BrowserModule,
