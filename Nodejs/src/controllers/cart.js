@@ -44,7 +44,7 @@ const getCartById = async (req, res) => {
 // Create a new cart
 const createCart = async (req, res) => {
   const { items, userId } = req.body;
-  const { size, color, image } = items[0];
+  const { size, color, image, quantity } = items[0];
   try {
     //lấy product
     //lấy user
@@ -52,11 +52,15 @@ const createCart = async (req, res) => {
     if (cart) {
       // kiểm tra sản phẩm đó đã có trong giỏ hàng chưa
       // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+      const product = await Product.findById(items[0].productId);
+      const price = product.priceSale * quantity;
       cart.items.push({
         productId: items[0].productId,
         size: [...size],
         color: [...color],
         image: [...image],
+        quantity: quantity,
+        price: price,
         // price: product.priceSale.quantity * quantity,
       });
       await cart.save();
@@ -67,6 +71,13 @@ const createCart = async (req, res) => {
     } else {
       // Nếu chưa có giỏ hàng, tạo giỏ hàng mới và thêm sản phẩm vào
       const newCart = await Cart.create(req.body);
+      const product = await Product.findById(items[0].productId);
+      if (!product) {
+        return res.status(404).json({ error: "Sản phẩm không tồn tại" });
+      }
+      const price = product.priceSale * quantity;
+      newCart.items[0].price = price;
+      await newCart.save();
       res.status(201).json({
         message: "Thêm Cart thành công",
         cart: newCart,
