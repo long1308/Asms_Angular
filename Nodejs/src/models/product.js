@@ -11,6 +11,10 @@ const productSchema = new Schema(
     quantity: Number,
     description: String,
     description_short: String,
+    isFavorite: {
+      type: Boolean,
+      default: false,
+    },
     featured: {
       type: Boolean,
       default: false,

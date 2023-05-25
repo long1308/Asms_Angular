@@ -37,6 +37,7 @@ export const productSchema = Joi.object({
   hot_sale: Joi.number(),
   description_short: Joi.string(),
   featured: Joi.boolean(),
+  isFavorite: Joi.boolean(),
   rating: Joi.number().required().messages({
     "string.empty": "rating không được để trống",
     "any.required": "Trường Price này là bắt buộc",
