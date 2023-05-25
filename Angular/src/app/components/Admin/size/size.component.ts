@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
+
 @Component({
-  selector: 'app-list-product',
-  templateUrl: './list-product.component.html',
-  styleUrls: ['./list-product.component.css'],
+  selector: 'app-size',
+  templateUrl: './size.component.html',
+  styleUrls: ['./size.component.css'],
   providers: [MessageService, ConfirmationService],
+
 })
-export class ListProductComponent implements OnInit {
+export class SizeComponent  implements OnInit{
   productDialog!: boolean;
   inputValue!: string;
   products!: Iproduct[];

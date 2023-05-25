@@ -15,7 +15,8 @@ import { DashboardComponent } from './components/Admin/dashboard/dashboard.compo
 import { ListProductComponent } from './components/Admin/list-product/list-product.component';
 import { LayoutClientComponent } from './layouts/layout-client/layout-client.component';
 import { ContainerComponent } from './pages/Client/container/container.component';
-
+import { SizeComponent } from './components/Admin/size/size.component';
+import { ColorComponent } from './components/Admin/color/color.component';
 const routes: Routes = [
   {
     path: '',
@@ -43,6 +44,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: ListProductComponent },
+      { path: 'size', component:  SizeComponent},
+      { path: 'color', component:  ColorComponent},
+
     ],
   },
   {
@@ -58,6 +62,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+
+exports: [RouterModule],
 })
 export class AppRoutingModule {}

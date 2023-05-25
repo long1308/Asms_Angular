@@ -3,12 +3,11 @@ import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
 @Component({
-  selector: 'app-list-product',
-  templateUrl: './list-product.component.html',
-  styleUrls: ['./list-product.component.css'],
-  providers: [MessageService, ConfirmationService],
+  selector: 'app-categoy',
+  templateUrl: './categoy.component.html',
+  styleUrls: ['./categoy.component.css']
 })
-export class ListProductComponent implements OnInit {
+export class CategoyComponent implements OnInit {
   productDialog!: boolean;
   inputValue!: string;
   products!: Iproduct[];
