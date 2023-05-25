@@ -34,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Message Content',
+      detail: 'Add Product Successfully',
     });
   }
   handleInput(event: KeyboardEvent) {
@@ -160,5 +160,8 @@ export class ProductDetailComponent implements OnInit {
       console.log(data);
     });
     // this.router.navigate(['/cart']);
+  }
+   toggleColor(event:any) {
+    event.target.classList.toggle('text-red-500');
   }
 }

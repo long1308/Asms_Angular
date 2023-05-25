@@ -111,7 +111,6 @@
                   [id]="'size_' + size"
                   class="peer sr-only"
                   (click)="clickSize(i)"
-                  
                 />
 
                 <span
@@ -174,15 +173,18 @@
                 pButton
                 pRipple
                 (click)="showSuccess()"
+                *ngIf="product.inventoryStatus !== 'OUTOFSTOCK'"
                 label="Add to cart"
               ></button>
             </div>
             <button
               type="button"
               class="mx-5 h-14 px-9 py-2 font-semibold bg-teal-600 hover:bg-teal-500 text-white mt-6 rounded-lg"
+              *ngIf="product.inventoryStatus !== 'OUTOFSTOCK'"
             >
               Buy now
             </button>
+            <h1  *ngIf="product.inventoryStatus == 'OUTOFSTOCK'" class="mt-5 text-xl text-red-500">Sản Phẩm đã hết Hàng....</h1>
           </div>
         </div>
       </div>
@@ -218,8 +220,15 @@
         />
         <span
           *ngIf="productss.hot_sale > 0"
-          class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
+          class="absolute top-0 left-6 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
           >{{ productss.hot_sale }}% OFF</span
+        >
+        <span
+          href=""
+          title="Add to Favorites"
+          class="text-4xl text-gray-300 hover:text-red-600 duration-200 absolute right-2 top-0 cursor-pointer"
+          (click)="toggleColor($event)"
+          >&hearts;</span
         >
       </a>
       <div class="mt-4 px-5 pb-5">

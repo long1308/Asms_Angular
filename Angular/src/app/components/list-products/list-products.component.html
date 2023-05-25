@@ -15,7 +15,7 @@
       autoPlayInterval="3000"
     >
       <ng-template let-product pTemplate="item">
-        <ng-container >
+        <ng-container>
           <a
             class="relative mx-3 mt-3 flex justify-center h-60 overflow-hidden rounded-xl"
           >
@@ -29,6 +29,12 @@
               *ngIf="product.hot_sale"
               class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
               >{{ product.hot_sale }}% OFF</span
+            >
+            <span
+              href=""
+              title="Add to Favorites"
+              class="text-4xl text-gray-300 hover:text-red-600 duration-200 absolute right-2 top-0 cursor-pointer"
+              >&hearts;</span
             >
           </a>
           <div class="mt-4 px-5 pb-5">
@@ -125,7 +131,7 @@
         [responsiveOptions]="responsiveOptions"
         autoPlayInterval="3000"
       >
-        <ng-template let-product pTemplate="item" >
+        <ng-template let-product pTemplate="item">
           <ng-container>
             <a
               class="relative mx-3 mt-3 flex justify-center h-60 overflow-hidden rounded-xl"
@@ -141,6 +147,12 @@
                 class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
                 >{{ product.hot_sale }}% OFF</span
               >
+              <span
+              href=""
+              title="Add to Favorites"
+              class="text-4xl text-gray-300 hover:text-red-600 duration-200 absolute right-2 top-0 cursor-pointer "
+              >&hearts;</span
+            >
             </a>
             <div class="mt-4 px-5 pb-5">
               <a href="#">
