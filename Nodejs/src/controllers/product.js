@@ -134,3 +134,48 @@ export const remove = async (req, res) => {
     }
   }
 };
+export const updatePartial = async (req, res) => {
+  try {
+    // validate
+
+    // Update product partially
+    const updatedProduct = req.body;
+    if (updatedProduct.hot_sale >= 0 && updatedProduct.price) {
+      updatedProduct.priceSale =
+        updatedProduct.price * (1 - updatedProduct.hot_sale / 100);
+    }
+    switch (true) {
+      case updatedProduct.quantity <= 0:
+        updatedProduct.inventoryStatus = "OUTOFSTOCK";
+        break;
+      case updatedProduct.quantity <= 10:
+        updatedProduct.inventoryStatus = "LOWSTOCK";
+        break;
+      default:
+        updatedProduct.inventoryStatus = "INSTOCK";
+    }
+
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: updatedProduct }, // Sử dụng $set để chỉ cập nhật các trường được gửi trong yêu cầu
+      {
+        new: true,
+      }
+    );
+
+    if (!product) {
+      return res.json({
+        message: "Cập nhật sản phẩm không thành công!",
+      });
+    }
+
+    return res.json({
+      message: "Cập nhật sản phẩm thành công!",
+      product,
+    });
+  } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Id không hợp lệ" });
+    }
+  }
+};
