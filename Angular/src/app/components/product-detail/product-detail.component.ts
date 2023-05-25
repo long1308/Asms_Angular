@@ -161,7 +161,21 @@ export class ProductDetailComponent implements OnInit {
     });
     // this.router.navigate(['/cart']);
   }
-   toggleColor(event:any) {
-    event.target.classList.toggle('text-red-500');
+  // addToFavorites
+  isFavorite!: boolean;
+  addToFavorites(product: any) {
+    this.isFavorite = !product.isFavorite; // Đảo giá trị của biến isFavorite
+    console.log(this.isFavorite);
+    product.isFavorite = this.isFavorite; // Cập nhật giá trị isFavorite trong đối tượng product
+    this.productService.editPatchProduct(product).subscribe(
+      (updatedProduct: any) => {
+        // Xử lý khi cập nhật sản phẩm thành công
+        console.log('Sản phẩm đã được cập nhật:', updatedProduct);
+      },
+      (error: any) => {
+        // Xử lý khi cập nhật sản phẩm gặp lỗi
+        console.error('Lỗi khi cập nhật sản phẩm:', error);
+      }
+    );
   }
 }

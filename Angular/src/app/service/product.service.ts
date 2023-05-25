@@ -30,6 +30,13 @@ export class ProductService {
       product
     );
   }
+
+  editPatchProduct(product: Iproduct): Observable<Iproduct> {
+    return this.http.patch<Iproduct>(
+      'http://localhost:8080/api/products/' + product._id,
+      product
+    );
+  }
   addCart(product: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/api/cart', product);
   }

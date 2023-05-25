@@ -9,7 +9,10 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  constructor(private productService: ProductService,private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
   products: Iproduct[] = [];
   filteredCountries: Iproduct[] = [];
   itemsPerPage!: number;
@@ -19,26 +22,24 @@ export class ShopComponent implements OnInit {
   searchValue: string = '';
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
-    
       this.searchValue = params.search;
-    this.productService.getProducts().subscribe((data: any) => {
-      this.products = data.product.docs;
-      this.totalRecords = data.product.totalDocs;
-      this.itemsPerPage = data.product.limit;
-      console.log(data.product);
-      console.log(this.totalRecords);
-      console.log(this.itemsPerPage);
-      
+      this.productService.getProducts().subscribe((data: any) => {
+        this.products = data.product.docs;
+        this.totalRecords = data.product.totalDocs;
+        this.itemsPerPage = data.product.limit;
+        console.log(data.product);
+        console.log(this.totalRecords);
+        console.log(this.itemsPerPage);
 
-    if(this.searchValue){
-      this.filteredCountries = this.products.filter((country: Iproduct) =>
-      country.name.toLowerCase().includes(this.searchValue.toLowerCase())
-    )
-      }else{
-    this.filteredCountries = this.products;
-     }
-  })
-});
+        if (this.searchValue) {
+          this.filteredCountries = this.products.filter((country: Iproduct) =>
+            country.name.toLowerCase().includes(this.searchValue.toLowerCase())
+          );
+        } else {
+          this.filteredCountries = this.products;
+        }
+      });
+    });
   }
   onPageChange(event: any) {
     this.currentPage = event.page + 1;
@@ -60,5 +61,22 @@ export class ShopComponent implements OnInit {
   // get rating array
   getRatingArray(rating: number, maxRating: number): number[] {
     return Array.from({ length: maxRating }, (_, index) => index + 1);
+  }
+  // addToFavorites
+  isFavorite!: boolean;
+  addToFavorites(product: any) {
+    this.isFavorite = !product.isFavorite; // Đảo giá trị của biến isFavorite
+    console.log(this.isFavorite);
+    product.isFavorite = this.isFavorite; // Cập nhật giá trị isFavorite trong đối tượng product
+    this.productService.editPatchProduct(product).subscribe(
+      (updatedProduct: any) => {
+        // Xử lý khi cập nhật sản phẩm thành công
+        console.log('Sản phẩm đã được cập nhật:', updatedProduct);
+      },
+      (error: any) => {
+        // Xử lý khi cập nhật sản phẩm gặp lỗi
+        console.error('Lỗi khi cập nhật sản phẩm:', error);
+      }
+    );
   }
 }

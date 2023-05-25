@@ -3,6 +3,7 @@ export interface Iproduct {
   name: string;
   price: number;
   priceSale: number;
+  isFavorite:boolean;
   featured: boolean;
   image: string;
   description: string;
