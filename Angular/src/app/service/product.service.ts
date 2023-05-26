@@ -44,4 +44,12 @@ export class ProductService {
   addCart(product: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/api/cart', product);
   }
+  deleteCart(
+    idUser: number | string,
+    idProduct: number | string
+  ): Observable<any> {
+    return this.http.delete<any>(
+      `http://localhost:8080/api/cart/${idUser}/products/${idProduct}`
+    );
+  }
 }

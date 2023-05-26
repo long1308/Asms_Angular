@@ -47,13 +47,13 @@
               Total
             </h3>
             <h3
-              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
+              class="font-semibold text-center text-gray-600 text-base  uppercase w-full md:w-1/6"
             >
               Action
             </h3>
           </div>
           <div
-            class="flex flex-col md:flex-row justify-center hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-md shadow"
+            class=" flex flex-col md:flex-row  hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-xl shadow-custom mb-4"
             *ngFor="let item of cart.items"
           >
             <div class="flex w-full md:w-2/6">
@@ -112,12 +112,21 @@
                 item.priceSale | currency : "USD" : "symbol" : "1.2-2"
               }}</span>
             </div>
-            <div class="flex items-center justify-center w-full md:w-1/6">
+            <div class="flex absolute -right-20 top-1 items-center justify-center w-full md:w-1/6">
               <a
-                href=""
+               routerLink="/cart"
+                (click)="removeItem(item)"
                 class="text-center font-semibold hover:text-red-500 text-gray-500 text-sm"
-                >Delete</a
               >
+                <svg
+                  class="fill-current text-gray-500 w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19.78,6.36l-1.42-1.42L12,10.59L6.64,5.23L5.22,6.64L10.59,12l-5.36,5.36l1.42,1.42L12,13.41l5.36,5.36l1.42-1.42 L13.41,12L19.78,6.36z"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
           <!-- pagination  -->
@@ -159,7 +168,10 @@
             >
           </div>
         </div>
-        <div id="summary" class="w-full md:w-1/4 px-8 py-10">
+        <div
+          id="summary"
+          class="w-full md:w-1/4 px-8 py-10 fixed top-16 right-0"
+        >
           <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           <div class="flex justify-between mt-10 mb-5">
             <span class="font-semibold text-sm uppercase"

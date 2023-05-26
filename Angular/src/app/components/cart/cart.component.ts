@@ -17,4 +17,11 @@ export class CartComponent implements OnInit {
       console.log(data.cart);
     });
   }
+  removeItem(item:any){
+    console.log(item._id);
+    this.productService.deleteCart(this.user._id,item.productId._id).subscribe((data:any)=>{
+      this.cart = data.cart;
+    })
+    
+  }
 }
