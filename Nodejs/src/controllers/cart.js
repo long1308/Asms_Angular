@@ -140,21 +140,22 @@ const deleteProductFromCart = async (userId, productId) => {
     }
 
     // Kiểm tra và xóa sản phẩm từ mảng items
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId
+    const updatedCart = await Cart.findOneAndUpdate(
+      { userId },
+      { $pull: { "items": { _id: productId } } },
+      { new: true }
     );
-    if (itemIndex === -1) {
+
+    if (!updatedCart) {
       throw new Error("Product not found in cart");
     }
 
-    cart.items.splice(itemIndex, 1); // Xóa sản phẩm khỏi mảng items
-    await cart.save();
-
-    return cart;
+    return updatedCart;
   } catch (error) {
     throw error;
   }
 };
+
 
 // Delete a cart by ID
 const deleteCart = async (req, res) => {
