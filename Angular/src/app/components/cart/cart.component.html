@@ -1,85 +1,197 @@
 <body class="bg-gray-100 mt-16">
-  <div class="container mx-auto mt-10">
-    <div class="flex flex-col md:flex-row shadow-md my-10">
-      <div class="w-full md:w-3/4 bg-white px-10 py-10">
-        <div class="flex flex-col md:flex-row justify-between border-b pb-8">
-          <h1 class="font-semibold text-2xl">Shopping Cart
-            <a href="#" class="flex font-semibold text-indigo-600 text-sm mt-10">
-              <svg class="fill-current mr-2 text-indigo-600 w-4 text-left" viewBox="0 0 448 512">
-                <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
+  <ng-container *ngIf="cart; else loadingTemplate">
+    <div class="container mx-auto mt-10">
+      <div class="flex flex-col md:flex-row shadow-md my-10">
+        <div class="w-full md:w-3/4 bg-white px-10 py-10">
+          <div class="flex flex-col md:flex-row justify-between border-b pb-8">
+            <h1 class="font-semibold text-2xl">
+              Shopping Cart
+              <a
+                href="#"
+                class="flex font-semibold text-indigo-600 text-sm mt-10"
+              >
+                <svg
+                  class="fill-current mr-2 text-indigo-600 w-4 text-left"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"
+                  />
+                </svg>
+                Continue Shopping
+              </a>
+            </h1>
+            <h2 class="font-semibold text-2xl">
+              {{ cart.totalQuantity }} Items
+            </h2>
+          </div>
+          <div class="flex flex-col md:flex-row mt-10 mb-5">
+            <h3
+              class="font-semibold text-gray-600 text-base uppercase w-full md:w-2/6"
+            >
+              Product Details
+            </h3>
+            <h3
+              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
+            >
+              Quantity
+            </h3>
+            <h3
+              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
+            >
+              Price
+            </h3>
+            <h3
+              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
+            >
+              Total
+            </h3>
+            <h3
+              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
+            >
+              Action
+            </h3>
+          </div>
+          <div
+            class="flex flex-col md:flex-row justify-center hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-md shadow"
+            *ngFor="let item of cart.items"
+          >
+            <div class="flex w-full md:w-2/6">
+              <!-- product -->
+              <div class="flex items-center md:w-2/5 relative">
+                <img class="w-full" [src]="item.image[0]" alt="" />
+                <span
+                  *ngIf="item.productId.hot_sale > 0"
+                  class="text-xs flex gap-3 absolute right-0 top-2 bg-green-400 p-1 text-white rounded-full"
+                  >{{ item.productId.hot_sale }}% OFF</span
+                >
+              </div>
+              <div class="flex flex-col ml-4 flex-grow md:w-3/5">
+                <span class="font-medium text-base">{{
+                  item.productId.name
+                }}</span>
+                <div class="flex items-center gap-1">
+                  <span class="text-base">Color:</span>
+                  <span
+                    [ngStyle]="{ 'background-color': item.color[0] }"
+                    class="flex gap-3 rounded-full w-4 h-4 opacity-70"
+                  ></span>
+                </div>
+                <span class="text-sm flex gap-3">Size: {{ item.size[0] }}</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-center w-full md:w-1/6">
+              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                <path
+                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                />
               </svg>
-              Continue Shopping
-            </a>
-          </h1>
-          <h2 class="font-semibold text-2xl">3 Items</h2>
-        </div>
-        <div class="flex flex-col md:flex-row mt-10 mb-5">
-          <h3 class="font-semibold text-gray-600 text-base uppercase w-full md:w-2/6">Product Details</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6">Quantity</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6">Price</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6">Total</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6">Action</h3>
-        </div>
-        <div class="flex flex-col md:flex-row justify-center hover:bg-gray-100 -mx-8 px-6 py-5">
-          <div class="flex  w-full md:w-2/6"> <!-- product -->
-            <div class=" flex  items-center md:w-2/5">
-              <img class="w-full" src="https://templateprj.vercel.app/img/products/f6.jpg" alt="">
+
+              <input
+                class="mx-2 border text-center w-10"
+                type="text"
+                [value]="item.quantity"
+              />
+
+              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                <path
+                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                />
+              </svg>
             </div>
-            <div class="flex flex-col  ml-4 flex-grow md:w-3/5">
-              <span class="font-bold text-sm ">Nike Air MX Super 1000- Red</span>
-              <span class="text-sm flex gap-3">Color: Red</span>
-              <span  class="text-sm font-semibold text-gray-500">Size: XL</span>
+            <div class="flex items-center justify-center w-full md:w-1/6">
+              <span
+                [ngClass]="{ 'line-through': item.productId.hot_sale }"
+                class="text-center font-medium text-sm"
+              >
+                {{ item.price | currency : "USD" : "symbol" : "1.2-2" }}
+              </span>
+            </div>
+            <div class="flex items-center justify-center w-full md:w-1/6">
+              <span class="text-center font-medium text-sm">{{
+                item.priceSale | currency : "USD" : "symbol" : "1.2-2"
+              }}</span>
+            </div>
+            <div class="flex items-center justify-center w-full md:w-1/6">
+              <a
+                href=""
+                class="text-center font-semibold hover:text-red-500 text-gray-500 text-sm"
+                >Delete</a
+              >
             </div>
           </div>
-          <div class="flex items-center justify-center w-full md:w-1/6">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-        
-            <input class="mx-2 border text-center w-10 " type="text" value="1">
-        
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
+          <!-- pagination  -->
+          <div class="ml-64 hidden md:flex gap-x-3">
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60"
+              >1</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >2</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >3</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >...</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >12</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >13</a
+            >
+            <a
+              href="#"
+              class="px-5 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >14</a
+            >
           </div>
-          <div class="flex items-center justify-center w-full md:w-1/6">
-            <span class="text-center font-semibold text-sm">$400.00</span>
-          </div>
-          <div class="flex items-center justify-center w-full md:w-1/6">
-            <span class="text-center font-semibold text-sm">$400.00</span>
-          </div>
-          <div class="flex items-center justify-center w-full md:w-1/6">
-            <a href="" class="text-center font-semibold hover:text-red-500 text-gray-500 text-sm">Delete</a>
-          </div>
-        </div>
-          <div class="ml-64 hidden md:flex gap-x-3 ">
-            <a href="#" class="px-5 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-            <a href="#" class="px-5  py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
-        </div>
         </div>
         <div id="summary" class="w-full md:w-1/4 px-8 py-10">
           <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           <div class="flex justify-between mt-10 mb-5">
-            <span class="font-semibold text-sm uppercase">Items 3</span>
-            <span class="font-semibold text-sm">590$</span>
+            <span class="font-semibold text-sm uppercase"
+              >Items {{ cart.totalQuantity }}</span
+            >
+            <span class="font-semibold text-sm line-through">{{
+              cart.totalPrice | currency : "USD" : "symbol" : "1.2-2"
+            }}</span>
           </div>
-         
-        
+
           <div class="border-t mt-8">
-            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+            <div
+              class="flex font-semibold justify-between py-6 text-sm uppercase"
+            >
               <span>Total cost</span>
-              <span>$600</span>
+              <span>{{
+                cart.totalpriceSale | currency : "USD" : "symbol" : "1.2-2"
+              }}</span>
             </div>
-            <button class="bg-teal-600 font-semibold hover:bg-teal-700 py-3 text-sm text-white uppercase w-full">Checkout</button>
+            <button
+              class="bg-teal-600 font-semibold hover:bg-teal-700 py-3 text-sm text-white uppercase w-full"
+            >
+              Checkout
+            </button>
           </div>
         </div>
-  
       </div>
     </div>
-  </body>
-  
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <!-- Nội dung khi cart chưa tồn tại -->
+    <p-skeleton width="100rem" height="100rem" styleClass="mb-2"></p-skeleton>
+  </ng-template>
+</body>

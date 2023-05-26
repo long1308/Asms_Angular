@@ -151,6 +151,7 @@ export class ProductDetailComponent implements OnInit {
           size: [this.selectedSize ? this.selectedSize : product.size[0]],
           color: [this.selectedColor ? this.selectedColor : product.color[0]],
           image: [this.srcFromChild ? this.srcFromChild : product.image[0]],
+          quantity: this.valueQuantity,
         },
       ],
     };

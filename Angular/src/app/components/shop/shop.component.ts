@@ -27,10 +27,6 @@ export class ShopComponent implements OnInit {
         this.products = data.product.docs;
         this.totalRecords = data.product.totalDocs;
         this.itemsPerPage = data.product.limit;
-        console.log(data.product);
-        console.log(this.totalRecords);
-        console.log(this.itemsPerPage);
-
         if (this.searchValue) {
           this.filteredCountries = this.products.filter((country: Iproduct) =>
             country.name.toLowerCase().includes(this.searchValue.toLowerCase())
