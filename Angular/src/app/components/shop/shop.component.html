@@ -36,13 +36,13 @@
         />
         <span
           *ngIf="product.hot_sale"
-          class="absolute top-0 left-6 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
+          class="absolute top-0 left-14 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
           >{{ product.hot_sale }}% OFF</span
         >
         <span
           href=""
           title="Add to Favorites"
-          class="text-4xl text-gray-300 hover:text-red-600 duration-200 absolute right-10 top-0 cursor-pointer"
+          class="text-4xl text-gray-300 hover:text-red-600 duration-200 absolute right-16 top-0 cursor-pointer"
           (click)="addToFavorites(product)"
           [ngClass]="{
             'text-red-600': product.isFavorite,

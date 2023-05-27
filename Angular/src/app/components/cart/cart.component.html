@@ -47,13 +47,13 @@
               Total
             </h3>
             <h3
-              class="font-semibold text-center text-gray-600 text-base  uppercase w-full md:w-1/6"
+              class="font-semibold text-center text-gray-600 text-base uppercase w-full md:w-1/6"
             >
               Action
             </h3>
           </div>
           <div
-            class=" flex flex-col md:flex-row  hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-xl shadow-custom mb-4"
+            class="flex flex-col md:flex-row hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-xl shadow-custom mb-4"
             *ngFor="let item of cart.items"
           >
             <div class="flex w-full md:w-2/6">
@@ -81,23 +81,30 @@
               </div>
             </div>
             <div class="flex items-center justify-center w-full md:w-1/6">
-              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                <path
-                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
+              <button
+                type="button"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
+                (click)="decreaseQuantity(item)"
+              >
+                &minus;
+              </button>
 
               <input
-                class="mx-2 border text-center w-10"
-                type="text"
                 [value]="item.quantity"
+                type="number"
+                id="Quantity"
+                max="item.productId.quantity"
+                (ngModelChange)="updateQuantity(item, $event)"
+                class="h-10 w-16 bg-transparent border border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
               />
 
-              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                <path
-                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                />
-              </svg>
+              <button
+              (click)="increaseQuantity(item)"
+                type="button"
+                class="w-10 h-10 leading-10 text-gray-600 transition hover:bg-slate-300"
+              >
+                &plus;
+              </button>
             </div>
             <div class="flex items-center justify-center w-full md:w-1/6">
               <span
@@ -112,9 +119,11 @@
                 item.priceSale | currency : "USD" : "symbol" : "1.2-2"
               }}</span>
             </div>
-            <div class="flex absolute -right-20 top-1 items-center justify-center w-full md:w-1/6">
+            <div
+              class="flex absolute -right-20 top-1 items-center justify-center w-full md:w-1/6"
+            >
               <a
-               routerLink="/cart"
+                routerLink="/cart"
                 (click)="removeItem(item)"
                 class="text-center font-semibold hover:text-red-500 text-gray-500 text-sm"
               >
