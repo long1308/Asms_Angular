@@ -53,6 +53,6 @@ export class ProductService {
     );
   }
   updateCart(data: any): Observable<any> {
-    return this.http.put<any>('http://localhost:8080/api/cart', data);
+    return this.http.put<any>(`http://localhost:8080/api/cart/${data.userId}`, data);
   }
 }

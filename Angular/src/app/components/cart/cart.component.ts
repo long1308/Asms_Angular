@@ -29,17 +29,43 @@ export class CartComponent implements OnInit {
     // Ví dụ: Gọi API để cập nhật số lượng sản phẩm trong giỏ hàng
     // hoặc thực hiện các xử lý logic khác tương ứng với yêu cầu của bạn
     this.productService
-      .updateCart({ userId: this.user._id, _id: item._id })
+      .updateCart({
+        userId: this.user._id,
+        _id: item._id,
+        quantity: item.quantity,
+      })
       .subscribe((data: any) => {
-        console.log('Item quantity updated:', data);
+        console.log(data);
+        
+        const updatedItem = data.cart.items.find(
+          (cartItem: any) => cartItem._id === item._id
+        );
+        if (updatedItem) {
+          item.quantity = updatedItem.quantity;
+          item.price = updatedItem.price;
+          item.priceSale = updatedItem.priceSale;
+          // Cập nhật totalPrice và totalPriceSale
+          this.cart.totalPrice = data.cart.totalPrice;
+          this.cart.totalpriceSale = data.cart.totalpriceSale;
+        }
       });
   }
   increaseQuantity(item: any) {
     item.quantity++;
+    this.updateQuantity(item);
   }
   decreaseQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
     }
+    this.updateQuantity(item);
+  }
+  first: number = 0;
+
+  rows: number = 10;
+
+  onPageChange(event:any) {
+      this.first = event.first;
+      this.rows = event.rows;
   }
 }
