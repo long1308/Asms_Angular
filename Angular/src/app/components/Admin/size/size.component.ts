@@ -2,28 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
+import { Isize } from 'src/app/interface/size';
 
 @Component({
   selector: 'app-size',
   templateUrl: './size.component.html',
   styleUrls: ['./size.component.css'],
   providers: [MessageService, ConfirmationService],
-
 })
-export class SizeComponent  implements OnInit{
-  productDialog!: boolean;
+export class SizeComponent implements OnInit {
+  sizeDialog!: boolean;
   inputValue!: string;
-  products!: Iproduct[];
-
-  product!: Iproduct;
-  size! : Array<string>;
-
-  color!: Array<string>;
-
-  selectedProducts!: Iproduct[];
-
+  sizes!: Isize[];
+  size!: Isize;
+  selectedSize!: Isize[];
   submitted!: boolean;
-
   statuses!: any[];
 
   constructor(
@@ -33,63 +26,54 @@ export class SizeComponent  implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.productService
-      .getProducts()
-      .subscribe((data:any) => {
-        this.products = data.product.docs;
-
-      });
-
-    this.statuses = [
-      { label: 'INSTOCK', value: 'instock' },
-      { label: 'LOWSTOCK', value: 'lowstock' },
-      { label: 'OUTOFSTOCK', value: 'outofstock' },
-    ];
+    this.productService.getSizes().subscribe((data: any) => {
+      this.sizes = data.size;
+    });
   }
 
   openNew() {
-    this.product = {} as Iproduct;
+    this.size = {} as Isize;
     this.submitted = false;
-    this.productDialog = true;
+    this.sizeDialog = true;
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedSizes() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'Are you sure you want to delete the selected sizes?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(
-          (val) => !this.selectedProducts.includes(val)
+        this.sizes = this.sizes.filter(
+          (val) => !this.selectedSize.includes(val)
         );
-        this.selectedProducts! = [];
+        this.selectedSize! = [];
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Products Deleted',
+          detail: 'Size Deleted',
           life: 3000,
         });
       },
     });
   }
 
-  editProduct(product: Iproduct) {
-    this.product = { ...product };
-    this.productDialog = true;
+  editSize(size: Isize) {
+    this.size = { ...size };
+    this.sizeDialog = true;
   }
 
-  deleteProduct(product: Iproduct) {
+  deleteSize(size: Isize) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
+      message: 'Are you sure you want to delete ' + size.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter((val) => val._id !== product._id);
-        this.product = {} as Iproduct;
+        this.sizes = this.sizes.filter((val) => val._id !== size._id);
+        this.size = {} as Isize;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Deleted',
+          detail: 'Size Deleted',
           life: 3000,
         });
       },
@@ -97,53 +81,47 @@ export class SizeComponent  implements OnInit{
   }
 
   hideDialog() {
-    this.productDialog = false;
+    this.sizeDialog = false;
     this.submitted = false;
   }
 
-  saveProduct() {
+  saveSize() {
     this.submitted = true;
-
-    if (this.product.name.trim()) {
-      if (this.product._id) {
-        this.products[this.findIndexById(this.product._id.toString())] =
-          this.product;
+    if (this.size.name.trim()) {
+      if (this.size._id) {
+        this.sizes[this.findIndexById(this.size._id.toString())!] = this.size;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Updated',
+          detail: 'Size Updated',
           life: 3000,
         });
       } else {
-        this.product._id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
+        this.size._id = this.createId();
+        this.sizes.push(this.size);
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Created',
+          detail: 'Size Created',
           life: 3000,
         });
       }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {} as Iproduct;
+      this.sizes = [...this.sizes];
+      this.sizeDialog = false;
+      this.size = {} as Isize;
     }
   }
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i]._id === id) {
+    for (let i = 0; i < this.sizes.length; i++) {
+      if (this.sizes[i]._id === id) {
         index = i;
         break;
       }
     }
-
     return index;
   }
-
   createId(): string {
     let id = '';
     var chars =
@@ -152,19 +130,6 @@ export class SizeComponent  implements OnInit{
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
-  }
-
-  getSeverity(status: string): string {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
-    }
   }
   search() {
     console.log(this.inputValue); // In giá trị của input ra console

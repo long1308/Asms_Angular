@@ -8,7 +8,6 @@
         label="New"
         icon="pi pi-plus"
         class="p-button-success btn-left"
-
         (click)="openNew()"
       ></button>
       <button
@@ -142,41 +141,38 @@
     </ng-template>
   </p-table>
 </div>
+<!-- Add New Product -->
 <p-dialog
   [(visible)]="productDialog"
-  [style]="{ width: '750px' }"
+  [style]="{ width: '1200px' }"
   header="Product Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="field title-inp flex">
-   <div class="w-1/2">
-      <img 
-      [style]=" { width:'100%'}"
-        [src]="product.image[0]"
-        [alt]="product.name"
-        class="block m-auto pb-3"
-        *ngIf="product.image"
-      />
-   </div>
-    <div class="flex items-center justify-center py-12 w-1/2">
-      <label for="fileInput" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500">
-        <span class="sr-only">Select a file</span>
-        <input id="fileInput" name="fileInput" type="file" class="absolute top-0 left-0 w-0 h-0 opacity-0"  />
-    
-        <div class=" ">
-            <svg class="w-12 h-12 m-auto  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-            </svg>
-        </div>
-    
-        <span class="ml-2">Choose a file</span>
-      </label>
-    </div>
-  </div>
+    <!-- chọn image  -->
     <div class="field title-inp">
-      <label class="title-label" for="name">Name</label>
+      <label class="title-label" for="name">Image: </label>
+      <p-fileUpload
+        name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        (onUpload)="onUpload($event)"
+        [multiple]="true"
+        accept="image/*"
+        [maxFileSize]="+1000000"
+      >
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">
+              {{ file.name }} - {{ file.size }} bytes
+            </li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+    <!-- chọn name  -->
+    <div class="field title-inp">
+      <label class="title-label" for="name">Name: </label>
       <input
         type="text"
         pInputText
@@ -189,8 +185,9 @@
         >Name is required.</small
       >
     </div>
+    <!-- chọn Description  -->
     <div class="field title-inp">
-      <label class="title-label" for="description">Description</label>
+      <label class="title-label" for="description">Description: </label>
       <textarea
         id="description"
         pInputTextarea
@@ -200,9 +197,61 @@
         cols="20"
       ></textarea>
     </div>
-
+    <!-- chọn Description_Detail  -->
     <div class="field title-inp">
-      <label class="title-label" for="inventoryStatus">Inventory Status</label>
+      <label class="title-label" for="description">Description Short: </label>
+      <textarea
+        id="description"
+        pInputTextarea
+        [(ngModel)]="product.description"
+        required
+        rows="3"
+        cols="20"
+      ></textarea>
+    </div>
+    <!--chọn  rating  -->
+    <div class="field flex flex-col title-inp">
+      <label for="rating">Rating: </label>
+      <p-rating formControlName="value"></p-rating>
+    </div>
+    <!-- size  -->
+    <div class="field title-inp">
+      <div class="flex gap-3">
+        <label class="title-label" for="description">Product Size :</label>
+        <div
+          *ngFor="let category of categories"
+          class="field-checkbox flex gap-1"
+        >
+          <p-checkbox
+            name="group"
+            [value]="category"
+            [(ngModel)]="selectedCategories"
+            [inputId]="category.key"
+          ></p-checkbox>
+          <label [for]="category.key">Size: {{ category.name }}</label>
+        </div>
+      </div>
+    </div>
+    <!-- chọn color  -->
+    <div class="field title-inp">
+      <div class="flex gap-3">
+        <label class="title-label" for="description">Product Color :</label>
+        <div
+          *ngFor="let category of categories"
+          class="field-checkbox flex gap-1"
+        >
+          <p-checkbox
+            name="group"
+            [value]="category"
+            [(ngModel)]="selectedCategories"
+            [inputId]="category.key"
+          ></p-checkbox>
+          <label [for]="category.key">Color: {{ category.name }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="field title-inp">
+      <label class="title-label" for="inventoryStatus">Category: </label>
       <p-dropdown
         [(ngModel)]="product.inventoryStatus"
         inputId="inventoryStatus"
@@ -223,52 +272,6 @@
       </p-dropdown>
     </div>
 
-    <div class="field title-inp">
-      <label class="title-label" class="mb-3">Category</label>
-      <div class="formgrid flex">
-        <div class="field-radiobutton col-6 checkbox-cate "
-    >
-          <p-radioButton 
-            id="category1"
-           
-            name="category"
-            value="Accessories"
-            [(ngModel)]="product.category"
-          ></p-radioButton>
-          <label class="title-label ml-1 mr-3" for="category1">Accessories</label>
-        </div>
-        <div class="field-radiobutton col-6 checkbox-cate">
-          <p-radioButton 
-            id="category2"
-           
-            name="category"
-            value="Clothing"
-            [(ngModel)]="product.category"
-          ></p-radioButton>
-          <label class="title-label ml-1 mr-3" for="category2">Clothing</label>
-        </div>
-        <div class="field-radiobutton col-6 checkbox-cate">
-          <p-radioButton 
-            id="category3"
-           
-            name="category"
-            value="Electronics"
-            [(ngModel)]="product.category"
-          ></p-radioButton>
-          <label class="title-label ml-1 mr-3" for="category3">Electronics</label>
-        </div>
-        <div class="field-radiobutton col-6 checkbox-cate">
-          <p-radioButton 
-            id="category4"
-           
-            name="category"
-            value="Fitness"
-            [(ngModel)]="product.category"
-          ></p-radioButton>
-          <label class="title-label ml-1 mr-3" for="category4">Fitness</label>
-        </div>
-      </div>
-    </div>
 
     <div class="formgrid grid title-inp">
       <div class="field col">
@@ -287,6 +290,19 @@
           id="quantity"
           [(ngModel)]="product.quantity"
         ></p-inputNumber>
+      </div>
+      <div class="field col title-inp">
+        <label for="hot_sale">Hot Sale</label>
+        <p-inputNumber
+          id="hot_sale"
+          [(ngModel)]="product.hot_sale"
+          inputId="minmax"
+          inputId="minmax"
+          mode="decimal"
+          [min]="0"
+          [max]="70"
+        >
+        </p-inputNumber>
       </div>
     </div>
   </ng-template>

@@ -16,15 +16,15 @@
         pRipple
         icon="pi pi-trash"
         class="p-button-danger ml"
-        (click)="deleteSelectedProducts()"
-        [disabled]="!selectedProducts || !selectedProducts.length"
+        (click)="deleteSelectedColor()"
+        [disabled]="!selectedColor || !selectedColor.length"
       ></button>
     </ng-template>
   </p-toolbar>
 
   <p-table
     #dt
-    [value]="products"
+    [value]="colors"
     [rows]="4"
     [paginator]="true"
     [globalFilterFields]="[
@@ -34,7 +34,7 @@
       'status'
     ]"
     [tableStyle]="{ 'min-width': '75rem' }"
-    [(selection)]="selectedProducts"
+    [(selection)]="selectedColor"
     [rowHover]="true"
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -45,7 +45,8 @@
         class="flex align-items-center justify-content-between"
         style="justify-content: space-between; align-items: center"
       >
-        <h5 class="m-0">Manage Products</h5>
+        <h5 class="m-0">Manage Color</h5>
+        <!-- search  -->
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -58,43 +59,35 @@
         </span>
       </div>
     </ng-template>
+
+    <!-- cột thead  -->
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 4rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="name" style="min-width: 15rem">
-          Name <p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="name" style="min-width: 5rem">
+          Color <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th pSortableColumn="color">
-          color <p-sortIcon field="color"></p-sortIcon>
-        </th>
-
-
-
         <th pSortableColumn="inventoryActive" style="min-width: 10rem">
           Active
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <!-- hàng tbody  -->
+    <ng-template pTemplate="body" let-color>
       <tr>
         <td>
-          <p-tableCheckbox [value]="product"></p-tableCheckbox>
+          <p-tableCheckbox [value]="color"></p-tableCheckbox>
         </td>
-        <td>{{ product.name }}</td>
-
-        <td>{{ product.color  }}</td>
-
-
-
+        <td>{{ color.name | titlecase }}</td>
         <td>
           <button
             pButton
             pRipple
             class="p-button-rounded p-button-success"
             style="margin-right: 0.5rem"
-            (click)="editProduct(product)"
+            (click)="editColor(color)"
           >
             Edit
           </button>
@@ -102,7 +95,7 @@
             pButton
             pRipple
             class="p-button-rounded p-button-warning"
-            (click)="deleteProduct(product)"
+            (click)="deleteColor(color)"
           >
             Remove
           </button>
@@ -111,46 +104,32 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{ products ? products.length : 0 }} products.
+        In total there are {{ colors ? colors.length : 0 }} Color.
       </div>
     </ng-template>
   </p-table>
 </div>
 <p-dialog
-  [(visible)]="productDialog"
+  [(visible)]="colorDialog"
   [style]="{ width: '450px' }"
-  header="Product Details"
+  header="Color Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-
     <div class="field">
       <label for="name">Name</label>
       <input
         type="text"
         pInputText
         id="name"
-        [(ngModel)]="product.name"
+        [(ngModel)]="color.name"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !product.name"
+      <small class="p-error" *ngIf="submitted && !color.name"
         >Name is required.</small
       >
-    </div>
-    <div class="formgrid grid">
-      <div class="field col">
-        <label for="color">color</label>
-        <p-inputNumber
-          id="color"
-          [(ngModel)]="product.color"
-          mode="currency"
-          currency="USD"
-          locale="en-US"
-        ></p-inputNumber>
-      </div>
-
     </div>
   </ng-template>
 
@@ -169,7 +148,7 @@
       label="Save"
       icon="pi pi-check"
       class="p-button-text"
-      (click)="saveProduct()"
+      (click)="saveColor()"
     ></button>
   </ng-template>
 </p-dialog>

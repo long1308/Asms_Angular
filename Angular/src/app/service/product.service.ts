@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Iproduct } from '../interface/product';
 import { signup, signin } from '../interface/user';
-
+import { Isize } from '../interface/size';
+import { IColor } from '../interface/color';
 @Injectable({
   providedIn: 'root',
 })
@@ -53,6 +54,17 @@ export class ProductService {
     );
   }
   updateCart(data: any): Observable<any> {
-    return this.http.put<any>(`http://localhost:8080/api/cart/${data.userId}`, data);
+    return this.http.put<any>(
+      `http://localhost:8080/api/cart/${data.userId}`,
+      data
+    );
+  }
+  //size
+  getSizes(): Observable<Isize[]> {
+    return this.http.get<Isize[]>('http://localhost:8080/api/size');
+  }
+  //color
+  getColors(): Observable<IColor[]> {
+    return this.http.get<IColor[]>('http://localhost:8080/api/color');
   }
 }

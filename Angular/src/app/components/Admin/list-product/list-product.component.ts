@@ -12,18 +12,11 @@ export class ListProductComponent implements OnInit {
   productDialog!: boolean;
   inputValue!: string;
   products!: Iproduct[];
-
   product!: Iproduct;
-  size! : Array<string>;
-
-  color!: Array<string>;
-
   selectedProducts!: Iproduct[];
-
   submitted!: boolean;
-
   statuses!: any[];
-
+  uploadedFiles: any[] = []; // image upload
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
@@ -31,12 +24,9 @@ export class ListProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productService
-      .getProducts()
-      .subscribe((data:any) => {
-        this.products = data.product.docs;
-
-      });
+    this.productService.getProducts().subscribe((data: any) => {
+      this.products = data.product.docs;
+    });
 
     this.statuses = [
       { label: 'INSTOCK', value: 'instock' },
@@ -151,7 +141,7 @@ export class ListProductComponent implements OnInit {
     }
     return id;
   }
-
+  // status
   getSeverity(status: string): string {
     switch (status) {
       case 'INSTOCK':
@@ -164,8 +154,34 @@ export class ListProductComponent implements OnInit {
         return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
     }
   }
+  //search
   search() {
     console.log(this.inputValue); // In giá trị của input ra console
     // Thực hiện các tác vụ khác với giá trị của input
   }
+  //file image
+  onUpload(event: any) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.messageService.add({
+      severity: 'info',
+      summary: 'File Uploaded',
+      detail: '',
+    });
+  }
+
+
+  //checkbox
+  selectedCategories: any[] = [];
+
+  categories: any[] = [
+      { name: 'S', key: 'A' },
+      { name: 'M', key: 'M' },
+      { name: 'XL', key: 'P' },
+      { name: 'L', key: 'R' }
+  ];
+  
+  
 }

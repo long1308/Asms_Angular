@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
-
+import { IColor } from 'src/app/interface/color';
 @Component({
   selector: 'app-color',
   templateUrl: './color.component.html',
@@ -11,19 +11,12 @@ import { ProductService } from 'src/app/service/product.service';
 
 })
 export class ColorComponent implements OnInit {
-  productDialog!: boolean;
+  colorDialog!: boolean;
   inputValue!: string;
-  products!: Iproduct[];
-
-  product!: Iproduct;
-  size! : Array<string>;
-
-  color!: Array<string>;
-
-  selectedProducts!: Iproduct[];
-
+  colors!: IColor[];
+  color!: IColor;
+  selectedColor!: IColor[];
   submitted!: boolean;
-
   statuses!: any[];
 
   constructor(
@@ -33,63 +26,56 @@ export class ColorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productService
-      .getProducts()
-      .subscribe((data:any) => {
-        this.products = data.product.docs;
-
-      });
-
-    this.statuses = [
-      { label: 'INSTOCK', value: 'instock' },
-      { label: 'LOWSTOCK', value: 'lowstock' },
-      { label: 'OUTOFSTOCK', value: 'outofstock' },
-    ];
+    this.productService.getColors().subscribe((data: any) => {
+      
+      this.colors = data.color;
+      console.log(this.colors);
+    });
   }
 
   openNew() {
-    this.product = {} as Iproduct;
+    this.color = {} as IColor;
     this.submitted = false;
-    this.productDialog = true;
+    this.colorDialog = true;
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedColor() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'Are you sure you want to delete the selected colors?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(
-          (val) => !this.selectedProducts.includes(val)
+        this.colors = this.colors.filter(
+          (val) => !this.selectedColor.includes(val)
         );
-        this.selectedProducts! = [];
+        this.selectedColor! = [];
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Products Deleted',
+          detail: 'Color Deleted',
           life: 3000,
         });
       },
     });
   }
 
-  editProduct(product: Iproduct) {
-    this.product = { ...product };
-    this.productDialog = true;
+  editColor(color: IColor) {
+    this.color = { ...color };
+    this.colorDialog = true;
   }
 
-  deleteProduct(product: Iproduct) {
+  deleteColor(color: IColor) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
+      message: 'Are you sure you want to delete ' + color.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter((val) => val._id !== product._id);
-        this.product = {} as Iproduct;
+        this.colors = this.colors.filter((val) => val._id !== color._id);
+        this.color = {} as IColor;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Deleted',
+          detail: 'Color Deleted',
           life: 3000,
         });
       },
@@ -97,53 +83,47 @@ export class ColorComponent implements OnInit {
   }
 
   hideDialog() {
-    this.productDialog = false;
+    this.colorDialog = false;
     this.submitted = false;
   }
 
-  saveProduct() {
+  saveColor() {
     this.submitted = true;
-
-    if (this.product.name.trim()) {
-      if (this.product._id) {
-        this.products[this.findIndexById(this.product._id.toString())] =
-          this.product;
+    if (this.color.name.trim()) {
+      if (this.color._id) {
+        this.colors[this.findIndexById(this.color._id.toString())!] = this.color;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Updated',
+          detail: 'Color Updated',
           life: 3000,
         });
       } else {
-        this.product._id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
+        this.color._id = this.createId();
+        this.colors.push(this.color);
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Created',
+          detail: 'Color Created',
           life: 3000,
         });
       }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {} as Iproduct;
+      this.colors = [...this.colors];
+      this.colorDialog = false;
+      this.color = {} as IColor;
     }
   }
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i]._id === id) {
+    for (let i = 0; i < this.colors.length; i++) {
+      if (this.colors[i]._id === id) {
         index = i;
         break;
       }
     }
-
     return index;
   }
-
   createId(): string {
     let id = '';
     var chars =
@@ -152,19 +132,6 @@ export class ColorComponent implements OnInit {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
-  }
-
-  getSeverity(status: string): string {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
-    }
   }
   search() {
     console.log(this.inputValue); // In giá trị của input ra console
