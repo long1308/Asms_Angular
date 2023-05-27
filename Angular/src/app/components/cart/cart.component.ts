@@ -24,12 +24,15 @@ export class CartComponent implements OnInit {
         this.cart = data.cart;
       });
   }
-  updateQuantity(item: any, newQuantity: any){
-    console.log(item);
-    console.log(newQuantity);
-    
-    
-
+  updateQuantity(item: any) {
+    // Thực hiện các hoạt động cập nhật dữ liệu ở đây
+    // Ví dụ: Gọi API để cập nhật số lượng sản phẩm trong giỏ hàng
+    // hoặc thực hiện các xử lý logic khác tương ứng với yêu cầu của bạn
+    this.productService
+      .updateCart({ userId: this.user._id, _id: item._id })
+      .subscribe((data: any) => {
+        console.log('Item quantity updated:', data);
+      });
   }
   increaseQuantity(item: any) {
     item.quantity++;

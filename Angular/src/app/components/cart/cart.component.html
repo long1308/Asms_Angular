@@ -90,11 +90,11 @@
               </button>
 
               <input
-                [value]="item.quantity"
+              [(ngModel)]="item.quantity"
+              (input)="updateQuantity(item)"
                 type="number"
                 id="Quantity"
                 max="item.productId.quantity"
-                (ngModelChange)="updateQuantity(item, $event)"
                 class="h-10 w-16 bg-transparent border border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
               />
 
