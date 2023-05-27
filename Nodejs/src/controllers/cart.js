@@ -92,34 +92,41 @@ const createCart = async (req, res) => {
 const updateCart = async (req, res) => {
   const { idUser } = req.params;
   const { items } = req.body;
-  const { quantity } = items[0];
+  const { _id, quantity } = items[0];
 
   try {
     const cart = await Cart.findOne({ "items.userId": idUser });
-    // nếu cart không tồn tại
+
+    // Nếu cart không tồn tại
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
-    // lấy product
-    const product = await Product.findById(items[0].productId);
-    // nếu product không tồn tại
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
 
-    // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
-    const existingItem = cart.items.find(
-      (item) => item.productId.toString() === items[0].productId
-    );
-    if (existingItem) {
-      existingItem.quantity = quantity;
-      existingItem.price = product.price * quantity;
-      existingItem.priceSale = product.priceSale * quantity;
-    } else {
-      return res.status(200).json({
-        message: "Cập nhật giỏ hàng không thành công",
-      });
-    }
+    // for (let i = 0; i < items.length; i++) {
+
+      // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
+      const existingItem = cart.items.find(
+        (item) => item._id.toString() === _id
+      );
+
+      if (existingItem) {
+        const product = await Product.findById(existingItem.productId);
+
+        // Nếu product không tồn tại
+        if (!product) {
+          return res.status(404).json({ error: "Product not found" });
+        }
+
+        existingItem.quantity = quantity;
+        existingItem.price = product.price * quantity;
+        existingItem.priceSale = product.priceSale * quantity;
+      } else {
+        return res.status(200).json({
+          message: "Cập nhật giỏ hàng không thành công",
+        });
+      }
+    // }
+
     await cart.save();
 
     res.status(200).json({
@@ -130,6 +137,9 @@ const updateCart = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+
+
 
 // Delete a product from cart by userId and productId
 const deleteProductFromCart = async (userId, productId) => {
