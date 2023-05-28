@@ -27,9 +27,7 @@ export class ColorComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getColors().subscribe((data: any) => {
-      
       this.colors = data.color;
-      console.log(this.colors);
     });
   }
 

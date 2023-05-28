@@ -2,25 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
+import { ICategory } from 'src/app/interface/category';
 @Component({
   selector: 'app-categoy',
   templateUrl: './categoy.component.html',
-  styleUrls: ['./categoy.component.css']
+  styleUrls: ['./categoy.component.css'],
+  providers: [MessageService, ConfirmationService],
 })
 export class CategoyComponent implements OnInit {
-  productDialog!: boolean;
+  categoryDialog!: boolean;
   inputValue!: string;
-  products!: Iproduct[];
-
-  product!: Iproduct;
-  size! : Array<string>;
-
-  color!: Array<string>;
-
-  selectedProducts!: Iproduct[];
-
+  categorys!: ICategory[];
+  category!: ICategory;
+  selectedCategorys!: ICategory[];
   submitted!: boolean;
-
   statuses!: any[];
 
   constructor(
@@ -30,63 +25,59 @@ export class CategoyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productService
-      .getProducts()
-      .subscribe((data:any) => {
-        this.products = data.product.docs;
-
-      });
-
-    this.statuses = [
-      { label: 'INSTOCK', value: 'instock' },
-      { label: 'LOWSTOCK', value: 'lowstock' },
-      { label: 'OUTOFSTOCK', value: 'outofstock' },
-    ];
+    this.productService.getCategorys().subscribe((data: any) => {
+      this.categorys = data;
+      console.log(data);
+      
+      console.log(this.categorys);
+    });
   }
 
   openNew() {
-    this.product = {} as Iproduct;
+    this.category = {} as ICategory;
     this.submitted = false;
-    this.productDialog = true;
+    this.categoryDialog = true;
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedCategorys() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'Are you sure you want to delete the selected categorys?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(
-          (val) => !this.selectedProducts.includes(val)
+        this.categorys = this.categorys.filter(
+          (val) => !this.selectedCategorys.includes(val)
         );
-        this.selectedProducts! = [];
+        this.selectedCategorys! = [];
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Products Deleted',
+          detail: 'Category Deleted',
           life: 3000,
         });
       },
     });
   }
 
-  editProduct(product: Iproduct) {
-    this.product = { ...product };
-    this.productDialog = true;
+  editCategory(category: ICategory) {
+    this.category = { ...category };
+    this.categoryDialog = true;
   }
 
-  deleteProduct(product: Iproduct) {
+  deleteCategory(category: ICategory) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
+      message: 'Are you sure you want to delete ' + category.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter((val) => val._id !== product._id);
-        this.product = {} as Iproduct;
+        this.categorys = this.categorys.filter(
+          (val) => val._id !== category._id
+        );
+        this.category = {} as ICategory;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Deleted',
+          detail: 'Category Deleted',
           life: 3000,
         });
       },
@@ -94,53 +85,48 @@ export class CategoyComponent implements OnInit {
   }
 
   hideDialog() {
-    this.productDialog = false;
+    this.categoryDialog = false;
     this.submitted = false;
   }
 
-  saveProduct() {
+  saveCategory() {
     this.submitted = true;
-
-    if (this.product.name.trim()) {
-      if (this.product._id) {
-        this.products[this.findIndexById(this.product._id.toString())] =
-          this.product;
+    if (this.category.name.trim()) {
+      if (this.category._id) {
+        this.categorys[this.findIndexById(this.category._id.toString())!] =
+          this.category;
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Updated',
+          detail: 'Category Updated',
           life: 3000,
         });
       } else {
-        this.product._id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
+        this.category._id = this.createId();
+        this.categorys.push(this.category);
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Created',
+          detail: 'Category Created',
           life: 3000,
         });
       }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {} as Iproduct;
+      this.categorys = [...this.categorys];
+      this.categoryDialog = false;
+      this.category = {} as ICategory;
     }
   }
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i]._id === id) {
+    for (let i = 0; i < this.categorys.length; i++) {
+      if (this.categorys[i]._id === id) {
         index = i;
         break;
       }
     }
-
     return index;
   }
-
   createId(): string {
     let id = '';
     var chars =
@@ -149,19 +135,6 @@ export class CategoyComponent implements OnInit {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
-  }
-
-  getSeverity(status: string): string {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
-    }
   }
   search() {
     console.log(this.inputValue); // In giá trị của input ra console

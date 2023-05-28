@@ -17,6 +17,7 @@ import { LayoutClientComponent } from './layouts/layout-client/layout-client.com
 import { ContainerComponent } from './pages/Client/container/container.component';
 import { SizeComponent } from './components/Admin/size/size.component';
 import { ColorComponent } from './components/Admin/color/color.component';
+import { CategoyComponent } from './components/Admin/categoy/categoy.component';
 const routes: Routes = [
   {
     path: '',
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: 'products', component: ListProductComponent },
       { path: 'size', component:  SizeComponent},
       { path: 'color', component:  ColorComponent},
+      { path: 'categorys', component:  CategoyComponent},
 
     ],
   },

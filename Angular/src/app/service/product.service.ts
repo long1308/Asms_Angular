@@ -5,6 +5,7 @@ import { Iproduct } from '../interface/product';
 import { signup, signin } from '../interface/user';
 import { Isize } from '../interface/size';
 import { IColor } from '../interface/color';
+import { ICategory } from '../interface/category';
 @Injectable({
   providedIn: 'root',
 })
@@ -66,5 +67,9 @@ export class ProductService {
   //color
   getColors(): Observable<IColor[]> {
     return this.http.get<IColor[]>('http://localhost:8080/api/color');
+  }
+  //categorys
+  getCategorys(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>('http://localhost:8080/api/categorys');
   }
 }

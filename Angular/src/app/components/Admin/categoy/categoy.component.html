@@ -16,15 +16,15 @@
         pRipple
         icon="pi pi-trash"
         class="p-button-danger ml"
-        (click)="deleteSelectedProducts()"
-        [disabled]="!selectedProducts || !selectedProducts.length"
+        (click)="deleteSelectedCategorys()"
+        [disabled]="!selectedCategorys || !selectedCategorys.length"
       ></button>
     </ng-template>
   </p-toolbar>
 
   <p-table
     #dt
-    [value]="products"
+    [value]="categorys"
     [rows]="4"
     [paginator]="true"
     [globalFilterFields]="[
@@ -34,7 +34,7 @@
       'status'
     ]"
     [tableStyle]="{ 'min-width': '75rem' }"
-    [(selection)]="selectedProducts"
+    [(selection)]="selectedCategorys"
     [rowHover]="true"
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -45,7 +45,8 @@
         class="flex align-items-center justify-content-between"
         style="justify-content: space-between; align-items: center"
       >
-        <h5 class="m-0">Manage Products</h5>
+        <h5 class="m-0">Manage Category</h5>
+        <!-- search  -->
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -58,51 +59,35 @@
         </span>
       </div>
     </ng-template>
+
+    <!-- cột thead  -->
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 4rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="name" style="min-width: 15rem">
-          Name <p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="name" style="min-width: 5rem">
+          Category <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th>Image</th>
-        <th pSortableColumn="size">
-          size <p-sortIcon field="size"></p-sortIcon>
-        </th>
-
-
-
         <th pSortableColumn="inventoryActive" style="min-width: 10rem">
           Active
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <!-- hàng tbody  -->
+    <ng-template pTemplate="body" let-category>
       <tr>
         <td>
-          <p-tableCheckbox [value]="product"></p-tableCheckbox>
+          <p-tableCheckbox [value]="category"></p-tableCheckbox>
         </td>
-        <td>{{ product.name }}</td>
-        <td>
-          <img
-            [src]="product.image"
-            [alt]="product.name"
-            width="50"
-            class="shadow-4"
-          />
-        </td>
-        <td>{{ product.size  }}</td>
-
-
-
+        <td>{{ category.name | titlecase }}</td>
         <td>
           <button
             pButton
             pRipple
             class="p-button-rounded p-button-success"
             style="margin-right: 0.5rem"
-            (click)="editProduct(product)"
+            (click)="editCategory(category)"
           >
             Edit
           </button>
@@ -110,7 +95,7 @@
             pButton
             pRipple
             class="p-button-rounded p-button-warning"
-            (click)="deleteProduct(product)"
+            (click)="deleteCategory(category)"
           >
             Remove
           </button>
@@ -119,52 +104,32 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{ products ? products.length : 0 }} products.
+        In total there are {{ categorys ? categorys.length : 0 }} Category.
       </div>
     </ng-template>
   </p-table>
 </div>
 <p-dialog
-  [(visible)]="productDialog"
+  [(visible)]="categoryDialog"
   [style]="{ width: '450px' }"
-  header="Product Details"
+  header="Color Details"
   [modal]="true"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-
     <div class="field">
       <label for="name">Name</label>
       <input
         type="text"
         pInputText
         id="name"
-        [(ngModel)]="product.name"
+        [(ngModel)]="category.name"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !product.name"
+      <small class="p-error" *ngIf="submitted && !category.name"
         >Name is required.</small
       >
-    </div>
-
-
-
-
-
-
-    <div class="formgrid grid">
-      <div class="field col">
-        <label for="size">size</label>
-        <p-inputNumber
-          id="size"
-          [(ngModel)]="product.size"
-          mode="currency"
-          currency="USD"
-          locale="en-US"
-        ></p-inputNumber>
-      </div>
-
     </div>
   </ng-template>
 
@@ -183,7 +148,7 @@
       label="Save"
       icon="pi pi-check"
       class="p-button-text"
-      (click)="saveProduct()"
+      (click)="saveCategory()"
     ></button>
   </ng-template>
 </p-dialog>
