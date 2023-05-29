@@ -3,9 +3,18 @@ import { signinSchema, signupSchema } from "../Schema/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 dotenv.config();
 
-const { SECRET_CODE } = process.env;
+const { SECRET_CODE, EMAIL_USERNAME, EMAIL_PASSWORD } = process.env;
+
+const transporter = nodemailer.createTransport({
+  service: "gmail", 
+  auth: {
+    user: EMAIL_USERNAME, 
+    pass: EMAIL_PASSWORD, 
+  },
+});
 
 export const signup = async (req, res) => {
   const { name, email, password, image_url } = req.body;
@@ -27,16 +36,31 @@ export const signup = async (req, res) => {
       });
     }
     // Mã hóa mật khẩu
-
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = await User.create({
-      // ...req.body,
       name,
       email,
       image_url,
       password: hashedPassword,
     });
     user.password = undefined;
+
+    // Gửi email thông báo tạo tài khoản thành công
+    const mailOptions = {
+      from: "your-email@example.com", // Địa chỉ email gửi
+      to: email, // Địa chỉ email người nhận
+      subject: "Chào Mừng", // Tiêu đề email
+      text: "Chúc mừng bạn đã đăng ký thành công tài khoản", // Nội dung email
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error sending email:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
+
     return res.status(201).json({
       message: "Tạo tài khoản thành công",
       user,
