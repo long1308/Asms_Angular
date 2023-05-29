@@ -7,6 +7,7 @@ export const getAll = async (req, res) => {
     sort: {
       [_sort]: _order === "asc" ? 1 : -1,
     },
+    populate: "categoryId",
   };
   try {
     const product = await Product.paginate({}, option);
