@@ -12,7 +12,7 @@ export interface Iproduct {
   size: Array<string>;
   color: Array<string>;
   quantity: number;
-  category: string;
+  categoryId: string;
   inventoryStatus: string;
   rating: number;
 }
