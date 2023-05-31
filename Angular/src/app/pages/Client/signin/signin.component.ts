@@ -1,48 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/service/product.service';
-import {
-  FormControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css'],
+  styleUrls: ['./signin.component.css']
 })
-export class SigninComponent {
-  submitted = false;
+export class SigninComponent implements OnInit {
   form!: FormGroup;
+  submitted = false;
   loginError = false;
-  constructor(private ProductService: ProductService, private router: Router) {
-    this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   submitForm(): void {
-    if (this.form.valid) {
-      const formData = this.form.value;
-      this.ProductService.login(formData).subscribe(
-        (response: any) => {
-          console.log(response);
-          // Lưu thông tin người dùng vào localStorage
-          this.loginError = false;
-          localStorage.setItem('user', JSON.stringify(response.user));
-          this.router.navigate(['/']);
-        },
-        (error) => {
-          // Xử lý lỗi từ API khi đăng nhập thất bại
-          console.log('Đăng nhập thất bại', error);
-          this.loginError = true;
-        }
-      );
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
     }
+
+    const formData = this.form.value;
+    this.productService.login(formData).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.loginError = false;
+        localStorage.setItem('user', JSON.stringify(response.user));
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        console.log('Đăng nhập thất bại', error);
+        this.loginError = true;
+      }
+    );
   }
 }
