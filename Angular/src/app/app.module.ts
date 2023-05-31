@@ -33,7 +33,7 @@ import { TagModule } from 'primeng/tag';
 import { LayoutAdminComponent } from './layouts/layout-admin/layout-admin.component';
 import { LayoutClientComponent } from './layouts/layout-client/layout-client.component';
 import { DashboardComponent } from './components/Admin/dashboard/dashboard.component';
-import { ListProductComponent } from './components/Admin/list-product/list-product.component';
+import { ListProductComponent } from './components/Admin/product/list-product/list-product.component';
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AvatarModule } from 'primeng/avatar';
@@ -124,6 +124,8 @@ import { ContainerAdimComponent } from './pages/Admin/container-adim/container-a
 import { SizeComponent } from './components/Admin/size/size.component';
 import { ColorComponent } from './components/Admin/color/color.component';
 import { CategoyComponent } from './components/Admin/categoy/categoy.component';
+import { ProductAddComponent } from './components/Admin/product/product-add/product-add.component';
+import { ProductEditComponent } from './components/Admin/product/product-edit/product-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,6 +161,8 @@ import { CategoyComponent } from './components/Admin/categoy/categoy.component';
     SizeComponent,
     ColorComponent,
     CategoyComponent,
+    ProductAddComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -260,10 +264,10 @@ import { CategoyComponent } from './components/Admin/categoy/categoy.component';
     AnimateModule,
     CardModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [SignupComponent]
+  exports: [SignupComponent],
 })
 export class AppModule {}

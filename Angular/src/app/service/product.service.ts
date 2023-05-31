@@ -19,6 +19,24 @@ export class ProductService {
   getProduct(id: number | string): Observable<Iproduct> {
     return this.http.get<Iproduct>('http://localhost:8080/api/products/' + id);
   }
+  editPatchProduct(product: Iproduct): Observable<Iproduct> {
+    return this.http.patch<Iproduct>(
+      'http://localhost:8080/api/products/' + product._id,
+      product
+    );
+  }
+  updateProduct(product: Iproduct, _id: number | string): Observable<Iproduct> {
+    return this.http.put<Iproduct>(
+      'http://localhost:8080/api/products/' + _id,
+      product
+    );
+  }
+  addProduct(product: Iproduct): Observable<Iproduct> {
+    return this.http.post<Iproduct>(
+      'http://localhost:8080/api/products/',
+      product
+    );
+  }
   register(user: signup): Observable<signup> {
     return this.http.post<signup>('http://localhost:8080/api/signup', user);
   }
@@ -26,19 +44,13 @@ export class ProductService {
   login(user: signin): Observable<signin> {
     return this.http.post<signin>('http://localhost:8080/api/signin', user);
   }
-  editProduct(product: Iproduct): Observable<Iproduct> {
+  editProduct(id: number | string, product: Iproduct): Observable<Iproduct> {
     return this.http.put<Iproduct>(
-      'http://localhost:8080/api/products/' + product._id,
+      'http://localhost:8080/api/products/' + id,
       product
     );
   }
 
-  editPatchProduct(product: Iproduct): Observable<Iproduct> {
-    return this.http.patch<Iproduct>(
-      'http://localhost:8080/api/products/' + product._id,
-      product
-    );
-  }
   //cart
   getOneCart(id: number | string): Observable<any> {
     return this.http.get<any>('http://localhost:8080/api/cart/' + id);

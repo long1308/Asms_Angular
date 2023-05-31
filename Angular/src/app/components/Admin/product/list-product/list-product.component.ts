@@ -89,58 +89,6 @@ export class ListProductComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct() {
-    this.submitted = true;
-
-    if (this.product.name.trim()) {
-      if (this.product._id) {
-        this.products[this.findIndexById(this.product._id.toString())] =
-          this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Updated',
-          life: 3000,
-        });
-      } else {
-        this.product._id = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Created',
-          life: 3000,
-        });
-      }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {} as Iproduct;
-    }
-  }
-
-  findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i]._id === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-
-  createId(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
-  }
   // status
   getSeverity(status: string): string {
     switch (status) {
@@ -172,16 +120,13 @@ export class ListProductComponent implements OnInit {
     });
   }
 
-
   //checkbox
   selectedCategories: any[] = [];
 
   categories: any[] = [
-      { name: 'S', key: 'A' },
-      { name: 'M', key: 'M' },
-      { name: 'XL', key: 'P' },
-      { name: 'L', key: 'R' }
+    { name: 'S', key: 'A' },
+    { name: 'M', key: 'M' },
+    { name: 'XL', key: 'P' },
+    { name: 'L', key: 'R' },
   ];
-  
-  
 }
