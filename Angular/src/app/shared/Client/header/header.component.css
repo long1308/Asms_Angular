@@ -16,3 +16,6 @@
   .slide-out {
     transform: translateX(100%);
   }
+  .border-none-menu{
+    background-color: transparent;
+  }

@@ -129,6 +129,9 @@ export class ProductDetailComponent implements OnInit {
   getRatingArray(rating: number, maxRating: number): number[] {
     return Array.from({ length: maxRating }, (_, index) => index + 1);
   }
+  onTop() {
+  window.scroll(0,0)
+  }
   clickSize(index: number) {
     this.selectedSize = this.product.size[index];
   }
@@ -179,4 +182,5 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
+ 
 }
