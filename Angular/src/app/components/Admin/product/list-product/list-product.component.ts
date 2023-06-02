@@ -13,7 +13,7 @@ export class ListProductComponent implements OnInit {
   inputValue!: string;
   products!: Iproduct[];
   product!: Iproduct;
-  selectedProducts!: Iproduct[];
+  selectedProducts: Iproduct[] = [];
   submitted!: boolean;
   statuses!: any[];
   uploadedFiles: any[] = []; // image upload
@@ -34,23 +34,24 @@ export class ListProductComponent implements OnInit {
       { label: 'OUTOFSTOCK', value: 'outofstock' },
     ];
   }
-
-  openNew() {
-    this.product = {} as Iproduct;
-    this.submitted = false;
-    this.productDialog = true;
-  }
-
   deleteSelectedProducts() {
+    console.log(this.selectedProducts);
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete the selected products?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(
-          (val) => !this.selectedProducts.includes(val)
-        );
-        this.selectedProducts! = [];
+        // Lặp qua các sản phẩm đã chọn để xóa từ cơ sở dữ liệu
+        for (const product of this.selectedProducts) {
+          this.productService.deleteProduct(product._id!).subscribe(() => {
+            // Xóa sản phẩm khỏi danh sách products sau khi xóa thành công trong cơ sở dữ liệu
+            this.products = this.products.filter((p) => p._id !== product._id);
+          });
+        }
+
+        // Xóa danh sách sản phẩm đã chọn
+        this.selectedProducts = [];
+
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
@@ -61,19 +62,17 @@ export class ListProductComponent implements OnInit {
     });
   }
 
-  editProduct(product: Iproduct) {
-    this.product = { ...product };
-    this.productDialog = true;
-  }
-
   deleteProduct(product: Iproduct) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + product.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter((val) => val._id !== product._id);
-        this.product = {} as Iproduct;
+        this.productService.deleteProduct(product._id!).subscribe((data) => {
+          this.productService.getProducts().subscribe((data: any) => {
+            this.products = data.product.docs;
+          });
+        });
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
@@ -119,14 +118,4 @@ export class ListProductComponent implements OnInit {
       detail: '',
     });
   }
-
-  //checkbox
-  selectedCategories: any[] = [];
-
-  categories: any[] = [
-    { name: 'S', key: 'A' },
-    { name: 'M', key: 'M' },
-    { name: 'XL', key: 'P' },
-    { name: 'L', key: 'R' },
-  ];
 }

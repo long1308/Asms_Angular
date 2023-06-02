@@ -31,6 +31,11 @@ export class ProductService {
       product
     );
   }
+  deleteProduct(id: number | string): Observable<Iproduct> {
+    return this.http.delete<Iproduct>(
+      'http://localhost:8080/api/products/' + id
+    );
+  }
   addProduct(product: Iproduct): Observable<Iproduct> {
     return this.http.post<Iproduct>(
       'http://localhost:8080/api/products/',
