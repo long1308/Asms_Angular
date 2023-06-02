@@ -14,6 +14,8 @@ export class CartComponent implements OnInit {
     this.productService.getOneCart(this.user._id).subscribe((data: any) => {
       // Handle the cart data received from the service
       this.cart = data.cart;
+      console.log(this.cart);
+      
     });
   }
   removeItem(item: any) {
@@ -21,10 +23,14 @@ export class CartComponent implements OnInit {
     this.productService
       .deleteCart(this.user._id, item._id)
       .subscribe((data: any) => {
+        console.log(data);
+        
         this.cart = data.cart;
       });
   }
   updateQuantity(item: any) {
+    // console.log(item);
+    
     // Thực hiện các hoạt động cập nhật dữ liệu ở đây
     // Ví dụ: Gọi API để cập nhật số lượng sản phẩm trong giỏ hàng
     // hoặc thực hiện các xử lý logic khác tương ứng với yêu cầu của bạn
@@ -35,19 +41,23 @@ export class CartComponent implements OnInit {
         quantity: item.quantity,
       })
       .subscribe((data: any) => {
-        console.log(data);
-        
-        const updatedItem = data.cart.items.find(
-          (cartItem: any) => cartItem._id === item._id
-        );
-        if (updatedItem) {
-          item.quantity = updatedItem.quantity;
-          item.price = updatedItem.price;
-          item.priceSale = updatedItem.priceSale;
-          // Cập nhật totalPrice và totalPriceSale
-          this.cart.totalPrice = data.cart.totalPrice;
-          this.cart.totalpriceSale = data.cart.totalpriceSale;
-        }
+        // Cập nhật lại số lượng và giá tiền của sản phẩm trong giỏ hàng
+        this.productService.getOneCart(this.user._id).subscribe((data: any) => {
+          // Handle the cart data received from the service
+          this.cart = data.cart;
+          
+        });
+        // const updatedItem = data.cart.items.find(
+        //   (cartItem: any) => cartItem._id === item._id
+        // );
+        // if (updatedItem) {
+        //   item.quantity = updatedItem.quantity;
+        //   item.price = updatedItem.price;
+        //   item.priceSale = updatedItem.priceSale;
+        //   // Cập nhật totalPrice và totalPriceSale
+        //   this.cart.totalPrice = data.cart.totalPrice;
+        //   this.cart.totalpriceSale = data.cart.totalpriceSale;
+        // }
       });
   }
   increaseQuantity(item: any) {
