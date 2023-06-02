@@ -89,4 +89,7 @@ export class ProductService {
   getCategorys(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>('http://localhost:8080/api/categorys');
   }
+  getOneCategory(id: string): Observable<ICategory>{
+  return this.http.get<ICategory>(`http://localhost:8080/api/categorys/${id}`);
+  }
 }

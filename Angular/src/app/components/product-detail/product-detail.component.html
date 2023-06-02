@@ -214,6 +214,7 @@
       >
         <img
           [routerLink]="'/products/' + productss._id"
+          (click)= "onTop()"
           class="w-full object-cover cursor-pointer"
           src="{{ productss.image[0] }}"
           alt="product image"

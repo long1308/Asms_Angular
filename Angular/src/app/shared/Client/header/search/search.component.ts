@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2  } from '@angular/core';
 import { Router } from '@angular/router';
 import { Iproduct } from 'src/app/interface/product';
 import { ProductService } from 'src/app/service/product.service';
@@ -19,13 +19,23 @@ export class SearchComponent implements OnInit {
  loading: boolean = false;
  timeoutId: any;
  @ViewChild('searchInput') searchInput!: ElementRef;
- constructor(private countryService: ProductService , private router: Router) {}
+ constructor(private countryService: ProductService , private router: Router,private renderer: Renderer2, private elementRef: ElementRef) {}
 
  ngOnInit() {// Lấy dữ liệu
    this.countryService.getProducts().subscribe((countries: any) => {
      this.countries = countries.product.docs;
    });
+   this.onClick()
  }
+
+ onClick(){
+  this.renderer.listen('document', 'click', (event: any) => {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.showResults = false;
+    }
+  });
+}
+
  onSearch() { // Submit khi tìm kiếm và chuyển đến trang Shop
   this.filteredCountries = this.countries.filter((country: Iproduct) => {
     return country.name.toLowerCase().includes(this.searchValue.toLowerCase());

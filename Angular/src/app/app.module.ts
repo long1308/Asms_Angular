@@ -126,6 +126,7 @@ import { ColorComponent } from './components/Admin/color/color.component';
 import { CategoyComponent } from './components/Admin/categoy/categoy.component';
 import { ProductAddComponent } from './components/Admin/product/product-add/product-add.component';
 import { ProductEditComponent } from './components/Admin/product/product-edit/product-edit.component';
+import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,6 +164,7 @@ import { ProductEditComponent } from './components/Admin/product/product-edit/pr
     CategoyComponent,
     ProductAddComponent,
     ProductEditComponent,
+    ProductsOfCategoriesComponent,
   ],
   imports: [
     BrowserModule,
