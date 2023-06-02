@@ -23,9 +23,12 @@ export class CartComponent implements OnInit {
     this.productService
       .deleteCart(this.user._id, item._id)
       .subscribe((data: any) => {
-        console.log(data);
-        
-        this.cart = data.cart;
+        // Cập nhật lại số lượng và giá tiền của sản phẩm trong giỏ hàng
+        this.productService.getOneCart(this.user._id).subscribe((data: any) => {
+          // Handle the cart data received from the service
+          this.cart = data.cart;
+          
+        });
       });
   }
   updateQuantity(item: any) {
