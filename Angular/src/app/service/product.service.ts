@@ -25,9 +25,9 @@ export class ProductService {
       product
     );
   }
-  updateProduct(product: Iproduct, _id: number | string): Observable<Iproduct> {
+  updateProduct(product: Iproduct): Observable<Iproduct> {
     return this.http.put<Iproduct>(
-      'http://localhost:8080/api/products/' + _id,
+      'http://localhost:8080/api/products/' + product._id,
       product
     );
   }
@@ -89,7 +89,9 @@ export class ProductService {
   getCategorys(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>('http://localhost:8080/api/categorys');
   }
-  getOneCategory(id: string): Observable<ICategory>{
-  return this.http.get<ICategory>(`http://localhost:8080/api/categorys/${id}`);
+  getOneCategory(id: string): Observable<ICategory> {
+    return this.http.get<ICategory>(
+      `http://localhost:8080/api/categorys/${id}`
+    );
   }
 }

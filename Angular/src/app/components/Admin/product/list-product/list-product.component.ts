@@ -17,6 +17,8 @@ export class ListProductComponent implements OnInit {
   submitted!: boolean;
   statuses!: any[];
   uploadedFiles: any[] = []; // image upload
+  isVisible!: boolean;
+  checkedfeatured!: boolean;
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
@@ -117,5 +119,18 @@ export class ListProductComponent implements OnInit {
       summary: 'File Uploaded',
       detail: '',
     });
+  }
+  //hide/ show
+  updateProductVisible(product: Iproduct) {
+    this.isVisible = !product.isVisible; // Đảo giá trị của biến isFavorite
+    console.log(this.isVisible);
+    // this.productService.editPatchProduct(product).subscribe(() => {
+    //   this.messageService.add({
+    //     severity: 'success',
+    //     summary: 'Successful',
+    //     detail: 'Product Status Updated',
+    //     life: 3000,
+    //   });
+    // });
   }
 }
