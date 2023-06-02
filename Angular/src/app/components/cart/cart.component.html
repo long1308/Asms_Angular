@@ -1,5 +1,4 @@
 <body class="bg-gray-100 mt-16">
-  
   <ng-container *ngIf="cart; else loadingTemplate">
     <div class="container mx-auto mt-10">
       <div class="flex flex-col md:flex-row shadow-md my-10">
@@ -120,23 +119,13 @@
                 item.priceSale | currency : "USD" : "symbol" : "1.2-2"
               }}</span>
             </div>
-            <div
-              class="flex absolute -right-20 top-1 items-center justify-center w-full md:w-1/6"
-            >
-              <a
-                routerLink="/cart"
+            <div class="card flex justify-content-center gap-2 right-2 top-1 absolute">
+              <button
+                class="p-button-rounded p-button-warning"
                 (click)="removeItem(item)"
-                class="text-center font-semibold hover:text-red-500 text-gray-500 text-sm"
               >
-                <svg
-                  class="fill-current text-gray-500 w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.78,6.36l-1.42-1.42L12,10.59L6.64,5.23L5.22,6.64L10.59,12l-5.36,5.36l1.42,1.42L12,13.41l5.36,5.36l1.42-1.42 L13.41,12L19.78,6.36z"
-                  />
-                </svg>
-              </a>
+              <i class="pi pi-times" style="color: green"></i>
+              </button>
             </div>
           </div>
           <!-- pagination  -->
@@ -189,3 +178,4 @@
     <p-skeleton width="100rem" height="100rem" styleClass="mb-2"></p-skeleton>
   </ng-template>
 </body>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

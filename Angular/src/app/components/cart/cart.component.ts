@@ -1,42 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
-
+import {
+  ConfirmationService,
+  MessageService,
+  ConfirmEventType,
+} from 'primeng/api';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
+  providers: [ConfirmationService, MessageService],
 })
 export class CartComponent implements OnInit {
-  user: any = JSON.parse(localStorage.getItem('user')!);
-  constructor(private productService: ProductService) {}
   cart: any;
+  user: any = JSON.parse(localStorage.getItem('user')!);
+  constructor(
+    private productService: ProductService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
+
   ngOnInit() {
     this.productService.getOneCart(this.user._id).subscribe((data: any) => {
-      // Handle the cart data received from the service
       this.cart = data.cart;
       console.log(this.cart);
-      
     });
   }
   removeItem(item: any) {
-    console.log(item._id);
-    this.productService
-      .deleteCart(this.user._id, item._id)
-      .subscribe((data: any) => {
-        // Cập nhật lại số lượng và giá tiền của sản phẩm trong giỏ hàng
-        this.productService.getOneCart(this.user._id).subscribe((data: any) => {
-          // Handle the cart data received from the service
-          this.cart = data.cart;
-          
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + item.productId.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productService
+          .deleteCart(this.user._id, item._id)
+          .subscribe((data: any) => {
+            // Cập nhật lại số lượng và giá tiền của sản phẩm trong giỏ hàng
+            this.productService
+              .getOneCart(this.user._id)
+              .subscribe((data: any) => {
+                // Handle the cart data received from the service
+                this.cart = data.cart;
+              });
+          });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: ' Cart Product Deleted Successfuly',
+          life: 3000,
         });
-      });
+      },
+    });
   }
   updateQuantity(item: any) {
-    // console.log(item);
-    
-    // Thực hiện các hoạt động cập nhật dữ liệu ở đây
-    // Ví dụ: Gọi API để cập nhật số lượng sản phẩm trong giỏ hàng
-    // hoặc thực hiện các xử lý logic khác tương ứng với yêu cầu của bạn
     this.productService
       .updateCart({
         userId: this.user._id,
@@ -48,7 +64,6 @@ export class CartComponent implements OnInit {
         this.productService.getOneCart(this.user._id).subscribe((data: any) => {
           // Handle the cart data received from the service
           this.cart = data.cart;
-          
         });
         // const updatedItem = data.cart.items.find(
         //   (cartItem: any) => cartItem._id === item._id
@@ -77,8 +92,8 @@ export class CartComponent implements OnInit {
 
   rows: number = 10;
 
-  onPageChange(event:any) {
-      this.first = event.first;
-      this.rows = event.rows;
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
   }
 }
