@@ -57,6 +57,9 @@ export class ProductService {
   }
 
   //cart
+  getCarts(): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/api/cart/');
+  }
   getOneCart(id: number | string): Observable<any> {
     return this.http.get<any>('http://localhost:8080/api/cart/' + id);
   }

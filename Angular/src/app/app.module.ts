@@ -134,6 +134,7 @@ import { ColorEditComponent } from './components/Admin/color/color-edit/color-ed
 import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/categoy-add.component';
 import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
+import { CartsComponent } from './components/Admin/carts/carts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -179,6 +180,7 @@ import { ProductsOfCategoriesComponent } from './components/products-of-categori
     CategoyAddComponent,
     CategoyEditComponent,
     ProductsOfCategoriesComponent,
+    CartsComponent,
   ],
   imports: [
     BrowserModule,

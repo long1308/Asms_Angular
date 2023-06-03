@@ -27,6 +27,7 @@ import { ColorEditComponent } from './components/Admin/color/color-edit/color-ed
 import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/categoy-add.component';
 import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
+import { CartsComponent } from './components/Admin/carts/carts.component';
 const routes: Routes = [
   {
     path: '',
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'categorys', component: CategoyComponent },
       { path: 'categorys/add', component: CategoyAddComponent },
       { path: 'categorys/edit/:id', component: CategoyEditComponent },
+      { path: 'cart', component: CartsComponent },
     ],
   },
   {

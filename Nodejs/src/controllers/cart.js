@@ -23,12 +23,12 @@ const getAllCarts = async (req, res) => {
 
 // Get a single cart by ID
 const getCartById = async (req, res) => {
-  const { idUser } = req.params;
   try {
-    const cart = await Cart.findOne({ "items.userId": idUser }).populate({
+    const cart = await Cart.findOne({ "userId": req.params.id }).populate({
       path: "items.productId",
       model: "Product",
     });
+    console.log(cart);
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
@@ -90,18 +90,16 @@ const createCart = async (req, res) => {
 
 // Update a cart by ID
 const updateCart = async (req, res) => {
-  const { idUser } = req.params;
+  const { id } = req.params;
   const { _id, quantity } = req.body;
 
   try {
-    const cart = await Cart.findOne({ "items.userId": idUser });
-
+    const cart = await Cart.findOne({ "userId": id });
     // Nếu cart không tồn tại
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
 
-    // for (let i = 0; i < items.length; i++) {
 
     // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
     const existingItem = cart.items.find((item) => item._id.toString() === _id);

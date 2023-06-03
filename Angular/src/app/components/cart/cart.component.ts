@@ -21,9 +21,9 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+  
     this.productService.getOneCart(this.user._id).subscribe((data: any) => {
       this.cart = data.cart;
-      console.log(this.cart);
     });
   }
   removeItem(item: any) {
