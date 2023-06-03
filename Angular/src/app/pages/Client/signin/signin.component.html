@@ -1,17 +1,17 @@
 <!-- Container -->
 <div
-  class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10"
+  class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10 grid-bg ba-grid anim"
 >
-  <div class="flex shadow-md font-semibold">
+<div class="inner">
+  <div class="flex shadow-2xl font-semibold">
     <!-- Login form -->
     <div
-      class="flex flex-wrap content-center justify-center rounded-l-md bg-white"
+      class="flex flex-wrap content-center justify-center rounded-l-md bg-slate-100"
       style="width: 30rem; height: 32rem"
     >
     <div class="w-full md:w-72">
         <!-- Heading -->
         <img src="./assets/logo.png" alt="" class="mx-auto w-1/4" />
-
         <!-- Form -->
         <form class="px-3 md:mt-4" [formGroup]="form" (ngSubmit)="submitForm()">
           <div class="mb-3">
@@ -23,7 +23,7 @@
               type="email"
               formControlName="email"
               placeholder="Email"
-              class="block w-full md:w-72 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              class="block w-full px-5 py-3 mt-2 text-gray-700 plac eholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:outline-none"
             />
             <!-- validate show -->
             <div
@@ -56,7 +56,7 @@
               type="password"
               placeholder="***"
               formControlName="password"
-              class="block  w-full md:w-72 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              class="block w-full px-5 py-3 mt-2 text-gray-700 plac eholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:outline-none"
             />
             <!-- validate show -->
             <div
@@ -74,7 +74,7 @@
 
           <div class="mb-3">
             <button
-              class="mb-1.5 block  w-full md:w-72 text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-mds"
+              class="mb-1.5 block w-full text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-md"
             >
               Sign in
             </button>
@@ -82,7 +82,7 @@
               class="btn-wrapper text-center flex items-center justify-center space-x-4 mt-3"
             >
               <button
-                class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-slate-200 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+                class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-slate-200 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@
                 Facebook
               </button>
               <button
-                class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-slate-200 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+                class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-slate-200 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,4 +154,5 @@
       />
     </div>
   </div>
+</div>
 </div>

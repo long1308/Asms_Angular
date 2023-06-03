@@ -91,8 +91,7 @@ const createCart = async (req, res) => {
 // Update a cart by ID
 const updateCart = async (req, res) => {
   const { idUser } = req.params;
-  const {  _id, quantity } = req.body;
-
+  const { _id, quantity } = req.body;
 
   try {
     const cart = await Cart.findOne({ "items.userId": idUser });
@@ -104,27 +103,25 @@ const updateCart = async (req, res) => {
 
     // for (let i = 0; i < items.length; i++) {
 
-      // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
-      const existingItem = cart.items.find(
-        (item) => item._id.toString() === _id
-      );
+    // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
+    const existingItem = cart.items.find((item) => item._id.toString() === _id);
 
-      if (existingItem) {
-        const product = await Product.findById(existingItem.productId);
+    if (existingItem) {
+      const product = await Product.findById(existingItem.productId);
 
-        // Nếu product không tồn tại
-        if (!product) {
-          return res.status(404).json({ error: "Product not found" });
-        }
-
-        existingItem.quantity = quantity;
-        existingItem.price = product.price * quantity;
-        existingItem.priceSale = product.priceSale * quantity;
-      } else {
-        return res.status(200).json({
-          message: "Cập nhật giỏ hàng không thành công",
-        });
+      // Nếu product không tồn tại
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
       }
+
+      existingItem.quantity = quantity;
+      existingItem.price = product.price * quantity;
+      existingItem.priceSale = product.priceSale * quantity;
+    } else {
+      return res.status(200).json({
+        message: "Cập nhật giỏ hàng không thành công",
+      });
+    }
     // }
 
     await cart.save();
@@ -138,9 +135,6 @@ const updateCart = async (req, res) => {
   }
 };
 
-
-
-
 // Delete a product from cart by userId and productId
 const deleteProductFromCart = async (userId, productId) => {
   try {
@@ -148,11 +142,30 @@ const deleteProductFromCart = async (userId, productId) => {
     if (!cart) {
       throw new Error("Cart not found");
     }
+    // Tìm sản phẩm cần xóa trong giỏ hàng
+    const deletedItem = cart.items.find(
+      (item) => item._id.toString() === productId
+    );
 
+    if (!deletedItem) {
+      throw new Error("Product not found in cart");
+    }
+
+    // Lấy thông tin về giá và số lượng của sản phẩm
+    const { price, priceSale, quantity } = deletedItem;
+
+    // Xóa sản phẩm từ mảng items
+    cart.items = cart.items.filter((item) => item._id.toString() !== productId);
+
+    // Cập nhật lại tổng giá trị của giỏ hàng
+    cart.totalPrice -= price * quantity;
+    cart.totalPriceSale -= priceSale * quantity;
+
+    await cart.save();
     // Kiểm tra và xóa sản phẩm từ mảng items
     const updatedCart = await Cart.findOneAndUpdate(
       { userId },
-      { $pull: { "items": { _id: productId } } },
+      { $pull: { items: { _id: productId } } },
       { new: true }
     );
 
@@ -165,7 +178,6 @@ const deleteProductFromCart = async (userId, productId) => {
     throw error;
   }
 };
-
 
 // Delete a cart by ID
 const deleteCart = async (req, res) => {

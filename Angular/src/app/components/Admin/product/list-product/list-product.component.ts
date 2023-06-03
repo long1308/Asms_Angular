@@ -118,4 +118,28 @@ export class ListProductComponent implements OnInit {
       detail: '',
     });
   }
+  //hide/ show
+  updateProductVisible(product: Iproduct, event: any) {
+    product.isVisible = event; // thay đổi lại true false
+    this.productService.editPatchProduct(product).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Product Visible Updated',
+        life: 3000,
+      });
+    });
+  }
+  //featured
+  updateProductFeatured(product: Iproduct, event: any) {
+    product.featured = event; // thay đổi lại true false
+    this.productService.editPatchProduct(product).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Product Featured Updated',
+        life: 3000,
+      });
+    });
+  }
 }

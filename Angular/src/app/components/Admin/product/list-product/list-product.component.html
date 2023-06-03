@@ -75,6 +75,12 @@
         <th pSortableColumn="rating">
           Reviews <p-sortIcon field="rating"></p-sortIcon>
         </th>
+        <th pSortableColumn="hide_show">
+          Hide/Show <p-sortIcon field="hide_show"></p-sortIcon>
+        </th>
+        <th pSortableColumn="featured">
+          Featured <p-sortIcon field="featured"></p-sortIcon>
+        </th>
         <th pSortableColumn="inventoryStatus" style="min-width: 10rem">
           Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
         </th>
@@ -107,6 +113,8 @@
             [ngStyle]="{ color: 'yellow' }"
           ></p-rating>
         </td>
+        <td><p-inputSwitch [(ngModel)]="product.isVisible"  (ngModelChange)="updateProductVisible(product,$event)"></p-inputSwitch></td>
+        <td><p-inputSwitch [(ngModel)]="product.featured"(ngModelChange)="updateProductFeatured(product,$event)" ></p-inputSwitch></td>
         <td>
           <p-tag
             [value]="product.inventoryStatus"
@@ -114,23 +122,25 @@
           ></p-tag>
         </td>
         <td>
-          <a
-            pButton
-            pRipple
-            class="p-button-rounded p-button-success"
-            style="margin-right: 0.5rem"
-            [routerLink]="['/admin/products/edit/', product._id]"
-          >
-            Edit
-          </a>
-          <button
-            pButton
-            pRipple
-            class="p-button-rounded p-button-warning"
-            (click)="deleteProduct(product)"
-          >
-            Remove
-          </button>
+          <div class="flex">
+            <a
+              pButton
+              pRipple
+              class="p-button-rounded p-button-success"
+              style="margin-right: 0.5rem"
+              [routerLink]="['/admin/products/edit/', product._id]"
+            >
+              Edit
+            </a>
+            <button
+              pButton
+              pRipple
+              class="p-button-rounded p-button-warning"
+              (click)="deleteProduct(product)"
+            >
+              Remove
+            </button>
+          </div>
         </td>
       </tr>
     </ng-template>

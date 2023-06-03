@@ -15,6 +15,10 @@ const productSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isVisible: {
+      type: Boolean,
+      default: false,
+    },
     featured: {
       type: Boolean,
       default: false,

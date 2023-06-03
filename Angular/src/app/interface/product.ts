@@ -15,4 +15,5 @@ export interface Iproduct {
   categoryId: string;
   inventoryStatus: string;
   rating: number;
+  isVisible: boolean;
 }

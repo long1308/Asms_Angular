@@ -26,6 +26,7 @@ import { ColorAddComponent } from './components/Admin/color/color-add/color-add.
 import { ColorEditComponent } from './components/Admin/color/color-edit/color-edit.component';
 import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/categoy-add.component';
 import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
+import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
 const routes: Routes = [
   {
     path: '',
@@ -40,6 +41,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'cart', component: CartComponent },
       { path: 'account', component: AccountComponent },
+      { path: 'category/:id', component: ProductsOfCategoriesComponent},
     ],
   },
   { path: 'signup', component: SignupComponent },
