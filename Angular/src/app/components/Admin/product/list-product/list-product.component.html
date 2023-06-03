@@ -114,7 +114,7 @@
           ></p-rating>
         </td>
         <td><p-inputSwitch [(ngModel)]="product.isVisible"  (ngModelChange)="updateProductVisible(product,$event)"></p-inputSwitch></td>
-        <td><p-inputSwitch [(ngModel)]="product.featured"(ngModelChange)="updateProductFeatured(product)" ></p-inputSwitch></td>
+        <td><p-inputSwitch [(ngModel)]="product.featured"(ngModelChange)="updateProductFeatured(product,$event)" ></p-inputSwitch></td>
         <td>
           <p-tag
             [value]="product.inventoryStatus"
