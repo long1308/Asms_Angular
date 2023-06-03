@@ -113,8 +113,8 @@
             [ngStyle]="{ color: 'yellow' }"
           ></p-rating>
         </td>
-        <td><p-inputSwitch [(ngModel)]="product.isVisible"  (ngModelChange)="updateProductVisible(product)"></p-inputSwitch></td>
-        <td><p-inputSwitch [(ngModel)]="checkedfeatured"></p-inputSwitch></td>
+        <td><p-inputSwitch [(ngModel)]="product.isVisible"  (ngModelChange)="updateProductVisible(product,$event)"></p-inputSwitch></td>
+        <td><p-inputSwitch [(ngModel)]="product.featured"(ngModelChange)="updateProductFeatured(product)" ></p-inputSwitch></td>
         <td>
           <p-tag
             [value]="product.inventoryStatus"
