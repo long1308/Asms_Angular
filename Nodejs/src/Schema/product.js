@@ -38,15 +38,16 @@ export const productSchema = Joi.object({
   description_short: Joi.string(),
   featured: Joi.boolean(),
   isFavorite: Joi.boolean(),
+  isVisible: Joi.boolean(),
   rating: Joi.number().required().messages({
     "string.empty": "rating không được để trống",
     "any.required": "Trường Price này là bắt buộc",
-    "number.base": "Price phải là 1 số",
+    "number.base": "Rating phải là 1 số",
   }),
   quantity: Joi.number().required().messages({
-    "string.empty": "rating không được để trống",
-    "any.required": "Trường Price này là bắt buộc",
-    "number.base": "Price phải là 1 số",
+    "string.empty": "Quantity không được để trống",
+    "any.required": "Trường Quantity này là bắt buộc",
+    "number.base": "Quantity phải là 1 số",
   }),
   inventoryStatus: Joi.string(),
   categoryId: Joi.string().required().messages({
