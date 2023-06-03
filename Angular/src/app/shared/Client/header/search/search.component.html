@@ -28,7 +28,11 @@
       
         <div class="search-results" [ngClass]= "{'show': showResults && filteredCountries.length > 0 ,'hide': showDetail}" *ngIf=" showResults && filteredCountries.length > 0 && searchValue!='' " >
           <ul>
-            <li (click)= "hidenList()" routerLink = "/products/{{country._id}}" *ngFor="let country of filteredCountries.slice(0, 6)">{{ country.name }}</li>
+            <li class="flex items-center gap-1" (click)= "hidenList()" routerLink = "/products/{{country._id}}" *ngFor="let country of filteredCountries.slice(0, 5)"><div  class="image w-20">
+              <img class="w-full" src={{country.image[0]}} alt="">
+            </div>
+            <span class="text-sm truncate">{{ country.name }}</span>
+          </li>
           </ul>
         </div>
         

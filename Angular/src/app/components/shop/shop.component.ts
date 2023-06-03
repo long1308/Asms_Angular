@@ -20,6 +20,9 @@ export class ShopComponent implements OnInit {
   totalRecords: number = 0;
   rowsPerPageOptions: number[] = [5, 10, 20];
   searchValue: string = '';
+  sortPrice: string = 'Giá';
+  sortRating: string = 'Đánh giá';
+
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
       this.searchValue = params.search;
@@ -36,6 +39,7 @@ export class ShopComponent implements OnInit {
         }
       });
     });
+
   }
   onPageChange(event: any) {
     this.currentPage = event.page + 1;
@@ -75,4 +79,73 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+  // sort
+  sortPriceChange(event: any){
+  
+    this.sortPrice = event.target.value;
+    if(this.sortPrice == 'asc'){
+      this.filteredCountries.sort((a, b) => (a.priceSale > b.priceSale ? 1 : -1));
+    }
+    
+    if(this.sortPrice == 'desc'){
+      this.filteredCountries.sort((a, b) => (a.priceSale < b.priceSale ? 1 : -1));
+    }
+    if (this.sortPrice === 'asc' || this.sortPrice === 'desc') {
+      this.sortPrice = ''; // Ẩn tùy chọn "Giá"
+    }
+    
+  }
+  sortRatingChange(event: any){
+  
+    this.sortRating = event.target.value;
+    if(this.sortRating == 'asc'){
+      this.filteredCountries.sort((a, b) => (a.rating > b.rating ? 1 : -1));
+    }
+    
+    if(this.sortRating == 'desc'){
+      this.filteredCountries.sort((a, b) => (a.rating < b.rating ? 1 : -1));
+    }
+    if (this.sortRating === 'asc' || this.sortRating === 'desc') {
+      this.sortRating = ''; // Ẩn tùy chọn "Giá"
+    }
+    
+  }
+  sortSaleChange(event: any) {
+    this.sortRating = event.target.value;
+  
+    if (this.sortRating === 'asc') {
+      this.products.sort((a, b) => {
+        if (a.hot_sale === undefined && b.hot_sale === undefined) {
+          return 0;
+        }
+        if (a.hot_sale === undefined) {
+          return 1;
+        }
+        if (b.hot_sale === undefined) {
+          return -1;
+        }
+        return a.hot_sale > b.hot_sale ? 1 : -1;
+      });
+    }
+    
+    if (this.sortRating === 'desc') {
+      this.products.sort((a, b) => {
+        if (a.hot_sale === undefined && b.hot_sale === undefined) {
+          return 0;
+        }
+        if (a.hot_sale === undefined) {
+          return 1;
+        }
+        if (b.hot_sale === undefined) {
+          return -1;
+        }
+        return a.hot_sale < b.hot_sale ? 1 : -1;
+      });
+    }
+    
+    if (this.sortRating === 'asc' || this.sortRating === 'desc') {
+      this.sortRating = ''; // Ẩn tùy chọn "Giá"
+    }
+  }
+  
 }
