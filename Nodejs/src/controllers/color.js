@@ -82,14 +82,14 @@ export const updateColor = async (req, res) => {
     }
     const colorAll = await Color.find();
     const colorName = colorAll.find(
-      (color) => color.nametoLowerCase() === req.body.nametoLowerCase()
+      (color) => color.name.toLowerCase() === req.body.name.toLowerCase()
     );
     if (colorName) {
       return res.status(400).json({
         message: "Tên color đã có trong danh sách hoặc đã tồn tại !",
       });
     }
-    const color = await Color.findByIdAndUpdate(req.params.id, req.body, {
+    const color = await Color.findByIdAndUpdate({ _id: req.params.id }, req.body, {
       new: true,
     });
     if (!color) {

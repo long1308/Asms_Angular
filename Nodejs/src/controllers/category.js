@@ -61,7 +61,7 @@ export const update = async (req, res) => {
     if (error) {
       return res.status(400).json({ message: error.details[0].message });
     }
-    const data = await Category.findByIdAndUpdate(req.params.id, req.body, {
+    const data = await Category.findByIdAndUpdate({ _id: req.params.id }, req.body, {
       new: true,
     });
     if (data.length == 0) {

@@ -81,14 +81,100 @@ export class ProductService {
   getSizes(): Observable<Isize[]> {
     return this.http.get<Isize[]>('http://localhost:8080/api/size');
   }
+
+   updateSize(size: Isize, _id: number | string): Observable<Isize> {
+    return this.http.put<Isize>(
+      'http://localhost:8080/api/size/' + _id,
+      size
+    );
+  }
+  deleteSize(id: number | string): Observable<Isize> {
+    return this.http.delete<Isize>(
+      'http://localhost:8080/api/size/' + id
+    );
+  }
+  addSize(size: Isize): Observable<Isize> {
+    return this.http.post<Isize>(
+      'http://localhost:8080/api/size/',
+      size
+    );
+  }
+  editPatchSize(size: Isize): Observable<Isize> {
+    return this.http.patch<Isize>(
+      'http://localhost:8080/api/size/' + size._id,
+      size
+    );
+  }
+    editSize(id: number | string, size: Isize): Observable<Isize> {
+    return this.http.put<Isize>(
+      'http://localhost:8080/api/size/' + id,
+      size
+    );
+  }
   //color
   getColors(): Observable<IColor[]> {
     return this.http.get<IColor[]>('http://localhost:8080/api/color');
+  }
+  updateColor(color: IColor, _id: number | string): Observable<IColor> {
+    return this.http.put<IColor>(
+      'http://localhost:8080/api/color/' + _id,
+      color
+    );
+  }
+  deleteColor(id: number | string): Observable<IColor> {
+    return this.http.delete<IColor>(
+      'http://localhost:8080/api/color/' + id
+    );
+  }
+  addColor(color: IColor): Observable<IColor> {
+    return this.http.post<IColor>(
+      'http://localhost:8080/api/color/',
+      color
+    );
+  }
+  editPatchColor(color: IColor): Observable<IColor> {
+    return this.http.patch<IColor>(
+      'http://localhost:8080/api/color/' + color._id,
+      color
+    );
+  }
+    editColor(id: number | string, color: IColor): Observable<IColor> {
+    return this.http.put<IColor>(
+      'http://localhost:8080/api/color/' + id,
+      color
+    );
   }
   //categorys
   getCategorys(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>('http://localhost:8080/api/categorys');
   }
+  updateCategorys(category: ICategory, _id: number | string): Observable<ICategory> {
+    return this.http.put<ICategory>(
+      'http://localhost:8080/api/categorys/' + _id,
+      category
+    );
+  }
+  deleteCategorys(id: number | string): Observable<ICategory> {
+    return this.http.delete<ICategory>(
+      'http://localhost:8080/api/categorys/' + id
+    );
+  }
+  addCategorys(category: ICategory): Observable<ICategory> {
+    return this.http.post<ICategory>(
+      'http://localhost:8080/api/categorys/',
+      category
+    );
+  }
+  editPatchCategorys(category: ICategory): Observable<ICategory> {
+    return this.http.patch<ICategory>(
+      'http://localhost:8080/api/categorys/' + category._id,
+      category
+    );
+  }
+    editCategorys(id: number | string, category: ICategory): Observable<ICategory> {
+    return this.http.put<ICategory>(
+      'http://localhost:8080/api/categorys/' + id,
+      category
   getOneCategory(id: string): Observable<ICategory> {
     return this.http.get<ICategory>(
       `http://localhost:8080/api/categorys/${id}`

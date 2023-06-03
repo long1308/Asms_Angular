@@ -9,6 +9,7 @@
         icon="pi pi-plus"
         class="p-button-success"
         style="margin-right: 0.5rem"
+        [routerLink]="['/admin/size/add']"
         (click)="openNew()"
       ></button>
       <button
@@ -88,6 +89,7 @@
             class="p-button-rounded p-button-success"
             style="margin-right: 0.5rem"
             (click)="editSize(size)"
+            [routerLink]="['/admin/size/edit/', size._id]"
           >
             Edit
           </button>

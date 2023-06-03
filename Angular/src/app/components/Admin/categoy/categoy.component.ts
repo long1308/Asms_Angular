@@ -45,14 +45,22 @@ export class CategoyComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categorys = this.categorys.filter(
-          (val) => !this.selectedCategorys.includes(val)
-        );
-        this.selectedCategorys! = [];
+        // Create an array of selected size IDs
+        const selectedCategoryIds = this.selectedCategorys.map((category) => category._id);
+  
+        // Delete the selected sizes from the database
+        for (const category of this.selectedCategorys) {
+          this.productService.deleteCategorys(category._id!).subscribe(() => {
+            // Filter out the deleted sizes from the sizes array
+            this.categorys = this.categorys.filter((p) => !selectedCategoryIds.includes(p._id));
+          });
+        }
+        // Clear the selected sizes array
+        this.selectedCategorys = [];
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Category Deleted',
+          detail: 'Products Deleted',
           life: 3000,
         });
       },
@@ -70,14 +78,15 @@ export class CategoyComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categorys = this.categorys.filter(
-          (val) => val._id !== category._id
-        );
-        this.category = {} as ICategory;
+        this.productService.deleteCategorys(category._id!).subscribe((data) => {
+          this.productService.getCategorys().subscribe((data: any) => {
+            this.categorys = data.category;     
+          });
+        });
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Category Deleted',
+          detail: 'Product Deleted',
           life: 3000,
         });
       },
