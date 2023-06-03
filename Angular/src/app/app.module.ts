@@ -126,6 +126,13 @@ import { ColorComponent } from './components/Admin/color/color.component';
 import { CategoyComponent } from './components/Admin/categoy/categoy.component';
 import { ProductAddComponent } from './components/Admin/product/product-add/product-add.component';
 import { ProductEditComponent } from './components/Admin/product/product-edit/product-edit.component';
+import { ListSizeComponent } from './components/Admin/size/list-size/list-size.component';
+import { SizeAddComponent } from './components/Admin/size/size-add/size-add.component';
+import { SizeEditComponent } from './components/Admin/size/size-edit/size-edit.component';
+import { ColorAddComponent } from './components/Admin/color/color-add/color-add.component';
+import { ColorEditComponent } from './components/Admin/color/color-edit/color-edit.component';
+import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/categoy-add.component';
+import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,6 +170,13 @@ import { ProductEditComponent } from './components/Admin/product/product-edit/pr
     CategoyComponent,
     ProductAddComponent,
     ProductEditComponent,
+    ListSizeComponent,
+    SizeAddComponent,
+    SizeEditComponent,
+    ColorAddComponent,
+    ColorEditComponent,
+    CategoyAddComponent,
+    CategoyEditComponent,
   ],
   imports: [
     BrowserModule,

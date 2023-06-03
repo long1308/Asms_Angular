@@ -9,6 +9,7 @@
         icon="pi pi-plus"
         class="p-button-success"
         style="margin-right: 0.5rem"
+        [routerLink]="['/admin/categorys/add']"
         (click)="openNew()"
       ></button>
       <button
@@ -88,6 +89,7 @@
             class="p-button-rounded p-button-success"
             style="margin-right: 0.5rem"
             (click)="editCategory(category)"
+            [routerLink]="['/admin/categorys/edit/', category._id]"
           >
             Edit
           </button>

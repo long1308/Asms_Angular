@@ -3,7 +3,7 @@ import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
 import { Isize } from 'src/app/interface/size';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-size',
   templateUrl: './size.component.html',
@@ -22,7 +22,8 @@ export class SizeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,19 +39,28 @@ export class SizeComponent implements OnInit {
   }
 
   deleteSelectedSizes() {
+    console.log(this.selectedSize);
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected sizes?',
+      message: 'Are you sure you want to delete the selected products?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.sizes = this.sizes.filter(
-          (val) => !this.selectedSize.includes(val)
-        );
-        this.selectedSize! = [];
+        // Create an array of selected size IDs
+        const selectedSizeIds = this.selectedSize.map((size) => size._id);
+  
+        // Delete the selected sizes from the database
+        for (const size of this.selectedSize) {
+          this.productService.deleteSize(size._id!).subscribe(() => {
+            // Filter out the deleted sizes from the sizes array
+            this.sizes = this.sizes.filter((p) => !selectedSizeIds.includes(p._id));
+          });
+        }
+        // Clear the selected sizes array
+        this.selectedSize = [];
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Size Deleted',
+          detail: 'Products Deleted',
           life: 3000,
         });
       },
@@ -68,12 +78,15 @@ export class SizeComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.sizes = this.sizes.filter((val) => val._id !== size._id);
-        this.size = {} as Isize;
+        this.productService.deleteSize(size._id!).subscribe((data) => {
+          this.productService.getSizes().subscribe((data: any) => {
+            this.sizes = data.size;     
+          });
+        });
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Size Deleted',
+          detail: 'Product Deleted',
           life: 3000,
         });
       },

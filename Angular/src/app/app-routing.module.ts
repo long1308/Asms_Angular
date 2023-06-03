@@ -20,6 +20,12 @@ import { ColorComponent } from './components/Admin/color/color.component';
 import { CategoyComponent } from './components/Admin/categoy/categoy.component';
 import { ProductAddComponent } from './components/Admin/product/product-add/product-add.component';
 import { ProductEditComponent } from './components/Admin/product/product-edit/product-edit.component';
+import { SizeAddComponent } from './components/Admin/size/size-add/size-add.component';
+import { SizeEditComponent } from './components/Admin/size/size-edit/size-edit.component';
+import { ColorAddComponent } from './components/Admin/color/color-add/color-add.component';
+import { ColorEditComponent } from './components/Admin/color/color-edit/color-edit.component';
+import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/categoy-add.component';
+import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -48,10 +54,16 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: ListProductComponent },
       { path: 'products/add', component: ProductAddComponent },
-      { path: 'products/edit/:id', component: ProductEditComponent },
+      { path: 'products/edit/:id', component: ProductEditComponent },     
       { path: 'size', component: SizeComponent },
+      { path: 'size/add', component: SizeAddComponent },
+      { path: 'size/edit/:id', component: SizeEditComponent },
       { path: 'color', component: ColorComponent },
+      { path: 'color/add', component: ColorAddComponent },
+      { path: 'color/edit/:id', component: ColorEditComponent },
       { path: 'categorys', component: CategoyComponent },
+      { path: 'categorys/add', component: CategoyAddComponent },
+      { path: 'categorys/edit/:id', component: CategoyEditComponent },
     ],
   },
   {

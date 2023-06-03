@@ -3,6 +3,7 @@ import { Iproduct } from 'src/app/interface/product';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/service/product.service';
 import { IColor } from 'src/app/interface/color';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-color',
   templateUrl: './color.component.html',
@@ -43,9 +44,15 @@ export class ColorComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.colors = this.colors.filter(
-          (val) => !this.selectedColor.includes(val)
-        );
+        const selectedColorIds = this.selectedColor.map((color) => color._id);
+  
+        // Delete the selected sizes from the database
+        for (const color of this.selectedColor) {
+          this.productService.deleteColor(color._id!).subscribe(() => {
+            // Filter out the deleted sizes from the sizes array
+            this.colors = this.colors.filter((p) => !selectedColorIds.includes(p._id));
+          });
+        }
         this.selectedColor! = [];
         this.messageService.add({
           severity: 'success',
@@ -68,12 +75,15 @@ export class ColorComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.colors = this.colors.filter((val) => val._id !== color._id);
-        this.color = {} as IColor;
+        this.productService.deleteColor(color._id!).subscribe((data) => {
+          this.productService.getColors().subscribe((data: any) => {
+            this.colors = data.color;     
+          });
+        });
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Color Deleted',
+          detail: 'Product Deleted',
           life: 3000,
         });
       },

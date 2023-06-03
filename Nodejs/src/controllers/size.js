@@ -90,7 +90,7 @@ export const updateSize = async (req, res) => {
         message: "Tên size đã có trong danh sách hoặc đã tồn tại !!",
       });
     }
-    const size = await Size.findByIdAndUpdate({ id: req.params.id }, req.body, {
+    const size = await Size.findByIdAndUpdate({ _id: req.params.id }, req.body, {
       new: true,
     });
     if (!size) {
