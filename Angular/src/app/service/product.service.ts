@@ -82,22 +82,14 @@ export class ProductService {
     return this.http.get<Isize[]>('http://localhost:8080/api/size');
   }
 
-   updateSize(size: Isize, _id: number | string): Observable<Isize> {
-    return this.http.put<Isize>(
-      'http://localhost:8080/api/size/' + _id,
-      size
-    );
+  updateSize(size: Isize, _id: number | string): Observable<Isize> {
+    return this.http.put<Isize>('http://localhost:8080/api/size/' + _id, size);
   }
   deleteSize(id: number | string): Observable<Isize> {
-    return this.http.delete<Isize>(
-      'http://localhost:8080/api/size/' + id
-    );
+    return this.http.delete<Isize>('http://localhost:8080/api/size/' + id);
   }
   addSize(size: Isize): Observable<Isize> {
-    return this.http.post<Isize>(
-      'http://localhost:8080/api/size/',
-      size
-    );
+    return this.http.post<Isize>('http://localhost:8080/api/size/', size);
   }
   editPatchSize(size: Isize): Observable<Isize> {
     return this.http.patch<Isize>(
@@ -105,11 +97,8 @@ export class ProductService {
       size
     );
   }
-    editSize(id: number | string, size: Isize): Observable<Isize> {
-    return this.http.put<Isize>(
-      'http://localhost:8080/api/size/' + id,
-      size
-    );
+  editSize(id: number | string, size: Isize): Observable<Isize> {
+    return this.http.put<Isize>('http://localhost:8080/api/size/' + id, size);
   }
   //color
   getColors(): Observable<IColor[]> {
@@ -122,15 +111,10 @@ export class ProductService {
     );
   }
   deleteColor(id: number | string): Observable<IColor> {
-    return this.http.delete<IColor>(
-      'http://localhost:8080/api/color/' + id
-    );
+    return this.http.delete<IColor>('http://localhost:8080/api/color/' + id);
   }
   addColor(color: IColor): Observable<IColor> {
-    return this.http.post<IColor>(
-      'http://localhost:8080/api/color/',
-      color
-    );
+    return this.http.post<IColor>('http://localhost:8080/api/color/', color);
   }
   editPatchColor(color: IColor): Observable<IColor> {
     return this.http.patch<IColor>(
@@ -138,7 +122,7 @@ export class ProductService {
       color
     );
   }
-    editColor(id: number | string, color: IColor): Observable<IColor> {
+  editColor(id: number | string, color: IColor): Observable<IColor> {
     return this.http.put<IColor>(
       'http://localhost:8080/api/color/' + id,
       color
@@ -148,7 +132,10 @@ export class ProductService {
   getCategorys(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>('http://localhost:8080/api/categorys');
   }
-  updateCategorys(category: ICategory, _id: number | string): Observable<ICategory> {
+  updateCategorys(
+    category: ICategory,
+    _id: number | string
+  ): Observable<ICategory> {
     return this.http.put<ICategory>(
       'http://localhost:8080/api/categorys/' + _id,
       category
@@ -171,10 +158,15 @@ export class ProductService {
       category
     );
   }
-    editCategorys(id: number | string, category: ICategory): Observable<ICategory> {
+  editCategorys(
+    id: number | string,
+    category: ICategory
+  ): Observable<ICategory> {
     return this.http.put<ICategory>(
       'http://localhost:8080/api/categorys/' + id,
       category
+    );
+  }
   getOneCategory(id: string): Observable<ICategory> {
     return this.http.get<ICategory>(
       `http://localhost:8080/api/categorys/${id}`
