@@ -1,7 +1,7 @@
 import Product from "../models/product";
 import { productSchema } from "../Schema/product";
 export const getAll = async (req, res) => {
-  const { _sort = "createdAt", _limit = 100, _order = "asc" } = req.query;
+  const { _sort = "priceSale", _limit = 100, _order = "asc" } = req.query;
   const option = {
     limit: _limit,
     sort: {

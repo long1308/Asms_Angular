@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { Iproduct } from 'src/app/interface/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ICategory } from 'src/app/interface/category';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -22,7 +23,12 @@ export class ProductDetailComponent implements OnInit {
   //sản phẩm mới
   nonFeaturedProducts!: Iproduct[];
   selectedIndex: number = 0;
+  // lấy category so sánh
+  categorys:ICategory[] = [];
+  nameCategory: any;
+  idCategory: any;
   //lấy user localStorage
+ 
   user: any;
   constructor(
     private route: ActivatedRoute,
@@ -76,15 +82,34 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.ngOnInit1();
     this.ngOnInit2();
+    this.nameCate()
   }
   ngOnInit1() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
+     
+      
+        
         this.valueQuantity = 1;
+        this.productService.getCategorys().subscribe((categorys: ICategory[]) => {
+          this.categorys = categorys
+          this.categorys.map((category:ICategory)=>{
+           if(this.product.categoryId === category._id){
+             this.nameCategory = category.name
+             this.idCategory = category._id 
+           }
+        
+          
+           
+          })
+      
+        })
       });
     });
+ 
+   
   }
 
   ngOnInit2() {
@@ -182,5 +207,9 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
- 
+ //name cate
+ nameCate(){
+
+
+}
 }
