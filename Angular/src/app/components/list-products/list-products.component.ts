@@ -18,10 +18,10 @@ export class ListProductsComponent implements OnInit {
     this.productService.getProducts().subscribe((products: any) => {
       this.products = products.product.docs;
       this.featuredProducts = this.products.filter(
-        (product) => product.featured
+        (product) => product.featured &&  product.isVisible 
       );
       this.nonFeaturedProducts = this.products.filter(
-        (product) => !product.featured
+        (product) => !product.featured &&  product.isVisible 
       );
     });
     this.responsiveOptions = [

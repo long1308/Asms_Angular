@@ -12,7 +12,7 @@
       type="text"
       id="success"
       formControlName="name"
-      class="bg-green-50 border text-green-900 dark:text-green-400  text-sm rounded-lg focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
+      class="bg-green-50 border text-green-900 dark:text-green-400 text-sm rounded-lg focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
       placeholder="Name..."
     />
     <!-- validate show -->
@@ -27,6 +27,30 @@
     >
       Name is required.
     </div>
+  </div>
+  <!-- image -->
+  <div class="mb-6">
+    <label
+      for="success"
+      class="block mb-2 text-sm font-medium dark:text-green-500"
+    >
+      Image</label
+    >
+    <p-fileUpload
+      name="demo[]"
+      url="https://www.primefaces.org/cdn/api/upload.php"
+      (onUpload)="onUpload($event)"
+      [multiple]="true"
+      accept="image/*"
+    >
+      <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+          <li *ngFor="let file of uploadedFiles">
+            {{ file.name }} - {{ file.size }} bytes
+          </li>
+        </ul>
+      </ng-template>
+    </p-fileUpload>
   </div>
   <!-- price  -->
   <div class="mb-6">

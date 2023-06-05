@@ -106,18 +106,6 @@ export class ListProductComponent implements OnInit {
     console.log(this.inputValue); // In giá trị của input ra console
     // Thực hiện các tác vụ khác với giá trị của input
   }
-  //file image
-  onUpload(event: any) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
-
-    this.messageService.add({
-      severity: 'info',
-      summary: 'File Uploaded',
-      detail: '',
-    });
-  }
   //hide/ show
   updateProductVisible(product: Iproduct, event: any) {
     product.isVisible = event; // thay đổi lại true false

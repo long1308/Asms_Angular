@@ -7,25 +7,26 @@ import { ProductService } from 'src/app/service/product.service';
 @Component({
   selector: 'app-products-of-categories',
   templateUrl: './products-of-categories.component.html',
-  styleUrls: ['./products-of-categories.component.css']
+  styleUrls: ['./products-of-categories.component.css'],
 })
 export class ProductsOfCategoriesComponent {
-products: Iproduct[]= [] 
-sortRating: string = 'Đánh giá';
-sortPrice: string = 'Giá';
-hotsale: any;
-constructor(private product : ProductService, private route: ActivatedRoute) {}
-ngOnInit(){
-  this.route.paramMap.subscribe((params) => {
-    const id = params.get('id');
-  this.product.getOneCategory(id!).subscribe((category: any) => {
-  this.products = category.products
-  console.log(this.products);
-  
-  })
-  })
-}
-isFavorite!: boolean;
+  products: Iproduct[] = [];
+  sortRating: string = 'Đánh giá';
+  sortPrice: string = 'Giá';
+  hotsale: any;
+  constructor(private product: ProductService, private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      this.product.getOneCategory(id!).subscribe((category: any) => {
+        this.products = category.products.filter(
+          (product: Iproduct) => product.isVisible
+        );
+        console.log(this.products);
+      });
+    });
+  }
+  isFavorite!: boolean;
   addToFavorites(product: any) {
     this.isFavorite = !product.isFavorite; // Đảo giá trị của biến isFavorite
     console.log(this.isFavorite);
@@ -59,72 +60,68 @@ isFavorite!: boolean;
         return ''; // Giá trị mặc định hoặc giá trị xử lý trường hợp không xác định
     }
   }
-    // sort
-    sortPriceChange(event: any){
-  
-      this.sortPrice = event.target.value;
-      if(this.sortPrice == 'asc'){
-        this.products.sort((a, b) => (a.priceSale > b.priceSale ? 1 : -1));
-      }
-      
-      if(this.sortPrice == 'desc'){
-        this.products.sort((a, b) => (a.priceSale < b.priceSale ? 1 : -1));
-      }
-      if (this.sortPrice === 'asc' || this.sortPrice === 'desc') {
-        this.sortPrice = ''; // Ẩn tùy chọn "Giá"
-      }
-      
+  // sort
+  sortPriceChange(event: any) {
+    this.sortPrice = event.target.value;
+    if (this.sortPrice == 'asc') {
+      this.products.sort((a, b) => (a.priceSale > b.priceSale ? 1 : -1));
     }
-    sortRatingChange(event: any){
-    
-      this.sortRating = event.target.value;
-      if(this.sortRating == 'asc'){
-        this.products.sort((a, b) => (a.rating > b.rating ? 1 : -1));
-      }
-      
-      if(this.sortRating == 'desc'){
-        this.products.sort((a, b) => (a.rating < b.rating ? 1 : -1));
-      }
-      if (this.sortRating === 'asc' || this.sortRating === 'desc') {
-        this.sortRating = ''; // Ẩn tùy chọn "Giá"
-      }
-      
+
+    if (this.sortPrice == 'desc') {
+      this.products.sort((a, b) => (a.priceSale < b.priceSale ? 1 : -1));
     }
-    sortSaleChange(event: any) {
-      this.sortRating = event.target.value;
-    
-      if (this.sortRating === 'asc') {
-        this.products.sort((a, b) => {
-          if (a.hot_sale === undefined && b.hot_sale === undefined) {
-            return 0;
-          }
-          if (a.hot_sale === undefined) {
-            return 1;
-          }
-          if (b.hot_sale === undefined) {
-            return -1;
-          }
-          return a.hot_sale > b.hot_sale ? 1 : -1;
-        });
-      }
-      
-      if (this.sortRating === 'desc') {
-        this.products.sort((a, b) => {
-          if (a.hot_sale === undefined && b.hot_sale === undefined) {
-            return 0;
-          }
-          if (a.hot_sale === undefined) {
-            return 1;
-          }
-          if (b.hot_sale === undefined) {
-            return -1;
-          }
-          return a.hot_sale < b.hot_sale ? 1 : -1;
-        });
-      }
-      
-      if (this.sortRating === 'asc' || this.sortRating === 'desc') {
-        this.sortRating = ''; // Ẩn tùy chọn "Giá"
-      }
+    if (this.sortPrice === 'asc' || this.sortPrice === 'desc') {
+      this.sortPrice = ''; // Ẩn tùy chọn "Giá"
     }
+  }
+  sortRatingChange(event: any) {
+    this.sortRating = event.target.value;
+    if (this.sortRating == 'asc') {
+      this.products.sort((a, b) => (a.rating > b.rating ? 1 : -1));
+    }
+
+    if (this.sortRating == 'desc') {
+      this.products.sort((a, b) => (a.rating < b.rating ? 1 : -1));
+    }
+    if (this.sortRating === 'asc' || this.sortRating === 'desc') {
+      this.sortRating = ''; // Ẩn tùy chọn "Giá"
+    }
+  }
+  sortSaleChange(event: any) {
+    this.sortRating = event.target.value;
+
+    if (this.sortRating === 'asc') {
+      this.products.sort((a, b) => {
+        if (a.hot_sale === undefined && b.hot_sale === undefined) {
+          return 0;
+        }
+        if (a.hot_sale === undefined) {
+          return 1;
+        }
+        if (b.hot_sale === undefined) {
+          return -1;
+        }
+        return a.hot_sale > b.hot_sale ? 1 : -1;
+      });
+    }
+
+    if (this.sortRating === 'desc') {
+      this.products.sort((a, b) => {
+        if (a.hot_sale === undefined && b.hot_sale === undefined) {
+          return 0;
+        }
+        if (a.hot_sale === undefined) {
+          return 1;
+        }
+        if (b.hot_sale === undefined) {
+          return -1;
+        }
+        return a.hot_sale < b.hot_sale ? 1 : -1;
+      });
+    }
+
+    if (this.sortRating === 'asc' || this.sortRating === 'desc') {
+      this.sortRating = ''; // Ẩn tùy chọn "Giá"
+    }
+  }
 }

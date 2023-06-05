@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
+import { Paginator } from 'primeng/paginator';
 import {
   ConfirmationService,
   MessageService,
@@ -14,6 +15,7 @@ import {
 export class CartComponent implements OnInit {
   cart: any;
   user: any = JSON.parse(localStorage.getItem('user')!);
+   filteredItems: any[] = []
   constructor(
     private productService: ProductService,
     private confirmationService: ConfirmationService,
@@ -21,9 +23,12 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-  
     this.productService.getOneCart(this.user._id).subscribe((data: any) => {
       this.cart = data.cart;
+      this.totalRecords = this.cart.items.length;
+      this.loadCartItems(); 
+      console.log(this.totalRecords);
+      
     });
   }
   removeItem(item: any) {
@@ -88,12 +93,24 @@ export class CartComponent implements OnInit {
     }
     this.updateQuantity(item);
   }
-  first: number = 0;
 
-  rows: number = 10;
+  @ViewChild(Paginator) paginator!: Paginator;
+  first = 0;
+  rows = 5;
+  totalRecords = 0;
 
+  // Phương thức xử lý sự kiện khi thay đổi trang
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
+    // Gọi lại API hoặc thực hiện các thay đổi cần thiết khi thay đổi trang
+    // Ví dụ:
+    this.loadCartItems();
   }
+  loadCartItems() {
+    const startIndex = this.first;
+    const endIndex = this.first + this.rows;
+    this.filteredItems = this.cart.items.slice(startIndex, endIndex);
+  }
+  
 }

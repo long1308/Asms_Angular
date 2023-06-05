@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { Isize } from 'src/app/interface/size';
 import { IColor } from 'src/app/interface/color';
 import { ICategory } from 'src/app/interface/category';
+import { MessageService } from 'primeng/api';
 import {
   AbstractControl,
   FormControl,
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.css'],
+  providers: [MessageService],
 })
 export class ProductAddComponent {
   sizes!: Isize[];
@@ -21,7 +23,12 @@ export class ProductAddComponent {
   categorys!: ICategory[];
   productForm!: FormGroup;
   submitted = false;
-  constructor(private productService: ProductService, private router: Router) {
+  uploadedFiles: any[] = [];
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private messageService: MessageService
+  ) {
     this.productForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
@@ -51,6 +58,18 @@ export class ProductAddComponent {
     });
     this.productService.getCategorys().subscribe((data: any) => {
       this.categorys = data;
+    });
+  }
+  //file image
+  onUpload(event: any) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.messageService.add({
+      severity: 'info',
+      summary: 'File Uploaded',
+      detail: '',
     });
   }
   onHandleSubmit() {

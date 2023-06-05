@@ -24,11 +24,11 @@ export class ProductDetailComponent implements OnInit {
   nonFeaturedProducts!: Iproduct[];
   selectedIndex: number = 0;
   // lấy category so sánh
-  categorys:ICategory[] = [];
+  categorys: ICategory[] = [];
   nameCategory: any;
   idCategory: any;
   //lấy user localStorage
- 
+
   user: any;
   constructor(
     private route: ActivatedRoute,
@@ -82,41 +82,34 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.ngOnInit1();
     this.ngOnInit2();
-    this.nameCate()
+    this.nameCate();
   }
   ngOnInit1() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id!).subscribe((products: any) => {
         this.product = products.product;
-     
-      
-        
         this.valueQuantity = 1;
-        this.productService.getCategorys().subscribe((categorys: ICategory[]) => {
-          this.categorys = categorys
-          this.categorys.map((category:ICategory)=>{
-           if(this.product.categoryId === category._id){
-             this.nameCategory = category.name
-             this.idCategory = category._id 
-           }
-        
-          
-           
-          })
-      
-        })
+        this.productService
+          .getCategorys()
+          .subscribe((categorys: ICategory[]) => {
+            this.categorys = categorys;
+            this.categorys.map((category: ICategory) => {
+              if (this.product.categoryId === category._id) {
+                this.nameCategory = category.name;
+                this.idCategory = category._id;
+              }
+            });
+          });
       });
     });
- 
-   
   }
 
   ngOnInit2() {
     this.productService.getProducts().subscribe((products: any) => {
       this.productsAll = products.product.docs;
       this.nonFeaturedProducts = this.productsAll.filter(
-        (product) => !product.featured
+        (product) => !product.featured && product.isVisible
       );
     });
     this.responsiveOptions = [
@@ -155,7 +148,7 @@ export class ProductDetailComponent implements OnInit {
     return Array.from({ length: maxRating }, (_, index) => index + 1);
   }
   onTop() {
-  window.scroll(0,0)
+    window.scroll(0, 0);
   }
   clickSize(index: number) {
     this.selectedSize = this.product.size[index];
@@ -207,9 +200,6 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
- //name cate
- nameCate(){
-
-
-}
+  //name cate
+  nameCate() {}
 }

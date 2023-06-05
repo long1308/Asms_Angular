@@ -135,6 +135,9 @@ import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/cate
 import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
 import { CartsComponent } from './components/Admin/carts/carts.component';
+import { AdminGuardComponent } from './guards/admin-guard/admin-guard.component';
+import { AuthGuardNotLoggedComponent } from './guards/auth-guard-not-logged/auth-guard-not-logged.component';
+import { AuthServiceComponent } from './guards/auth-service/auth-service.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -181,6 +184,8 @@ import { CartsComponent } from './components/Admin/carts/carts.component';
     CategoyEditComponent,
     ProductsOfCategoriesComponent,
     CartsComponent,
+    AdminGuardComponent,
+    AuthGuardNotLoggedComponent,
   ],
   imports: [
     BrowserModule,
@@ -284,7 +289,7 @@ import { CartsComponent } from './components/Admin/carts/carts.component';
     CommonModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AdminGuardComponent],
   bootstrap: [AppComponent],
   exports: [SignupComponent],
 })

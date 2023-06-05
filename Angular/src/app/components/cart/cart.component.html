@@ -54,7 +54,7 @@
           </div>
           <div
             class="flex flex-col md:flex-row hover:bg-gray-100 -mx-8 px-6 py-5 drop-shadow-xl shadow-custom mb-4"
-            *ngFor="let item of cart.items"
+            *ngFor="let item of filteredItems"
           >
             <div class="flex w-full md:w-2/6">
               <!-- product -->
@@ -119,24 +119,28 @@
                 item.priceSale | currency : "USD" : "symbol" : "1.2-2"
               }}</span>
             </div>
-            <div class="card flex justify-content-center gap-2 right-2 top-1 absolute">
+            <div
+              class="card flex justify-content-center gap-2 right-2 top-1 absolute"
+            >
               <button
                 class="p-button-rounded p-button-warning"
                 (click)="removeItem(item)"
               >
-              <i class="pi pi-times" style="color: green"></i>
+                <i class="pi pi-times" style="color: green"></i>
               </button>
             </div>
           </div>
           <!-- pagination  -->
           <div class="ml-64 hidden md:flex gap-x-3">
-            <p-paginator
-              (onPageChange)="onPageChange($event)"
-              [first]="first"
-              [rows]="rows"
-              [totalRecords]="120"
-              [rowsPerPageOptions]="[5, 10, 15]"
-            ></p-paginator>
+            <div class="ml-64 hidden md:flex gap-x-3">
+              <p-paginator
+                (onPageChange)="onPageChange($event)"
+                [first]="first"
+                [rows]="rows"
+                [totalRecords]="totalRecords"
+                [rowsPerPageOptions]="[5, 10, 15]"
+              ></p-paginator>
+            </div>
           </div>
         </div>
         <div

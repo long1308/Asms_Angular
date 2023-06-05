@@ -28,6 +28,8 @@ import { CategoyAddComponent } from './components/Admin/categoy/categoy-add/cate
 import { CategoyEditComponent } from './components/Admin/categoy/categoy-edit/categoy-edit.component';
 import { ProductsOfCategoriesComponent } from './components/products-of-categories/products-of-categories.component';
 import { CartsComponent } from './components/Admin/carts/carts.component';
+import { AdminGuardComponent } from './guards/admin-guard/admin-guard.component';
+import { AuthGuardNotLoggedComponent } from './guards/auth-guard-not-logged/auth-guard-not-logged.component';
 const routes: Routes = [
   {
     path: '',
@@ -42,22 +44,31 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'cart', component: CartComponent },
       { path: 'account', component: AccountComponent },
-      { path: 'category/:id', component: ProductsOfCategoriesComponent},
+      { path: 'category/:id', component: ProductsOfCategoriesComponent },
     ],
   },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [AuthGuardNotLoggedComponent],
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [AuthGuardNotLoggedComponent],
+  },
 
   //admin
   {
     path: 'admin',
     component: LayoutAdminComponent,
+    canActivate: [AdminGuardComponent],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: ListProductComponent },
       { path: 'products/add', component: ProductAddComponent },
-      { path: 'products/edit/:id', component: ProductEditComponent },     
+      { path: 'products/edit/:id', component: ProductEditComponent },
       { path: 'size', component: SizeComponent },
       { path: 'size/add', component: SizeAddComponent },
       { path: 'size/edit/:id', component: SizeEditComponent },
@@ -83,7 +94,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-
+  providers: [AdminGuardComponent],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

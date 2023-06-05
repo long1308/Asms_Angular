@@ -27,7 +27,9 @@ export class ShopComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.searchValue = params.search;
       this.productService.getProducts().subscribe((data: any) => {
-        this.products = data.product.docs;
+        this.products = data.product.docs.filter((product: Iproduct) =>
+        product.isVisible 
+      );
         this.totalRecords = data.product.totalDocs;
         this.itemsPerPage = data.product.limit;
         if (this.searchValue) {
