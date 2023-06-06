@@ -1,18 +1,110 @@
-<!-- <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{ product.code }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
-        </tr>
-    </ng-template>
-</p-table> -->
+<p-table [value]="carts" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 5rem"></th>
+      <th pSortableColumn="name">
+        Customer <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        Email <p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th>Image</th>
+      <th pSortableColumn="role">
+        Role <p-sortIcon field="role"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-cart let-expanded="expanded">
+    <tr>
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="cart"
+          class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+        ></button>
+      </td>
+      <td>{{ cart.userId.name }}</td>
+      <td>{{ cart.userId.email }}</td>
+      <td>
+        <p-image
+          [src]="cart.userId.image_url"
+          [alt]="cart.name"
+          width="50"
+          [preview]="true"
+        ></p-image>
+      </td>
+      <td>{{ cart.userId.role }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-cart>
+    <tr>
+      <td colspan="7">
+        <div class="p-3">
+          <p-table [value]="cart.items" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="id">
+                  STT <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="customer">
+                  name <p-sortIcon field="customer"></p-sortIcon>
+                </th>
+                <th>Image</th>
+                <th pSortableColumn="date">
+                  Date <p-sortIcon field="date"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">
+                  Quantity<p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">
+                  Price <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="status">
+                  Status <p-sortIcon field="status"></p-sortIcon>
+                </th>
+                <th style="width: 4rem"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.productId.name }}</td>
+                <td>
+                  <p-image
+                    [src]="item.productId.image[0]"
+                    [alt]="cart.name"
+                    width="50"
+                    [preview]="true"
+                  ></p-image>
+                </td>
+                <td>{{ item.updatedAt | date : "yyyy-MM-dd" }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.priceSale | currency : "USD" }}</td>
+                <td></td>
+              </tr>
+              <tr *ngIf="i === cart.items.length - 1">
+                <td colspan="8">
+                  <h3 class="mb-2">Total Quantity: {{ cart.totalQuantity }}</h3>
+                  <h3 class="mb-2">
+                    Total Price: {{ cart.totalPrice | currency : "USD" }}
+                  </h3>
+                  <h3 class="mb-2">
+                    Total Price Sale: {{ cart.totalpriceSale | currency : "USD" }}
+                  </h3>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template>
+              <tr>
+                <td colspan="8">There are no orders for this product yet.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

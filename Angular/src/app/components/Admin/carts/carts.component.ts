@@ -7,11 +7,12 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./carts.component.css'],
 })
 export class CartsComponent {
+  carts!: any;
   constructor(private productService: ProductService) {}
   ngOnInit() {
-    this.productService.getCarts().subscribe(data => {
-      console.log(data);
-      
-    })
+    this.productService.getCarts().subscribe((data) => {
+      this.carts = data.carts;
+      console.log(this.carts);
+    });
   }
 }

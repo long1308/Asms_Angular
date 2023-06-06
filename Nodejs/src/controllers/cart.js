@@ -6,6 +6,9 @@ const getAllCarts = async (req, res) => {
     const carts = await Cart.find().populate({
       path: "items.productId",
       model: "Product",
+    }).populate({
+      path: "userId",
+      model: "User",
     });
     if (carts.length === 0) {
       return res.status(200).json({

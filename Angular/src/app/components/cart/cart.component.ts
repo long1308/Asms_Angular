@@ -27,8 +27,6 @@ export class CartComponent implements OnInit {
       this.cart = data.cart;
       this.totalRecords = this.cart.items.length;
       this.loadCartItems(); 
-      console.log(this.totalRecords);
-      
     });
   }
   removeItem(item: any) {
@@ -46,6 +44,8 @@ export class CartComponent implements OnInit {
               .subscribe((data: any) => {
                 // Handle the cart data received from the service
                 this.cart = data.cart;
+                this.loadCartItems();
+                
               });
           });
         this.messageService.add({
@@ -69,18 +69,8 @@ export class CartComponent implements OnInit {
         this.productService.getOneCart(this.user._id).subscribe((data: any) => {
           // Handle the cart data received from the service
           this.cart = data.cart;
+          this.loadCartItems(); 
         });
-        // const updatedItem = data.cart.items.find(
-        //   (cartItem: any) => cartItem._id === item._id
-        // );
-        // if (updatedItem) {
-        //   item.quantity = updatedItem.quantity;
-        //   item.price = updatedItem.price;
-        //   item.priceSale = updatedItem.priceSale;
-        //   // Cập nhật totalPrice và totalPriceSale
-        //   this.cart.totalPrice = data.cart.totalPrice;
-        //   this.cart.totalpriceSale = data.cart.totalpriceSale;
-        // }
       });
   }
   increaseQuantity(item: any) {

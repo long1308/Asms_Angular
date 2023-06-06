@@ -1,4 +1,4 @@
-<body class="bg-gray-100 mt-16">
+<body class="bg-gray-100 mt-16 ">
   <ng-container *ngIf="cart; else loadingTemplate">
     <div class="container mx-auto mt-10">
       <div class="flex flex-col md:flex-row shadow-md my-10">
@@ -183,3 +183,4 @@
   </ng-template>
 </body>
 <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<p-messages class="fixed top-16 left-0"></p-messages>
