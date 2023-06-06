@@ -138,6 +138,7 @@ import { CartsComponent } from './components/Admin/carts/carts.component';
 import { AdminGuardComponent } from './guards/admin-guard/admin-guard.component';
 import { AuthGuardNotLoggedComponent } from './guards/auth-guard-not-logged/auth-guard-not-logged.component';
 import { AuthServiceComponent } from './guards/auth-service/auth-service.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   declarations: [
     AppComponent,
@@ -288,6 +289,7 @@ import { AuthServiceComponent } from './guards/auth-service/auth-service.compone
     CardModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxDropzoneModule
   ],
   providers: [AdminGuardComponent],
   bootstrap: [AppComponent],

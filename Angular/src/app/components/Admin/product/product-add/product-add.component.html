@@ -1,5 +1,19 @@
+<h1 class="text-2xl font-bold">Add Product</h1>
+
+<!-- image -->
+<div class="mb-6">
+  <label for="success" class="block mb-2 text-sm font-medium dark:text-green-500">Image</label>
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
+  <p-progressBar class="custom_style" [value]="value" [style.display]="showProgressBar ? 'block' : 'none'"></p-progressBar>
+  <button (click)="uploadFile()" pButton pRipple label="Upload image" class="p-button-success custom_style "></button>
+</div>
+
 <form [formGroup]="productForm" (ngSubmit)="onHandleSubmit()">
-  <h1 class="text-2xl font-bold">Add Product</h1>
   <!-- name  -->
   <div class="mb-6">
     <label
@@ -27,30 +41,6 @@
     >
       Name is required.
     </div>
-  </div>
-  <!-- image -->
-  <div class="mb-6">
-    <label
-      for="success"
-      class="block mb-2 text-sm font-medium dark:text-green-500"
-    >
-      Image</label
-    >
-    <p-fileUpload
-      name="demo[]"
-      url="https://www.primefaces.org/cdn/api/upload.php"
-      (onUpload)="onUpload($event)"
-      [multiple]="true"
-      accept="image/*"
-    >
-      <ng-template pTemplate="content">
-        <ul *ngIf="uploadedFiles.length">
-          <li *ngFor="let file of uploadedFiles">
-            {{ file.name }} - {{ file.size }} bytes
-          </li>
-        </ul>
-      </ng-template>
-    </p-fileUpload>
   </div>
   <!-- price  -->
   <div class="mb-6">
