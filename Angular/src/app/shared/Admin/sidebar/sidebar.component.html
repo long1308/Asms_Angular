@@ -159,7 +159,7 @@
             [routerLinkActiveOptions]="{ exact: true }"
             class="flex text-sm font-semibold items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-          <i class="pi pi-shopping-cart" style="font-size: 1rem"></i>
+            <i class="pi pi-shopping-cart" style="font-size: 1rem"></i>
             <span class="flex-1 ml-3 whitespace-nowrap text-sm font-semibold"
               >Cart</span
             >
@@ -167,7 +167,8 @@
         </li>
         <li>
           <a
-            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            (click)="logout()"
+            class="flex text-sm font-semibold items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <svg
               aria-hidden="true"
@@ -182,7 +183,7 @@
                 clip-rule="evenodd"
               ></path>
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap text-sm font-semibold"
+            <span class="flex-1 ml-3 whitespace-nowrap text-sm font-semibold cursor-pointer"
               >Logout</span
             >
           </a>

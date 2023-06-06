@@ -1,7 +1,9 @@
+
 <div
   class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10 grid-bg ba-grid anim"
 >
 <div class="inner">
+  <p-messages *ngIf="error" [(value)]="messages2" [enableService]="false"></p-messages>
   <div class="flex shadow-2xl font-semibold">
     <div
       class="flex flex-wrap content-center justify-center rounded-l-md bg-slate-100"

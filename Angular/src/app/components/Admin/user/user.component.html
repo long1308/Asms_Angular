@@ -1,0 +1,40 @@
+<th class="text-5xl my-3">List Users</th>
+<p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>STT</th>
+      <th>Name</th>
+      <th>email</th>
+      <th>Image</th>
+      <th>Role</th>
+      <th>Active</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user let-i="rowIndex">
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <p-avatar
+          [image]="user.image_url"
+          styleClass="mr-2"
+          size="xlarge"
+          shape="circle"
+        ></p-avatar>
+      </td>
+      <td>{{ user.role }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          class="p-button-rounded p-button-warning"
+          (click)="deleteUser(user)"
+        >
+          Remove
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

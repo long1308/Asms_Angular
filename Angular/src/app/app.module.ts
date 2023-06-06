@@ -139,6 +139,7 @@ import { AdminGuardComponent } from './guards/admin-guard/admin-guard.component'
 import { AuthGuardNotLoggedComponent } from './guards/auth-guard-not-logged/auth-guard-not-logged.component';
 import { AuthServiceComponent } from './guards/auth-service/auth-service.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { UserComponent } from './components/Admin/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -187,6 +188,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     CartsComponent,
     AdminGuardComponent,
     AuthGuardNotLoggedComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

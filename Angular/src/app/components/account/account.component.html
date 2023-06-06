@@ -1,51 +1,88 @@
-<div class="p-16">
-  <div class="p-8 bg-white shadow mt-24">
-    <div class="grid grid-cols-1 md:grid-cols-3">
-<div class="p-16  bg-slate-300">
-  <div class="p-8 bg-white shadow-2xl mt-24 rounded-2xl">
-    <div class="grid grid-cols-1 md:grid-cols-3 pt-40">
-      <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-      </div>
-      <div class="relative mb-6">
-        <div
-          class="w-48 h-48 bg-indigo-100 mx-auto rounded-full  absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500 ">
-          <img src="https://img.freepik.com/free-icon/black-male-user-symbol_318-60703.jpg" class="rounded-full " alt="">
-          </div>
-      </div>
-    </div>
-    <div class="mt-25 text-center border-b pb-12">
-      <div class="mt-20 text-center border-b pb-12">
-        <div class="flex items-center justify-center">
-          <form class="max-w-lg">
-            <div class="flex flex-wrap -mx-3 mb-6">
-         
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mx-auto" for="grid-first-name">
-                  Name
-                </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-                <p class="text-red-500 text-xs italic mx-auto">Please fill out this field.</p>
-              </div>
-          
-        
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                  Password
-                </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************">
-                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+<app-banner4></app-banner4>
+<div class="">
+  <h1 class="my-3 text-4xl text-center font-semibold">User information</h1>
+  <div class="p-8 bg-white shadow">
+    <div class="grid grid-cols-1">
+      <div class="bg-slate-100">
+        <form>
+          <div class="p-8 bg-white shadow-2xl mt-24 rounded-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 pt-40">
+              <div
+                class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0"
+              ></div>
+              <div class="relative mb-6">
+                <div
+                  class="w-48 h-48 bg-indigo-100 mx-auto rounded-full absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500"
+                >
+                  <img
+                    src="data:image/jpeg;base64,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"
+                    class="rounded-full"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
+            <div class="mt-25 text-center border-b pb-12">
+              <div class="mt-20 text-center border-b pb-12">
+                <div class="flex items-center justify-center">
+                  <form class="max-w-lg">
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mx-auto"
+                        for="grid-first-name"
+                      >
+                        Name
+                      </label>
+                      <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        placeholder="Name..."
+                      />
+                      <p class="text-red-500 text-xs italic mx-auto">
+                        Please fill out this field.
+                      </p>
+                    </div>
 
-          </form>
-        </div>
-        <div class="mt-12 flex flex-col justify-center">
-      <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"><button
-        class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-        sửa</button> <button
-        class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-        Thông tin</button> </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full px-3">
+                        <label
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="grid-password"
+                        >
+                          Password
+                        </label>
+                        <input
+                          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          id="grid-password"
+                          type="password"
+                          placeholder="******************"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="mt-12 flex flex-col justify-center">
+                  <div
+                    class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"
+                  >
+                    <button
+                      class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+                    >
+                      sửa
+                    </button>
+                    <button
+                      class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+                    >
+                      Thông tin
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-
-  </div>
-
+</div>

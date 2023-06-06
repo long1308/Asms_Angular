@@ -30,6 +30,7 @@ import { ProductsOfCategoriesComponent } from './components/products-of-categori
 import { CartsComponent } from './components/Admin/carts/carts.component';
 import { AdminGuardComponent } from './guards/admin-guard/admin-guard.component';
 import { AuthGuardNotLoggedComponent } from './guards/auth-guard-not-logged/auth-guard-not-logged.component';
+import { UserComponent } from './components/Admin/user/user.component';
 const routes: Routes = [
   {
     path: '',
@@ -79,6 +80,7 @@ const routes: Routes = [
       { path: 'categorys/add', component: CategoyAddComponent },
       { path: 'categorys/edit/:id', component: CategoyEditComponent },
       { path: 'cart', component: CartsComponent },
+      { path: 'user', component: UserComponent },
     ],
   },
   {

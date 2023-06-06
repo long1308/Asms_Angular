@@ -62,6 +62,9 @@
         <th style="width: 4rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
+        <th>
+          STT
+        </th>
         <th pSortableColumn="name" style="min-width: 15rem">
           Name <p-sortIcon field="name"></p-sortIcon>
         </th>
@@ -71,7 +74,7 @@
         </th>
         <th pSortableColumn="category" style="min-width: 10rem">
           Category <p-sortIcon field="category"></p-sortIcon>
-        </th>        
+        </th>
         <th pSortableColumn="rating">
           Reviews <p-sortIcon field="rating"></p-sortIcon>
         </th>
@@ -89,19 +92,22 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-product let-i="rowIndex">
       <tr>
         <td>
           <p-tableCheckbox [value]="product"></p-tableCheckbox>
         </td>
+        <td>
+          <h2>{{i+1}}</h2>
+        </td>
         <td>{{ product.name }}</td>
         <td>
-          <img
+          <p-image
             [src]="product.image[0]"
             [alt]="product.name"
-            width="50"
-            class="shadow-4"
-          />
+            width="250"
+            [preview]="true"
+          ></p-image>
         </td>
         <td>{{ product.price | currency : "USD" }}</td>
         <td>{{ product.categoryId.name }}</td>
@@ -113,8 +119,18 @@
             [ngStyle]="{ color: 'yellow' }"
           ></p-rating>
         </td>
-        <td><p-inputSwitch [(ngModel)]="product.isVisible"  (ngModelChange)="updateProductVisible(product,$event)"></p-inputSwitch></td>
-        <td><p-inputSwitch [(ngModel)]="product.featured"(ngModelChange)="updateProductFeatured(product,$event)" ></p-inputSwitch></td>
+        <td>
+          <p-inputSwitch
+            [(ngModel)]="product.isVisible"
+            (ngModelChange)="updateProductVisible(product, $event)"
+          ></p-inputSwitch>
+        </td>
+        <td>
+          <p-inputSwitch
+            [(ngModel)]="product.featured"
+            (ngModelChange)="updateProductFeatured(product, $event)"
+          ></p-inputSwitch>
+        </td>
         <td>
           <p-tag
             [value]="product.inventoryStatus"

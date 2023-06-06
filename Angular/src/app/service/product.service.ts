@@ -42,6 +42,7 @@ export class ProductService {
       product
     );
   }
+  //user
   register(user: signup): Observable<signup> {
     return this.http.post<signup>('http://localhost:8080/api/signup', user);
   }
@@ -49,6 +50,13 @@ export class ProductService {
   login(user: signin): Observable<signin> {
     return this.http.post<signin>('http://localhost:8080/api/signin', user);
   }
+  getUsers(): Observable<signin[]> {
+    return this.http.get<signin[]>('http://localhost:8080/api/user');
+  }
+  deleteUser(id: number | string): Observable<signin> {
+    return this.http.delete<signin>('http://localhost:8080/api/user/' + id);
+  }
+
   editProduct(id: number | string, product: Iproduct): Observable<Iproduct> {
     return this.http.put<Iproduct>(
       'http://localhost:8080/api/products/' + id,
