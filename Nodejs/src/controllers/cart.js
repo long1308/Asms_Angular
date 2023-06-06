@@ -28,7 +28,6 @@ const getCartById = async (req, res) => {
       path: "items.productId",
       model: "Product",
     });
-    console.log(cart);
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
     }
