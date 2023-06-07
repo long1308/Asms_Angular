@@ -40,11 +40,14 @@ export class ProductAddComponent {
       description: new FormControl('', [Validators.required]),
       size: new FormControl([], [Validators.required]),
       color: new FormControl([], [Validators.required]),
-      hot_sale: new FormControl('', [Validators.required]),
+      hot_sale: new FormControl(0),
       categoryId: new FormControl('', [Validators.required]),
-      rating: new FormControl('', [Validators.required]),
+      rating: new FormControl(0),
       quantity: new FormControl('', [Validators.required]),
     });
+    this.productForm.get('rating')?.clearValidators();
+    this.productForm.get('rating')?.setErrors(null);
+    this.productForm.get('rating')?.updateValueAndValidity();
   }
   ngOnInit() {
     this.productService.getSizes().subscribe((data: any) => {
@@ -109,7 +112,7 @@ export class ProductAddComponent {
         console.log(error);
       });
   }
-// validate màu 
+  // validate màu
 
   onHandleSubmit() {
     this.submitted = true;

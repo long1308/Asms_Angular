@@ -2,15 +2,35 @@
 
 <!-- image -->
 <div class="mb-6">
-  <label for="success" class="block mb-2 text-sm font-medium dark:text-green-500">Image</label>
+  <label
+    for="success"
+    class="block mb-2 text-sm font-medium dark:text-green-500"
+    >Image</label
+  >
   <ngx-dropzone (change)="onSelect($event)">
     <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+    <ngx-dropzone-image-preview
+      ngProjectAs="ngx-dropzone-preview"
+      *ngFor="let f of files"
+      [file]="f"
+      [removable]="true"
+      (removed)="onRemove(f)"
+    >
       <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
     </ngx-dropzone-image-preview>
   </ngx-dropzone>
-  <p-progressBar class="custom_style" [value]="value" [style.display]="showProgressBar ? 'block' : 'none'"></p-progressBar>
-  <button (click)="uploadFile()" pButton pRipple label="Upload image" class="p-button-success custom_style "></button>
+  <p-progressBar
+    class="custom_style"
+    [value]="value"
+    [style.display]="showProgressBar ? 'block' : 'none'"
+  ></p-progressBar>
+  <button
+    (click)="uploadFile()"
+    pButton
+    pRipple
+    label="Upload image"
+    class="p-button-success custom_style"
+  ></button>
 </div>
 
 <form [formGroup]="productForm" (ngSubmit)="onHandleSubmit()">
@@ -114,7 +134,6 @@
       formControlName="hot_sale"
       class="bg-green-50 border text-green-900 dark:text-green-400 dark:placeholder-green-500 text-sm rounded-lg focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
       placeholder="Hot sale..."
-      min="1"
     />
   </div>
   <!-- desc  -->
@@ -154,18 +173,6 @@
       Rating</label
     >
     <p-rating formControlName="rating"></p-rating>
-    <!-- validate show -->
-    <div
-      *ngIf="
-        productForm.get('rating')?.hasError('required') &&
-        (productForm.get('rating')?.dirty ||
-          productForm.get('rating')?.touched ||
-          submitted)
-      "
-      class="text-red-500 text-xs mt-1"
-    >
-      Rating is required.
-    </div>
   </div>
   <!-- color  -->
   <div class="mb-6">
