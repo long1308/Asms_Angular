@@ -25,11 +25,20 @@
               [src]="product.image[0]"
               alt="product image"
             />
-            <span
+            <div
               *ngIf="product.hot_sale"
-              class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white z-10"
-              >{{ product.hot_sale }}% OFF</span
+              class="absolute z-10 left-0 top-1 py-2 px-2"
+              style="
+                background-image: url('./assets/seo.png');
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+              "
             >
+              <span
+                class="m-2 rounded-full text-center text-sm font-medium text-white"
+                >{{ product.hot_sale }}% OFF</span
+              >
+            </div>
 
             <span
               href=""
@@ -148,11 +157,21 @@
                 [src]="product.image[0]"
                 alt="product image"
               />
-              <span
+
+              <div
                 *ngIf="product.hot_sale"
-                class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white"
-                >{{ product.hot_sale }}% OFF</span
+                class="absolute z-10 left-0 top-1 py-2 px-2"
+                style="
+                  background-image: url('./assets/seo.png');
+                  background-repeat: no-repeat;
+                  background-size: 100% 100%;
+                "
               >
+                <span
+                  class="m-2 rounded-full text-center text-sm font-medium text-white"
+                  >{{ product.hot_sale }}% OFF</span
+                >
+              </div>
               <span
                 href=""
                 title="Add to Favorites"

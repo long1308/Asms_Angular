@@ -36,9 +36,10 @@ export class SigninComponent implements OnInit {
     const formData = this.form.value;
     this.productService.login(formData).subscribe(
       (response: any) => {
-        console.log(response);
+        console.log("response",response);
         this.loginError = false;
         localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('token', JSON.stringify(response.accessToken));
         this.router.navigate(['/']);
       },
       (error) => {
