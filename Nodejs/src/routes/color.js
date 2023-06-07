@@ -6,10 +6,11 @@ import {
   removeColor,
   updateColor,
 } from "../controllers/color";
+import { checkPermission } from "../middlewares/checkPermission.";
 const router = express.Router();
 router.get("/color", getAllColor);
 router.get("/color/:id", getColor);
-router.post("/color/", createColor);
-router.put("/color/:id", updateColor);
-router.delete("/color/:id", removeColor);
+router.post("/color/",checkPermission, createColor);
+router.put("/color/:id",checkPermission, updateColor);
+router.delete("/color/:id",checkPermission, removeColor);
 export default router;
